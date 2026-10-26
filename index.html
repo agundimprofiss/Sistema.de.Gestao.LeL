@@ -266,9 +266,7 @@ button{cursor:pointer}
     border-radius:12px
 }
 
-.stat small{
-    color:#718096
-}
+.stat small{color:#718096}
 
 .stat b{
     display:block;
@@ -306,9 +304,7 @@ table{
     font-size:12px
 }
 
-.table tr:hover td{
-    background:#fafcff
-}
+.table tr:hover td{background:#fafcff}
 
 .status{
     display:inline-block;
@@ -318,25 +314,10 @@ table{
     font-weight:bold
 }
 
-.ok{
-    background:#dcfce7;
-    color:#166534
-}
-
-.low{
-    background:#fef3c7;
-    color:#92400e
-}
-
-.bad{
-    background:#fee2e2;
-    color:#991b1b
-}
-
-.neutral{
-    background:#e5e7eb;
-    color:#374151
-}
+.ok{background:#dcfce7;color:#166534}
+.low{background:#fef3c7;color:#92400e}
+.bad{background:#fee2e2;color:#991b1b}
+.neutral{background:#e5e7eb;color:#374151}
 
 .progress{
     height:9px;
@@ -365,9 +346,7 @@ table{
     gap:6px
 }
 
-.form-group.full{
-    grid-column:1/-1
-}
+.form-group.full{grid-column:1/-1}
 
 .form-group label{
     font-size:12px;
@@ -448,12 +427,7 @@ table{
 }
 
 .back{margin-bottom:15px}
-
-.empty{
-    padding:30px;
-    text-align:center;
-    color:#718096
-}
+.empty{padding:30px;text-align:center;color:#718096}
 
 .summary-row{
     display:grid;
@@ -526,17 +500,8 @@ table{
 }
 
 .hero-panel small{color:#9fb5d0}
-
-.hero-panel h3{
-    font-size:24px;
-    margin:7px 0
-}
-
-.hero-panel p{
-    color:#c9d6e5;
-    font-size:13px;
-    line-height:1.5
-}
+.hero-panel h3{font-size:24px;margin:7px 0}
+.hero-panel p{color:#c9d6e5;font-size:13px;line-height:1.5}
 
 .quick-panel{
     background:#fff;
@@ -546,16 +511,6 @@ table{
 }
 
 .quick-panel h3{margin-top:0}
-
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:14px
-}
-
-.section-title h3{margin:0}
 
 .stock-highlight{
     display:grid;
@@ -598,16 +553,10 @@ table{
     font-weight:bold
 }
 
-.edit-material{
-    white-space:nowrap
-}
+.edit-material{white-space:nowrap}
 
 .modal .form-group input,
-.modal .form-group select{
-    min-height:38px
-}
-
-/* IMPRESSÃO */
+.modal .form-group select{min-height:38px}
 
 .print-sheet{
     background:#fff;
@@ -644,8 +593,6 @@ table{
     flex-wrap:wrap;
     margin-bottom:14px
 }
-
-/* LOCALIZAÇÃO */
 
 .location-wrap{
     display:grid;
@@ -691,9 +638,7 @@ table{
     border:1px solid #3b82f6
 }
 
-.loc:hover{
-    background:#123d67
-}
+.loc:hover{background:#123d67}
 
 .loc .tooltip{
     display:none;
@@ -713,11 +658,7 @@ table{
     line-height:1.55
 }
 
-.loc:hover .tooltip{
-    display:block
-}
-
-/* INVENTÁRIO */
+.loc:hover .tooltip{display:block}
 
 .inventory-sheet{
     background:linear-gradient(135deg,#f8fbff,#fff);
@@ -773,8 +714,6 @@ table{
     color:#172338
 }
 
-/* GESTÃO */
-
 .gestao-grid{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -817,8 +756,6 @@ table{
     padding:9px
 }
 
-/* RESPONSIVO */
-
 @media(max-width:1100px){
     .location-wrap{
         grid-template-columns:repeat(5,minmax(90px,1fr))
@@ -849,19 +786,14 @@ table{
         align-items:flex-start;
         flex-direction:column
     }
-    .stock-highlight{
-        grid-template-columns:1fr
-    }
+    .stock-highlight{grid-template-columns:1fr}
     .location-wrap{
         grid-template-columns:repeat(2,minmax(90px,1fr))
     }
 }
 
 @media print{
-    body{
-        background:#fff!important
-    }
-
+    body{background:#fff!important}
     .no-print,
     .side,
     .head,
@@ -869,19 +801,9 @@ table{
     .env{
         display:none!important
     }
-
-    .sys{
-        display:block!important
-    }
-
-    .main{
-        padding:0!important
-    }
-
-    .panel{
-        box-shadow:none!important
-    }
-
+    .sys{display:block!important}
+    .main{padding:0!important}
+    .panel{box-shadow:none!important}
     .print-sheet,
     .inventory-sheet{
         border:0!important
@@ -1070,11 +992,9 @@ table{
 </div>
 
 <script>
+const KEY='almox_control_engenharia_v2';
 
-const KEY =
-    'almox_control_engenharia_v2';
-
-const state = {
+const state={
     user:null,
     env:null,
     screen:null,
@@ -1082,12 +1002,8 @@ const state = {
 };
 
 function load(){
-
     try{
-
-        return JSON.parse(
-            localStorage.getItem(KEY)
-        ) || {
+        return JSON.parse(localStorage.getItem(KEY)) || {
             materiais:[],
             projetos:[],
             entradas:[],
@@ -1104,9 +1020,7 @@ function load(){
                 ivy:[]
             }
         };
-
     }catch{
-
         return {
             materiais:[],
             projetos:[],
@@ -1124,68 +1038,49 @@ function load(){
                 ivy:[]
             }
         };
-
     }
-
 }
 
 function save(){
-
-    localStorage.setItem(
-        KEY,
-        JSON.stringify(state.data)
-    );
-
+    localStorage.setItem(KEY,JSON.stringify(state.data));
 }
 
-const $ =
-    id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
-const esc =
-    v => String(v ?? '')
-        .replace(
-            /[&<>"']/g,
-            m => ({
-                '&':'&amp;',
-                '<':'&lt;',
-                '>':'&gt;',
-                '"':'&quot;',
-                "'":'&#39;'
-            }[m])
-        );
+const esc=v=>String(v??'').replace(
+    /[&<>"']/g,
+    m=>({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+    }[m])
+);
 
-const moeda =
-    v => Number(v || 0)
-        .toLocaleString(
-            'pt-BR',
-            {
-                style:'currency',
-                currency:'BRL'
-            }
-        );
+const moeda=v=>Number(v||0).toLocaleString(
+    'pt-BR',
+    {
+        style:'currency',
+        currency:'BRL'
+    }
+);
 
-const num =
-    v => Number(v || 0)
-        .toLocaleString(
-            'pt-BR',
-            {
-                maximumFractionDigits:2
-            }
-        );
+const num=v=>Number(v||0).toLocaleString(
+    'pt-BR',
+    {
+        maximumFractionDigits:2
+    }
+);
 
 function show(id){
-
-    ['login','env','sys']
-        .forEach(
-            x => $(x).classList.add('hidden')
-        );
-
+    ['login','env','sys'].forEach(
+        x=>$(x).classList.add('hidden')
+    );
     $(id).classList.remove('hidden');
-
 }
 
 function label(s){
-
     return ({
         dashboard:'▦ Dashboard',
         estoque:'▤ Estoque',
@@ -1198,52 +1093,38 @@ function label(s){
         colaboradores:'♙ Cadastro de Colaboradores',
         'estoque-colaborador':'♧ Estoque por Colaborador',
         agenda:'□ Agenda'
-    }[s] || s);
-
+    }[s]||s);
 }
 
 function menu(){
 
-    const telas =
-        state.user?.telas?.[state.env] || [];
+    const telas=state.user?.telas?.[state.env]||[];
 
-    $('side').innerHTML =
-        telas.map(
-            s =>
-                `<button
-                    class="nav"
-                    data-screen="${s}"
-                >
-                    ${label(s)}
-                </button>`
-        ).join('');
+    $('side').innerHTML=telas.map(
+        s=>`<button class="nav" data-screen="${s}">
+            ${label(s)}
+        </button>`
+    ).join('');
 
-    document
-        .querySelectorAll('.nav')
-        .forEach(
-            b =>
-                b.onclick =
-                    () =>
-                        openScreen(
-                            b.dataset.screen
-                        )
-        );
-
+    document.querySelectorAll('.nav').forEach(
+        b=>{
+            b.onclick=()=>openScreen(b.dataset.screen);
+        }
+    );
 }
 
 function openScreen(s){
 
-    state.screen = s;
+    state.screen=s;
 
-    document
-        .querySelectorAll('.nav')
-        .forEach(
-            b =>
-                b.classList.toggle(
-                    'active',
-                    b.dataset.screen === s
-                )
-        );
+    document.querySelectorAll('.nav').forEach(
+        b=>{
+            b.classList.toggle(
+                'active',
+                b.dataset.screen===s
+            );
+        }
+    );
 
     ({
         dashboard,
@@ -1254,305 +1135,169 @@ function openScreen(s){
         inventario,
         localizacao,
         gestao
-    }[s] || dashboard)();
-
+    }[s]||dashboard)();
 }
 
 function title(t,d){
-
     return `
         <h2>${t}</h2>
-        <p class="muted subtitle">
-            ${d}
-        </p>
+        <p class="muted subtitle">${d}</p>
     `;
-
 }
 
 function table(headers,rows){
 
     if(!rows.length){
-
-        return `
-            <div class="empty">
-                Nenhum registo encontrado.
-            </div>
-        `;
-
+        return `<div class="empty">Nenhum registo encontrado.</div>`;
     }
 
     return `
         <div class="table-wrap">
-
             <table class="table">
-
                 <thead>
                     <tr>
-                        ${headers
-                            .map(h => `<th>${h}</th>`)
-                            .join('')}
+                        ${headers.map(h=>`<th>${h}</th>`).join('')}
                     </tr>
                 </thead>
-
                 <tbody>
-
-                    ${rows
-                        .map(
-                            r =>
-                                `<tr>
-                                    ${r
-                                        .map(v => `<td>${v}</td>`)
-                                        .join('')}
-                                </tr>`
-                        )
-                        .join('')}
-
+                    ${rows.map(
+                        r=>`<tr>${r.map(v=>`<td>${v}</td>`).join('')}</tr>`
+                    ).join('')}
                 </tbody>
-
             </table>
-
         </div>
     `;
-
 }
 
 function status(s){
-
     return `
-        <span
-            class="status ${
-                s === 'Ativo'
-                    ? 'ok'
-                    : s === 'Concluído'
-                        ? 'neutral'
-                        : 'bad'
-            }"
-        >
-            ${esc(s)}
-        </span>
+        <span class="status ${
+            s==='Ativo'
+                ? 'ok'
+                : s==='Concluído'
+                    ? 'neutral'
+                    : 'bad'
+        }">${esc(s)}</span>
     `;
-
 }
 
 function progress(p){
 
-    p =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                Number(p || 0)
-            )
-        );
+    p=Math.max(0,Math.min(100,Number(p||0)));
 
     return `
-        <div
-            style="
-                display:flex;
-                align-items:center;
-                gap:8px
-            "
-        >
-
+        <div style="display:flex;align-items:center;gap:8px">
             <div class="progress">
                 <span style="width:${p}%"></span>
             </div>
-
             <b>${p.toFixed(0)}%</b>
-
         </div>
     `;
-
 }
-
-/* DASHBOARD */
 
 function dashboard(){
 
-    const m =
-        state.data.materiais;
+    const m=state.data.materiais;
+    const p=state.data.projetos;
 
-    const p =
-        state.data.projetos;
+    const valor=m.reduce(
+        (s,x)=>s+(+x.estoque||0)*(+x.valorUnitario||0),
+        0
+    );
 
-    const valor =
-        m.reduce(
-            (s,x) =>
-                s +
-                (+x.estoque || 0) *
-                (+x.valorUnitario || 0),
+    const baixos=m.filter(
+        x=>(+x.estoque||0)<=(+x.minimo||0)
+    ).length;
+
+    const ativos=p.filter(x=>x.status==='Ativo').length;
+    const concl=p.filter(x=>x.status==='Concluído').length;
+    const canc=p.filter(x=>x.status==='Cancelado').length;
+
+    const totalPlan=p.reduce(
+        (s,p)=>s+(p.materiais||[]).reduce(
+            (a,m)=>a+(+m.planejado||0),
             0
-        );
+        ),
+        0
+    );
 
-    const baixos =
-        m.filter(
-            x =>
-                (+x.estoque || 0) <=
-                (+x.minimo || 0)
-        ).length;
-
-    const ativos =
-        p.filter(
-            x => x.status === 'Ativo'
-        ).length;
-
-    const concl =
-        p.filter(
-            x => x.status === 'Concluído'
-        ).length;
-
-    const canc =
-        p.filter(
-            x => x.status === 'Cancelado'
-        ).length;
-
-    const totalPlan =
-        p.reduce(
-            (s,p) =>
-                s +
-                (p.materiais || [])
-                    .reduce(
-                        (a,m) =>
-                            a +
-                            (+m.planejado || 0),
-                        0
-                    ),
+    const totalRec=p.reduce(
+        (s,p)=>s+(p.materiais||[]).reduce(
+            (a,m)=>a+(+m.recebido||0),
             0
-        );
+        ),
+        0
+    );
 
-    const totalRec =
-        p.reduce(
-            (s,p) =>
-                s +
-                (p.materiais || [])
-                    .reduce(
-                        (a,m) =>
-                            a +
-                            (+m.recebido || 0),
-                        0
-                    ),
-            0
-        );
+    const totalPend=Math.max(0,totalPlan-totalRec);
 
-    const totalPend =
-        Math.max(
-            0,
-            totalPlan - totalRec
-        );
-
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Dashboard',
             'Visão geral do Almoxarifado da Engenharia'
-        )
-
-        +
-
+        )+
         `
         <div class="dashboard-hero">
-
             <div class="hero-panel">
-
-                <small>
-                    ALMOXARIFADO SANTARÉM
-                </small>
-
-                <h3>
-                    Controle operacional da Engenharia
-                </h3>
-
+                <small>ALMOXARIFADO SANTARÉM</small>
+                <h3>Controle operacional da Engenharia</h3>
                 <p>
                     Acompanhe o valor do estoque,
                     os materiais críticos e o avanço
                     dos projetos em um único painel.
                 </p>
-
             </div>
 
             <div class="quick-panel">
-
-                <h3>
-                    Atendimento de projetos
-                </h3>
+                <h3>Atendimento de projetos</h3>
 
                 <div class="mini-stat">
-
-                    <small>
-                        Material pendente
-                    </small>
-
-                    <strong>
-                        ${num(totalPend)}
-                    </strong>
-
+                    <small>Material pendente</small>
+                    <strong>${num(totalPend)}</strong>
                 </div>
 
-                <div
-                    style="margin-top:10px"
-                    class="mini-stat"
-                >
-
-                    <small>
-                        Atendimento geral
-                    </small>
-
+                <div style="margin-top:10px" class="mini-stat">
+                    <small>Atendimento geral</small>
                     <strong>
                         ${
                             totalPlan
-                                ? ((totalRec / totalPlan) * 100)
-                                    .toFixed(1)
+                                ? ((totalRec/totalPlan)*100).toFixed(1)
                                 : 0
                         }%
                     </strong>
-
                 </div>
-
             </div>
-
         </div>
 
         <div class="grid">
 
             <div class="stat blue">
-                <small>
-                    Valor agregado do almoxarifado
-                </small>
+                <small>Valor agregado do almoxarifado</small>
                 <b>${moeda(valor)}</b>
             </div>
 
             <div class="stat blue">
-                <small>
-                    Materiais cadastrados
-                </small>
+                <small>Materiais cadastrados</small>
                 <b>${m.length}</b>
             </div>
 
             <div class="stat green">
-                <small>
-                    Projetos ativos
-                </small>
+                <small>Projetos ativos</small>
                 <b>${ativos}</b>
             </div>
 
             <div class="stat orange">
-                <small>
-                    Materiais com estoque baixo
-                </small>
+                <small>Materiais com estoque baixo</small>
                 <b>${baixos}</b>
             </div>
 
             <div class="stat green">
-                <small>
-                    Projetos concluídos
-                </small>
+                <small>Projetos concluídos</small>
                 <b>${concl}</b>
             </div>
 
             <div class="stat red">
-                <small>
-                    Projetos cancelados
-                </small>
+                <small>Projetos cancelados</small>
                 <b>${canc}</b>
             </div>
 
@@ -1561,111 +1306,60 @@ function dashboard(){
         <div class="panel">
 
             <div class="section-title">
-
-                <h3>
-                    Status dos projetos
-                </h3>
-
-                <span class="history-badge">
-                    ${p.length} projetos
-                </span>
-
+                <h3>Status dos projetos</h3>
+                <span class="history-badge">${p.length} projetos</span>
             </div>
 
             ${
                 p.length
                     ? table(
-                        [
-                            'Projeto',
-                            'Conclusão',
-                            'Status',
-                            'Pendente'
-                        ],
-                        p.map(x => {
+                        ['Projeto','Conclusão','Status','Pendente'],
+                        p.map(x=>{
 
-                            const plan =
-                                (x.materiais || [])
-                                    .reduce(
-                                        (a,m) =>
-                                            a +
-                                            (+m.planejado || 0),
-                                        0
-                                    );
+                            const plan=(x.materiais||[]).reduce(
+                                (a,m)=>a+(+m.planejado||0),0
+                            );
 
-                            const rec =
-                                (x.materiais || [])
-                                    .reduce(
-                                        (a,m) =>
-                                            a +
-                                            (+m.recebido || 0),
-                                        0
-                                    );
+                            const rec=(x.materiais||[]).reduce(
+                                (a,m)=>a+(+m.recebido||0),0
+                            );
 
                             return [
                                 esc(x.nome),
                                 progress(x.percentual),
                                 status(x.status),
-                                num(
-                                    Math.max(
-                                        0,
-                                        plan - rec
-                                    )
-                                )
+                                num(Math.max(0,plan-rec))
                             ];
-
                         })
                     )
-                    : `
-                        <div class="empty">
-                            Nenhum projeto cadastrado.
-                        </div>
-                    `
+                    : `<div class="empty">Nenhum projeto cadastrado.</div>`
             }
 
         </div>
         `;
-
 }
-
-/* ESTOQUE */
 
 function estoque(){
 
-    const m =
-        state.data.materiais;
+    const m=state.data.materiais;
 
-    const totalQtd =
-        m.reduce(
-            (s,x) =>
-                s + (+x.estoque || 0),
-            0
-        );
+    const totalQtd=m.reduce(
+        (s,x)=>s+(+x.estoque||0),0
+    );
 
-    const valor =
-        m.reduce(
-            (s,x) =>
-                s +
-                (+x.estoque || 0) *
-                (+x.valorUnitario || 0),
-            0
-        );
+    const valor=m.reduce(
+        (s,x)=>s+(+x.estoque||0)*(+x.valorUnitario||0),0
+    );
 
-    const baixos =
-        m.filter(
-            x =>
-                (+x.estoque || 0) <=
-                (+x.minimo || 0)
-        ).length;
+    const baixos=m.filter(
+        x=>(+x.estoque||0)<=(+x.minimo||0)
+    ).length;
 
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Estoque',
             'Todos os materiais pertencem ao projeto ALMOXARIFADO SANTARÉM.'
-        )
-
-        +
-
+        )+
         `
         <div class="stock-highlight">
 
@@ -1689,21 +1383,13 @@ function estoque(){
         <div class="panel no-print">
 
             <div class="section-title">
-
-                <h3>
-                    Cadastrar material
-                </h3>
-
+                <h3>Cadastrar material</h3>
                 <span class="history-badge">
                     ${baixos} em nível crítico
                 </span>
-
             </div>
 
-            <form
-                id="materialForm"
-                class="form-grid"
-            >
+            <form id="materialForm" class="form-grid">
 
                 <div class="form-group">
                     <label>Código</label>
@@ -1717,44 +1403,22 @@ function estoque(){
 
                 <div class="form-group">
                     <label>Unidade</label>
-                    <input
-                        name="unidade"
-                        placeholder="UN, M, KG..."
-                        required
-                    >
+                    <input name="unidade" placeholder="UN, M, KG..." required>
                 </div>
 
                 <div class="form-group">
                     <label>Quantidade actual</label>
-                    <input
-                        name="estoque"
-                        type="number"
-                        step="0.01"
-                        min="0"
-                        value="0"
-                    >
+                    <input name="estoque" type="number" step="0.01" min="0" value="0">
                 </div>
 
                 <div class="form-group">
                     <label>Valor unitário</label>
-                    <input
-                        name="valorUnitario"
-                        type="number"
-                        step="0.01"
-                        min="0"
-                        value="0"
-                    >
+                    <input name="valorUnitario" type="number" step="0.01" min="0" value="0">
                 </div>
 
                 <div class="form-group">
                     <label>Estoque mínimo</label>
-                    <input
-                        name="minimo"
-                        type="number"
-                        step="0.01"
-                        min="0"
-                        value="0"
-                    >
+                    <input name="minimo" type="number" step="0.01" min="0" value="0">
                 </div>
 
                 <div class="form-group">
@@ -1764,10 +1428,7 @@ function estoque(){
 
                 <div class="form-group">
                     <label>Projeto</label>
-                    <input
-                        value="ALMOXARIFADO SANTARÉM"
-                        disabled
-                    >
+                    <input value="ALMOXARIFADO SANTARÉM" disabled>
                 </div>
 
                 <div class="form-group">
@@ -1776,11 +1437,7 @@ function estoque(){
                 </div>
 
                 <div class="form-group full">
-
-                    <button class="btn">
-                        Cadastrar material
-                    </button>
-
+                    <button class="btn">Cadastrar material</button>
                 </div>
 
             </form>
@@ -1791,9 +1448,7 @@ function estoque(){
 
             <div class="section-title">
 
-                <h3>
-                    Materiais cadastrados
-                </h3>
+                <h3>Materiais cadastrados</h3>
 
                 <div class="print-actions no-print">
 
@@ -1803,10 +1458,7 @@ function estoque(){
                         placeholder="Pesquisar por código ou descrição..."
                     >
 
-                    <button
-                        class="btn"
-                        id="printStock"
-                    >
+                    <button class="btn" id="printStock">
                         🖨️ Imprimir estoque
                     </button>
 
@@ -1818,65 +1470,20 @@ function estoque(){
 
         </div>
 
-        <div
-            id="stockPrint"
-            class="print-sheet"
-            style="display:none"
-        ></div>
+        <div id="stockPrint" class="print-sheet" style="display:none"></div>
         `;
 
-    const render = () => {
+    const render=()=>{
 
-        const q =
-            ($('stockSearch').value || '')
-                .toLowerCase();
+        const q=($('stockSearch').value||'').toLowerCase();
 
-        const filtered =
-            m.filter(
-                x =>
-                    `${x.codigo} ${x.descricao} ${x.localizacao || ''}`
-                        .toLowerCase()
-                        .includes(q)
-            );
+        const filtered=m.filter(
+            x=>`${x.codigo} ${x.descricao} ${x.localizacao||''}`
+                .toLowerCase()
+                .includes(q)
+        );
 
-        const rows =
-            filtered.map(
-                x => [
-
-                    esc(x.codigo),
-
-                    esc(x.descricao),
-
-                    esc(x.unidade),
-
-                    num(x.estoque),
-
-                    moeda(x.valorUnitario),
-
-                    moeda(
-                        (+x.estoque || 0) *
-                        (+x.valorUnitario || 0)
-                    ),
-
-                    esc(
-                        'ALMOXARIFADO SANTARÉM'
-                    ),
-
-                    esc(
-                        x.localizacao || '-'
-                    ),
-
-                    (+x.estoque || 0) <=
-                    (+x.minimo || 0)
-
-                        ? '<span class="status low">Baixo</span>'
-
-                        : '<span class="status ok">Normal</span>'
-
-                ]
-            );
-
-        $('stockTable').innerHTML =
+        $('stockTable').innerHTML=
             table(
                 [
                     'Código',
@@ -1889,141 +1496,115 @@ function estoque(){
                     'Localização',
                     'Status'
                 ],
-                rows
-            );
-
-    };
-
-    render();
-
-    $('stockSearch').oninput =
-        render;
-
-    $('materialForm').onsubmit =
-        e => {
-
-            e.preventDefault();
-
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
-
-            m.push({
-                ...f,
-                estoque:
-                    +f.estoque || 0,
-                valorUnitario:
-                    +f.valorUnitario || 0,
-                minimo:
-                    +f.minimo || 0,
-                projeto:
-                    'ALMOXARIFADO SANTARÉM'
-            });
-
-            save();
-            estoque();
-
-        };
-
-    $('printStock').onclick =
-        () => {
-
-            const rows =
-                m.map(
-                    x => [
-
+                filtered.map(
+                    x=>[
                         esc(x.codigo),
                         esc(x.descricao),
                         esc(x.unidade),
                         num(x.estoque),
                         moeda(x.valorUnitario),
-                        moeda(
-                            (+x.estoque || 0) *
-                            (+x.valorUnitario || 0)
-                        ),
-                        esc(x.localizacao || '-')
-
+                        moeda((+x.estoque||0)*(+x.valorUnitario||0)),
+                        esc('ALMOXARIFADO SANTARÉM'),
+                        esc(x.localizacao||'-'),
+                        (+x.estoque||0)<=(+x.minimo||0)
+                            ? '<span class="status low">Baixo</span>'
+                            : '<span class="status ok">Normal</span>'
                     ]
-                );
+                )
+            );
+    };
 
-            $('stockPrint').innerHTML = `
+    render();
 
-                <div class="print-head">
+    $('stockSearch').oninput=render;
 
-                    <div>
+    $('materialForm').onsubmit=e=>{
 
-                        <h1>
-                            ALMOX CONTROL
-                        </h1>
+        e.preventDefault();
 
-                        <div class="print-meta">
-                            Inventário de estoque<br>
-                            Almoxarifado da Engenharia · Santarém
-                        </div>
+        const f=Object.fromEntries(
+            new FormData(e.target)
+        );
 
-                    </div>
+        m.push({
+            ...f,
+            estoque:+f.estoque||0,
+            valorUnitario:+f.valorUnitario||0,
+            minimo:+f.minimo||0,
+            projeto:'ALMOXARIFADO SANTARÉM'
+        });
+
+        save();
+        estoque();
+    };
+
+    $('printStock').onclick=()=>{
+
+        const rows=m.map(
+            x=>[
+                esc(x.codigo),
+                esc(x.descricao),
+                esc(x.unidade),
+                num(x.estoque),
+                moeda(x.valorUnitario),
+                moeda((+x.estoque||0)*(+x.valorUnitario||0)),
+                esc(x.localizacao||'-')
+            ]
+        );
+
+        $('stockPrint').innerHTML=`
+            <div class="print-head">
+
+                <div>
+                    <h1>ALMOX CONTROL</h1>
 
                     <div class="print-meta">
-                        Data:
-                        ${new Date().toLocaleDateString('pt-BR')}
+                        Inventário de estoque<br>
+                        Almoxarifado da Engenharia · Santarém
                     </div>
-
                 </div>
 
-                ${table(
-                    [
-                        'Código',
-                        'Descrição',
-                        'Un.',
-                        'Quantidade',
-                        'Valor unitário',
-                        'Valor agregado',
-                        'Localização'
-                    ],
-                    rows
-                )}
+                <div class="print-meta">
+                    Data:
+                    ${new Date().toLocaleDateString('pt-BR')}
+                </div>
 
-            `;
+            </div>
 
-            $('stockPrint').style.display =
-                'block';
+            ${table(
+                [
+                    'Código',
+                    'Descrição',
+                    'Un.',
+                    'Quantidade',
+                    'Valor unitário',
+                    'Valor agregado',
+                    'Localização'
+                ],
+                rows
+            )}
+        `;
 
-            window.print();
-
-            $('stockPrint').style.display =
-                'none';
-
-        };
-
+        $('stockPrint').style.display='block';
+        window.print();
+        $('stockPrint').style.display='none';
+    };
 }
-
-/* PROJETOS */
 
 function projetos(){
 
-    const p =
-        state.data.projetos;
+    const p=state.data.projetos;
 
     if(state._project){
-
-        projectDetail(
-            state._project
-        );
-
+        projectDetail(state._project);
         return;
-
     }
 
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Projetos',
             'Acompanhe quanto cada projeto precisa, recebeu, utilizou, possui em saldo e ainda aguarda do almoxarifado.'
-        )
-
-        +
-
+        )+
         `
         <div class="panel">
 
@@ -2031,23 +1612,17 @@ function projetos(){
 
                 <div class="summary">
                     <small>Ativos</small>
-                    <strong>
-                        ${p.filter(x => x.status === 'Ativo').length}
-                    </strong>
+                    <strong>${p.filter(x=>x.status==='Ativo').length}</strong>
                 </div>
 
                 <div class="summary">
                     <small>Concluídos</small>
-                    <strong>
-                        ${p.filter(x => x.status === 'Concluído').length}
-                    </strong>
+                    <strong>${p.filter(x=>x.status==='Concluído').length}</strong>
                 </div>
 
                 <div class="summary">
                     <small>Cancelados</small>
-                    <strong>
-                        ${p.filter(x => x.status === 'Cancelado').length}
-                    </strong>
+                    <strong>${p.filter(x=>x.status==='Cancelado').length}</strong>
                 </div>
 
             </div>
@@ -2056,14 +1631,11 @@ function projetos(){
 
         <div class="panel">
 
-            <div class="panel-header">
+            <div class="section-title">
 
                 <h3>Projetos</h3>
 
-                <button
-                    class="btn"
-                    id="newProject"
-                >
+                <button class="btn" id="newProject">
                     Novo projeto
                 </button>
 
@@ -2074,145 +1646,90 @@ function projetos(){
         </div>
         `;
 
-    const list = () => {
+    const list=()=>{
 
-        $('projectList').innerHTML =
+        $('projectList').innerHTML=p.length
+            ? p.map(
+                x=>`
+                <div class="project-card" data-id="${x.id}">
 
-            p.length
+                    <div class="project-head">
 
-                ? p.map(
-                    x => `
+                        <div>
 
-                    <div
-                        class="project-card"
-                        data-id="${x.id}"
-                    >
-
-                        <div class="project-head">
-
-                            <div>
-
-                                <div class="project-title">
-                                    ${esc(x.nome)}
-                                </div>
-
-                                <div class="project-meta">
-
-                                    ${esc(x.codigo || '')}
-                                    ·
-                                    ${status(x.status)}
-
-                                </div>
-
+                            <div class="project-title">
+                                ${esc(x.nome)}
                             </div>
 
-                            <div
-                                style="min-width:190px"
-                            >
-                                ${progress(x.percentual)}
+                            <div class="project-meta">
+                                ${esc(x.codigo||'')}
+                                ·
+                                ${status(x.status)}
                             </div>
 
                         </div>
 
+                        <div style="min-width:190px">
+                            ${progress(x.percentual)}
+                        </div>
+
                     </div>
-                    `
-                ).join('')
 
-                : `
-                    <div class="empty">
-                        Nenhum projeto cadastrado.
-                    </div>
-                `;
+                </div>
+                `
+            ).join('')
+            : `<div class="empty">Nenhum projeto cadastrado.</div>`;
 
-        document
-            .querySelectorAll('.project-card')
-            .forEach(
-                c =>
-                    c.onclick =
-                        () => {
-
-                            state._project =
-                                c.dataset.id;
-
-                            projectDetail(
-                                c.dataset.id
-                            );
-
-                        }
-            );
-
+        document.querySelectorAll('.project-card').forEach(
+            c=>{
+                c.onclick=()=>{
+                    state._project=c.dataset.id;
+                    projectDetail(c.dataset.id);
+                };
+            }
+        );
     };
 
     list();
 
-    $('newProject').onclick =
-        () => openProjectModal();
-
+    $('newProject').onclick=()=>openProjectModal();
 }
 
 function projectDetail(id){
 
-    const p =
-        state.data.projetos.find(
-            x => x.id === id
-        );
+    const p=state.data.projetos.find(x=>x.id===id);
 
     if(!p){
-
-        state._project = null;
-
+        state._project=null;
         return projetos();
-
     }
 
-    const mats =
-        p.materiais || [];
+    const mats=p.materiais||[];
 
-    const plan =
-        mats.reduce(
-            (s,m) =>
-                s + (+m.planejado || 0),
-            0
-        );
+    const plan=mats.reduce(
+        (s,m)=>s+(+m.planejado||0),0
+    );
 
-    const rec =
-        mats.reduce(
-            (s,m) =>
-                s + (+m.recebido || 0),
-            0
-        );
+    const rec=mats.reduce(
+        (s,m)=>s+(+m.recebido||0),0
+    );
 
-    const use =
-        mats.reduce(
-            (s,m) =>
-                s + (+m.utilizado || 0),
-            0
-        );
+    const use=mats.reduce(
+        (s,m)=>s+(+m.utilizado||0),0
+    );
 
-    const saldo =
-        mats.reduce(
-            (s,m) =>
-                s +
-                Math.max(
-                    0,
-                    (+m.recebido || 0) -
-                    (+m.utilizado || 0)
-                ),
-            0
-        );
-
-    const pend =
-        Math.max(
+    const saldo=mats.reduce(
+        (s,m)=>s+Math.max(
             0,
-            plan - rec
-        );
+            (+m.recebido||0)-(+m.utilizado||0)
+        ),
+        0
+    );
 
-    $('main').innerHTML = `
+    const pend=Math.max(0,plan-rec);
 
-        <button
-            class="btn btn-secondary back"
-            id="backProjects"
-        >
+    $('main').innerHTML=`
+        <button class="btn btn-secondary back" id="backProjects">
             ← Voltar para projetos
         </button>
 
@@ -2263,37 +1780,26 @@ function projectDetail(id){
 
             <div class="section-title">
 
-                <h3>
-                    Materiais do projeto
-                </h3>
+                <h3>Materiais do projeto</h3>
 
                 <div class="actions no-print">
 
-                    <button
-                        class="btn"
-                        id="addProjectMaterial"
-                    >
+                    <button class="btn" id="addProjectMaterial">
                         + Adicionar material
                     </button>
 
-                    <button
-                        class="btn btn-secondary"
-                        id="printProject"
-                    >
+                    <button class="btn btn-secondary" id="printProject">
                         🖨️ Imprimir projeto
                     </button>
 
                     ${
-                        p.status === 'Ativo'
+                        p.status==='Ativo'
                             ? `
-                                <button
-                                    class="btn btn-danger"
-                                    id="cancelProject"
-                                >
-                                    Cancelar projeto
-                                </button>
+                            <button class="btn btn-danger" id="cancelProject">
+                                Cancelar projeto
+                            </button>
                             `
-                            : ''
+                            :''
                     }
 
                 </div>
@@ -2311,36 +1817,25 @@ function projectDetail(id){
                     'Ação'
                 ],
                 mats.map(
-                    (m,i) => {
+                    (m,i)=>{
 
-                        const saldo =
-                            Math.max(
-                                0,
-                                (+m.recebido || 0) -
-                                (+m.utilizado || 0)
-                            );
+                        const saldo=Math.max(
+                            0,
+                            (+m.recebido||0)-(+m.utilizado||0)
+                        );
 
-                        const pend =
-                            Math.max(
-                                0,
-                                (+m.planejado || 0) -
-                                (+m.recebido || 0)
-                            );
+                        const pend=Math.max(
+                            0,
+                            (+m.planejado||0)-(+m.recebido||0)
+                        );
 
                         return [
-
                             esc(m.descricao),
-
                             num(m.planejado),
-
                             num(m.recebido),
-
                             num(m.utilizado),
-
                             num(saldo),
-
                             num(pend),
-
                             `
                             <button
                                 class="btn btn-secondary edit-material"
@@ -2355,188 +1850,137 @@ function projectDetail(id){
                                 Editar
                             </button>
                             `
-
                         ];
-
                     }
                 )
             )}
 
         </div>
-
     `;
 
-    $('backProjects').onclick =
-        () => {
+    $('backProjects').onclick=()=>{
+        state._project=null;
+        projetos();
+    };
 
-            state._project = null;
-            projetos();
-
-        };
-
-    $('addProjectMaterial').onclick =
-        () => openProjectMaterialModal(p);
+    $('addProjectMaterial').onclick=()=>openProjectMaterialModal(p);
 
     if($('cancelProject')){
+        $('cancelProject').onclick=()=>{
+            if(!confirm('Deseja realmente cancelar este projeto?')) return;
 
-        $('cancelProject').onclick =
-            () => {
+            p.status='Cancelado';
+            p.canceladoEm=new Date().toISOString();
+            p.canceladoPor=state.user?.nome||'';
 
-                if(
-                    !confirm(
-                        'Deseja realmente cancelar este projeto?'
-                    )
-                ) return;
-
-                p.status =
-                    'Cancelado';
-
-                p.canceladoEm =
-                    new Date().toISOString();
-
-                p.canceladoPor =
-                    state.user?.nome || '';
-
-                save();
-
-                projectDetail(p.id);
-
-            };
-
+            save();
+            projectDetail(p.id);
+        };
     }
 
-    $('printProject').onclick =
-        () => {
+    $('printProject').onclick=()=>{
+        const print=document.createElement('div');
 
-            const print =
-                document.createElement('div');
+        print.className='print-sheet';
 
-            print.className =
-                'print-sheet';
+        print.innerHTML=`
+            <div class="print-head">
 
-            print.innerHTML = `
+                <div>
 
-                <div class="print-head">
-
-                    <div>
-
-                        <h1>
-                            ${esc(p.nome)}
-                        </h1>
-
-                        <div class="print-meta">
-                            Código:
-                            ${esc(p.codigo || '-')}<br>
-
-                            Status:
-                            ${esc(p.status)}<br>
-
-                            Almoxarifado da Engenharia · Santarém
-                        </div>
-
-                    </div>
+                    <h1>${esc(p.nome)}</h1>
 
                     <div class="print-meta">
-                        Data:
-                        ${new Date().toLocaleDateString('pt-BR')}
+                        Código: ${esc(p.codigo||'-')}<br>
+                        Status: ${esc(p.status)}<br>
+                        Almoxarifado da Engenharia · Santarém
                     </div>
 
                 </div>
 
-                <div class="summary-row">
-
-                    <div class="summary">
-                        <small>Planejado</small>
-                        <strong>${num(plan)}</strong>
-                    </div>
-
-                    <div class="summary">
-                        <small>Recebido</small>
-                        <strong>${num(rec)}</strong>
-                    </div>
-
-                    <div class="summary">
-                        <small>Utilizado</small>
-                        <strong>${num(use)}</strong>
-                    </div>
-
-                    <div class="summary">
-                        <small>Saldo</small>
-                        <strong>${num(saldo)}</strong>
-                    </div>
-
-                    <div class="summary">
-                        <small>Pendente</small>
-                        <strong>${num(pend)}</strong>
-                    </div>
-
-                    <div class="summary">
-                        <small>Conclusão</small>
-                        <strong>
-                            ${Number(p.percentual || 0).toFixed(1)}%
-                        </strong>
-                    </div>
-
+                <div class="print-meta">
+                    Data:
+                    ${new Date().toLocaleDateString('pt-BR')}
                 </div>
 
-                <div style="margin-top:20px">
+            </div>
 
-                    ${table(
-                        [
-                            'Material',
-                            'Planejado',
-                            'Recebido',
-                            'Utilizado',
-                            'Saldo',
-                            'Pendente'
-                        ],
-                        mats.map(
-                            m => [
+            <div class="summary-row">
 
-                                esc(m.descricao),
-                                num(m.planejado),
-                                num(m.recebido),
-                                num(m.utilizado),
-                                num(
-                                    Math.max(
-                                        0,
-                                        (+m.recebido || 0) -
-                                        (+m.utilizado || 0)
-                                    )
-                                ),
-                                num(
-                                    Math.max(
-                                        0,
-                                        (+m.planejado || 0) -
-                                        (+m.recebido || 0)
-                                    )
-                                )
-
-                            ]
-                        )
-                    )}
-
+                <div class="summary">
+                    <small>Planejado</small>
+                    <strong>${num(plan)}</strong>
                 </div>
 
-            `;
+                <div class="summary">
+                    <small>Recebido</small>
+                    <strong>${num(rec)}</strong>
+                </div>
 
-            $('main').appendChild(print);
+                <div class="summary">
+                    <small>Utilizado</small>
+                    <strong>${num(use)}</strong>
+                </div>
 
-            print.style.position =
-                'absolute';
+                <div class="summary">
+                    <small>Saldo</small>
+                    <strong>${num(saldo)}</strong>
+                </div>
 
-            print.style.left =
-                '-99999px';
+                <div class="summary">
+                    <small>Pendente</small>
+                    <strong>${num(pend)}</strong>
+                </div>
 
-            print.style.width =
-                '100%';
+                <div class="summary">
+                    <small>Conclusão</small>
+                    <strong>${Number(p.percentual||0).toFixed(1)}%</strong>
+                </div>
 
-            window.print();
+            </div>
 
-            print.remove();
+            <div style="margin-top:20px">
 
-        };
+                ${table(
+                    [
+                        'Material',
+                        'Planejado',
+                        'Recebido',
+                        'Utilizado',
+                        'Saldo',
+                        'Pendente'
+                    ],
+                    mats.map(
+                        m=>[
+                            esc(m.descricao),
+                            num(m.planejado),
+                            num(m.recebido),
+                            num(m.utilizado),
+                            num(Math.max(
+                                0,
+                                (+m.recebido||0)-(+m.utilizado||0)
+                            )),
+                            num(Math.max(
+                                0,
+                                (+m.planejado||0)-(+m.recebido||0)
+                            ))
+                        ]
+                    )
+                )}
 
+            </div>
+        `;
+
+        $('main').appendChild(print);
+
+        print.style.position='absolute';
+        print.style.left='-99999px';
+        print.style.width='100%';
+
+        window.print();
+
+        print.remove();
+    };
 }
 
 function openProjectModal(){
@@ -2544,10 +1988,7 @@ function openProjectModal(){
     openModal(
         'Novo projeto',
         `
-        <form
-            id="projectForm"
-            class="form-grid"
-        >
+        <form id="projectForm" class="form-grid">
 
             <div class="form-group">
                 <label>Código</label>
@@ -2564,57 +2005,39 @@ function openProjectModal(){
                 <label>Status</label>
 
                 <select name="status">
-
                     <option>Ativo</option>
                     <option>Concluído</option>
-
                 </select>
 
             </div>
 
             <div class="form-group full">
-
-                <button class="btn">
-                    Criar projeto
-                </button>
-
+                <button class="btn">Criar projeto</button>
             </div>
 
         </form>
         `
     );
 
-    $('projectForm').onsubmit =
-        e => {
+    $('projectForm').onsubmit=e=>{
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
+        const f=Object.fromEntries(
+            new FormData(e.target)
+        );
 
-            state.data.projetos.push({
+        state.data.projetos.push({
+            id:crypto.randomUUID(),
+            ...f,
+            percentual:0,
+            materiais:[]
+        });
 
-                id:
-                    crypto.randomUUID(),
-
-                ...f,
-
-                percentual:0,
-
-                materiais:[]
-
-            });
-
-            save();
-
-            closeModal();
-
-            projetos();
-
-        };
-
+        save();
+        closeModal();
+        projetos();
+    };
 }
 
 function openProjectMaterialModal(p){
@@ -2622,31 +2045,22 @@ function openProjectMaterialModal(p){
     openModal(
         'Adicionar material ao projeto',
         `
-        <form
-            id="pmForm"
-            class="form-grid"
-        >
+        <form id="pmForm" class="form-grid">
 
             <div class="form-group full">
 
                 <label>Material</label>
 
-                <select
-                    name="descricao"
-                    required
-                >
+                <select name="descricao" required>
 
                     ${
-                        state.data.materiais
-                            .map(
-                                m =>
-                                    `<option
-                                        value="${esc(m.descricao)}"
-                                    >
-                                        ${esc(m.descricao)}
-                                    </option>`
-                            )
-                            .join('')
+                        state.data.materiais.map(
+                            m=>`
+                            <option value="${esc(m.descricao)}">
+                                ${esc(m.descricao)}
+                            </option>
+                            `
+                        ).join('')
                     }
 
                 </select>
@@ -2655,9 +2069,7 @@ function openProjectMaterialModal(p){
 
             <div class="form-group">
 
-                <label>
-                    Planejado — material necessário
-                </label>
+                <label>Planejado — material necessário</label>
 
                 <input
                     name="planejado"
@@ -2671,9 +2083,7 @@ function openProjectMaterialModal(p){
 
             <div class="form-group">
 
-                <label>
-                    Recebido — material enviado
-                </label>
+                <label>Recebido — material enviado</label>
 
                 <input
                     name="recebido"
@@ -2687,9 +2097,7 @@ function openProjectMaterialModal(p){
 
             <div class="form-group">
 
-                <label>
-                    Utilizado — material usado
-                </label>
+                <label>Utilizado — material usado</label>
 
                 <input
                     name="utilizado"
@@ -2702,76 +2110,49 @@ function openProjectMaterialModal(p){
             </div>
 
             <div class="form-group full">
-
-                <button class="btn">
-                    Adicionar ao projeto
-                </button>
-
+                <button class="btn">Adicionar ao projeto</button>
             </div>
 
         </form>
         `
     );
 
-    $('pmForm').onsubmit =
-        e => {
+    $('pmForm').onsubmit=e=>{
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
-
-            p.materiais.push({
-
-                ...f,
-
-                planejado:
-                    +f.planejado || 0,
-
-                recebido:
-                    +f.recebido || 0,
-
-                utilizado:
-                    +f.utilizado || 0
-
-            });
-
-            recalcProject(p);
-
-            save();
-
-            closeModal();
-
-            projectDetail(p.id);
-
-        };
-
-}
-
-function openEditProjectMaterialModal(
-    projectId,
-    index
-){
-
-    const p =
-        state.data.projetos.find(
-            x => x.id === projectId
+        const f=Object.fromEntries(
+            new FormData(e.target)
         );
 
-    const m =
-        p?.materiais?.[index];
+        p.materiais.push({
+            ...f,
+            planejado:+f.planejado||0,
+            recebido:+f.recebido||0,
+            utilizado:+f.utilizado||0
+        });
+
+        recalcProject(p);
+        save();
+        closeModal();
+        projectDetail(p.id);
+    };
+}
+
+function openEditProjectMaterialModal(projectId,index){
+
+    const p=state.data.projetos.find(
+        x=>x.id===projectId
+    );
+
+    const m=p?.materiais?.[index];
 
     if(!m) return;
 
     openModal(
         'Editar material do projeto',
         `
-        <form
-            id="editPmForm"
-            class="form-grid"
-        >
+        <form id="editPmForm" class="form-grid">
 
             <div class="form-group full">
 
@@ -2831,123 +2212,79 @@ function openEditProjectMaterialModal(
             </div>
 
             <div class="form-group full">
-
-                <button class="btn">
-                    Salvar alterações
-                </button>
-
+                <button class="btn">Salvar alterações</button>
             </div>
 
         </form>
         `
     );
 
-    $('editPmForm').onsubmit =
-        e => {
+    $('editPmForm').onsubmit=e=>{
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
+        const f=Object.fromEntries(
+            new FormData(e.target)
+        );
 
-            m.descricao =
-                f.descricao;
+        m.descricao=f.descricao;
+        m.planejado=+f.planejado||0;
+        m.recebido=+f.recebido||0;
+        m.utilizado=+f.utilizado||0;
 
-            m.planejado =
-                +f.planejado || 0;
-
-            m.recebido =
-                +f.recebido || 0;
-
-            m.utilizado =
-                +f.utilizado || 0;
-
-            recalcProject(p);
-
-            save();
-
-            closeModal();
-
-            projectDetail(p.id);
-
-        };
-
+        recalcProject(p);
+        save();
+        closeModal();
+        projectDetail(p.id);
+    };
 }
 
 function recalcProject(p){
 
-    const total =
-        p.materiais.reduce(
-            (s,m) =>
-                s +
-                (+m.planejado || 0),
-            0
-        );
-
-    const rec =
-        p.materiais.reduce(
-            (s,m) =>
-                s +
-                (+m.recebido || 0),
-            0
-        );
-
-    p.percentual =
-        total
-            ? Math.min(
-                100,
-                (rec / total) * 100
-            )
-            : 0;
-
-    p.materiais.forEach(
-        m => {
-
-            m.saldo =
-                Math.max(
-                    0,
-                    (+m.recebido || 0) -
-                    (+m.utilizado || 0)
-                );
-
-            m.pendente =
-                Math.max(
-                    0,
-                    (+m.planejado || 0) -
-                    (+m.recebido || 0)
-                );
-
-        }
+    const total=p.materiais.reduce(
+        (s,m)=>s+(+m.planejado||0),
+        0
     );
 
-}
+    const rec=p.materiais.reduce(
+        (s,m)=>s+(+m.recebido||0),
+        0
+    );
 
-/* ENTRADAS */
+    p.percentual=total
+        ? Math.min(100,(rec/total)*100)
+        : 0;
+
+    p.materiais.forEach(
+        m=>{
+            m.saldo=Math.max(
+                0,
+                (+m.recebido||0)-(+m.utilizado||0)
+            );
+
+            m.pendente=Math.max(
+                0,
+                (+m.planejado||0)-(+m.recebido||0)
+            );
+        }
+    );
+}
 
 function entradas(){
 
-    const d =
-        state.data;
+    const d=state.data;
 
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Entrada no Almoxarifado',
             'Registo claro e organizado de todos os materiais recebidos.'
-        )
-
-        +
-
+        )+
         `
         <div class="panel">
 
             <div class="section-title">
 
-                <h3>
-                    Nova entrada
-                </h3>
+                <h3>Nova entrada</h3>
 
                 <span class="history-badge">
                     ${d.entradas.length} registos
@@ -2955,40 +2292,27 @@ function entradas(){
 
             </div>
 
-            <form
-                id="entradaForm"
-                class="form-grid"
-            >
+            <form id="entradaForm" class="form-grid">
 
                 <div class="form-group">
                     <label>Data</label>
-                    <input
-                        name="data"
-                        type="date"
-                        required
-                    >
+                    <input name="data" type="date" required>
                 </div>
 
                 <div class="form-group">
 
                     <label>Material</label>
 
-                    <select
-                        name="material"
-                        required
-                    >
+                    <select name="material" required>
 
                         ${
-                            d.materiais
-                                .map(
-                                    m =>
-                                        `<option
-                                            value="${esc(m.codigo)}"
-                                        >
-                                            ${esc(m.descricao)}
-                                        </option>`
-                                )
-                                .join('')
+                            d.materiais.map(
+                                m=>`
+                                <option value="${esc(m.codigo)}">
+                                    ${esc(m.descricao)}
+                                </option>
+                                `
+                            ).join('')
                         }
 
                     </select>
@@ -2996,9 +2320,7 @@ function entradas(){
                 </div>
 
                 <div class="form-group">
-
                     <label>Quantidade</label>
-
                     <input
                         name="quantidade"
                         type="number"
@@ -3006,53 +2328,33 @@ function entradas(){
                         step="0.01"
                         required
                     >
-
                 </div>
 
                 <div class="form-group">
-
                     <label>Documento</label>
-
                     <input name="documento">
-
                 </div>
 
                 <div class="form-group">
-
                     <label>Fornecedor</label>
-
                     <input name="fornecedor">
-
                 </div>
 
                 <div class="form-group">
-
                     <label>Responsável</label>
-
                     <input
                         name="responsavel"
-                        value="${esc(state.user?.nome || '')}"
+                        value="${esc(state.user?.nome||'')}"
                     >
-
                 </div>
 
                 <div class="form-group full">
-
                     <label>Observação</label>
-
-                    <textarea
-                        name="observacao"
-                        rows="3"
-                    ></textarea>
-
+                    <textarea name="observacao" rows="3"></textarea>
                 </div>
 
                 <div class="form-group full">
-
-                    <button class="btn">
-                        Salvar entrada
-                    </button>
-
+                    <button class="btn">Salvar entrada</button>
                 </div>
 
             </form>
@@ -3063,9 +2365,7 @@ function entradas(){
 
             <div class="history-title">
 
-                <h3>
-                    Histórico de entradas
-                </h3>
+                <h3>Histórico de entradas</h3>
 
                 <span class="history-badge">
                     ${d.entradas.length}
@@ -3083,13 +2383,13 @@ function entradas(){
                     'Responsável'
                 ],
                 d.entradas.map(
-                    e => [
+                    e=>[
                         esc(e.data),
                         esc(e.material),
                         num(e.quantidade),
-                        esc(e.documento || '-'),
-                        esc(e.fornecedor || '-'),
-                        esc(e.responsavel || '-')
+                        esc(e.documento||'-'),
+                        esc(e.fornecedor||'-'),
+                        esc(e.responsavel||'-')
                     ]
                 )
             )}
@@ -3097,73 +2397,49 @@ function entradas(){
         </div>
         `;
 
-    $('entradaForm').onsubmit =
-        e => {
+    $('entradaForm').onsubmit=e=>{
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
+        const f=Object.fromEntries(
+            new FormData(e.target)
+        );
 
-            const mat =
-                d.materiais.find(
-                    m =>
-                        m.codigo ===
-                        f.material
-                );
+        const mat=d.materiais.find(
+            m=>m.codigo===f.material
+        );
 
-            if(!mat) return;
+        if(!mat) return;
 
-            mat.estoque =
-                (+mat.estoque || 0) +
-                (+f.quantidade || 0);
+        mat.estoque=
+            (+mat.estoque||0)+(+f.quantidade||0);
 
-            d.entradas.unshift({
+        d.entradas.unshift({
+            ...f,
+            material:mat.descricao,
+            quantidade:+f.quantidade||0
+        });
 
-                ...f,
-
-                material:
-                    mat.descricao,
-
-                quantidade:
-                    +f.quantidade || 0
-
-            });
-
-            save();
-
-            entradas();
-
-        };
-
+        save();
+        entradas();
+    };
 }
-
-/* SAÍDAS */
 
 function saidas(){
 
-    const d =
-        state.data;
+    const d=state.data;
 
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Saída do Almoxarifado',
             'Envie materiais aos projetos e acompanhe o histórico das movimentações.'
-        )
-
-        +
-
+        )+
         `
         <div class="panel">
 
             <div class="section-title">
 
-                <h3>
-                    Nova saída
-                </h3>
+                <h3>Nova saída</h3>
 
                 <span class="history-badge">
                     ${d.saidas.length} saídas registradas
@@ -3171,46 +2447,28 @@ function saidas(){
 
             </div>
 
-            <form
-                id="saidaForm"
-                class="form-grid"
-            >
+            <form id="saidaForm" class="form-grid">
 
                 <div class="form-group">
-
                     <label>Data</label>
-
-                    <input
-                        name="data"
-                        type="date"
-                        required
-                    >
-
+                    <input name="data" type="date" required>
                 </div>
 
                 <div class="form-group">
 
                     <label>Material</label>
 
-                    <select
-                        name="material"
-                        required
-                    >
+                    <select name="material" required>
 
                         ${
-                            d.materiais
-                                .map(
-                                    m =>
-                                        `<option
-                                            value="${esc(m.codigo)}"
-                                        >
-                                            ${esc(m.descricao)}
-                                            —
-                                            estoque
-                                            ${num(m.estoque)}
-                                        </option>`
-                                )
-                                .join('')
+                            d.materiais.map(
+                                m=>`
+                                <option value="${esc(m.codigo)}">
+                                    ${esc(m.descricao)}
+                                    — estoque ${num(m.estoque)}
+                                </option>
+                                `
+                            ).join('')
                         }
 
                     </select>
@@ -3221,27 +2479,20 @@ function saidas(){
 
                     <label>Projeto</label>
 
-                    <select
-                        name="projeto"
-                        required
-                    >
+                    <select name="projeto" required>
 
                         ${
                             d.projetos
                                 .filter(
-                                    p =>
-                                        p.status ===
-                                        'Ativo'
+                                    p=>p.status==='Ativo'
                                 )
                                 .map(
-                                    p =>
-                                        `<option
-                                            value="${esc(p.id)}"
-                                        >
-                                            ${esc(p.nome)}
-                                        </option>`
-                                )
-                                .join('')
+                                    p=>`
+                                    <option value="${esc(p.id)}">
+                                        ${esc(p.nome)}
+                                    </option>
+                                    `
+                                ).join('')
                         }
 
                     </select>
@@ -3249,9 +2500,7 @@ function saidas(){
                 </div>
 
                 <div class="form-group">
-
                     <label>Quantidade</label>
-
                     <input
                         name="quantidade"
                         type="number"
@@ -3259,37 +2508,23 @@ function saidas(){
                         step="0.01"
                         required
                     >
-
                 </div>
 
                 <div class="form-group">
-
                     <label>Responsável</label>
-
                     <input
                         name="responsavel"
-                        value="${esc(state.user?.nome || '')}"
+                        value="${esc(state.user?.nome||'')}"
                     >
-
                 </div>
 
                 <div class="form-group full">
-
                     <label>Observação</label>
-
-                    <textarea
-                        name="observacao"
-                        rows="3"
-                    ></textarea>
-
+                    <textarea name="observacao" rows="3"></textarea>
                 </div>
 
                 <div class="form-group full">
-
-                    <button class="btn">
-                        Registrar saída
-                    </button>
-
+                    <button class="btn">Registrar saída</button>
                 </div>
 
             </form>
@@ -3300,9 +2535,7 @@ function saidas(){
 
             <div class="history-title">
 
-                <h3>
-                    Histórico de saídas
-                </h3>
+                <h3>Histórico de saídas</h3>
 
                 <span class="history-badge">
                     ${d.saidas.length}
@@ -3320,13 +2553,13 @@ function saidas(){
                     'Observação'
                 ],
                 d.saidas.map(
-                    e => [
+                    e=>[
                         esc(e.data),
                         esc(e.material),
                         num(e.quantidade),
-                        esc(e.projetoNome || '-'),
-                        esc(e.responsavel || '-'),
-                        esc(e.observacao || '-')
+                        esc(e.projetoNome||'-'),
+                        esc(e.responsavel||'-'),
+                        esc(e.observacao||'-')
                     ]
                 )
             )}
@@ -3334,133 +2567,91 @@ function saidas(){
         </div>
         `;
 
-    $('saidaForm').onsubmit =
-        e => {
+    $('saidaForm').onsubmit=e=>{
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
+        const f=Object.fromEntries(
+            new FormData(e.target)
+        );
 
-            const mat =
-                d.materiais.find(
-                    m =>
-                        m.codigo ===
-                        f.material
-                );
+        const mat=d.materiais.find(
+            m=>m.codigo===f.material
+        );
 
-            const proj =
-                d.projetos.find(
-                    p =>
-                        p.id ===
-                        f.projeto
-                );
+        const proj=d.projetos.find(
+            p=>p.id===f.projeto
+        );
 
-            const qtd =
-                +f.quantidade || 0;
+        const qtd=+f.quantidade||0;
 
-            if(
-                !mat ||
-                !proj ||
-                qtd <= 0 ||
-                qtd > (+mat.estoque || 0)
-            ){
+        if(
+            !mat||
+            !proj||
+            qtd<=0||
+            qtd>(+mat.estoque||0)
+        ){
 
-                alert(
-                    'Quantidade inválida ou estoque insuficiente.'
-                );
+            alert(
+                'Quantidade inválida ou estoque insuficiente.'
+            );
 
-                return;
+            return;
+        }
 
-            }
+        mat.estoque=
+            (+mat.estoque||0)-qtd;
 
-            mat.estoque =
-                (+mat.estoque || 0) -
-                qtd;
+        let item=(proj.materiais||[]).find(
+            m=>m.descricao===mat.descricao
+        );
 
-            let item =
-                (proj.materiais || [])
-                    .find(
-                        m =>
-                            m.descricao ===
-                            mat.descricao
-                    );
+        if(!item){
 
-            if(!item){
+            item={
+                descricao:mat.descricao,
+                planejado:qtd,
+                recebido:0,
+                utilizado:0
+            };
 
-                item = {
-                    descricao:
-                        mat.descricao,
-                    planejado:qtd,
-                    recebido:0,
-                    utilizado:0
-                };
+            proj.materiais.push(item);
+        }
 
-                proj.materiais.push(item);
+        item.recebido=
+            (+item.recebido||0)+qtd;
 
-            }
+        recalcProject(proj);
 
-            item.recebido =
-                (+item.recebido || 0) +
-                qtd;
+        d.saidas.unshift({
+            ...f,
+            material:mat.descricao,
+            projetoNome:proj.nome,
+            quantidade:qtd
+        });
 
-            recalcProject(proj);
-
-            d.saidas.unshift({
-
-                ...f,
-
-                material:
-                    mat.descricao,
-
-                projetoNome:
-                    proj.nome,
-
-                quantidade:
-                    qtd
-
-            });
-
-            save();
-
-            saidas();
-
-        };
-
+        save();
+        saidas();
+    };
 }
-
-/* INVENTÁRIO */
 
 function inventario(){
 
-    const d =
-        state.data;
+    const d=state.data;
+    const hist=d.inventario||[];
+    const materiais=d.materiais||[];
 
-    const hist =
-        d.inventario || [];
-
-    const materiais =
-        d.materiais || [];
-
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Inventário',
             'Conferência física do estoque com histórico, responsável e atualização automática do saldo.'
-        )
-
-        +
-
+        )+
         `
         <div class="panel no-print">
 
             <div class="section-title">
 
-                <h3>
-                    Nova conferência
-                </h3>
+                <h3>Nova conferência</h3>
 
                 <span class="history-badge">
                     ${hist.length} conferências
@@ -3468,62 +2659,43 @@ function inventario(){
 
             </div>
 
-            <form
-                id="invForm"
-                class="form-grid"
-            >
+            <form id="invForm" class="form-grid">
 
                 <div class="form-group">
-
                     <label>Data</label>
-
                     <input
                         name="data"
                         type="date"
                         value="${new Date().toISOString().slice(0,10)}"
                         required
                     >
-
                 </div>
 
                 <div class="form-group">
-
                     <label>Responsável</label>
-
                     <input
                         name="responsavel"
-                        value="${esc(state.user?.nome || '')}"
+                        value="${esc(state.user?.nome||'')}"
                         required
                     >
-
                 </div>
 
                 <div class="form-group full">
 
-                    <label>
-                        Material a conferir
-                    </label>
+                    <label>Material a conferir</label>
 
-                    <select
-                        name="material"
-                        required
-                    >
+                    <select name="material" required>
 
                         ${
-                            materiais
-                                .map(
-                                    m =>
-                                        `<option
-                                            value="${esc(m.codigo)}"
-                                        >
-                                            ${esc(m.codigo)}
-                                            ·
-                                            ${esc(m.descricao)}
-                                            · sistema
-                                            ${num(m.estoque)}
-                                        </option>`
-                                )
-                                .join('')
+                            materiais.map(
+                                m=>`
+                                <option value="${esc(m.codigo)}">
+                                    ${esc(m.codigo)}
+                                    · ${esc(m.descricao)}
+                                    · sistema ${num(m.estoque)}
+                                </option>
+                                `
+                            ).join('')
                         }
 
                     </select>
@@ -3532,9 +2704,7 @@ function inventario(){
 
                 <div class="form-group">
 
-                    <label>
-                        Quantidade no sistema
-                    </label>
+                    <label>Quantidade no sistema</label>
 
                     <input
                         id="invSistema"
@@ -3546,9 +2716,7 @@ function inventario(){
 
                 <div class="form-group">
 
-                    <label>
-                        Quantidade física conferida
-                    </label>
+                    <label>Quantidade física conferida</label>
 
                     <input
                         name="fisico"
@@ -3562,9 +2730,7 @@ function inventario(){
 
                 <div class="form-group full">
 
-                    <label>
-                        Observação
-                    </label>
+                    <label>Observação</label>
 
                     <textarea
                         name="observacao"
@@ -3589,9 +2755,7 @@ function inventario(){
 
             <div class="section-title">
 
-                <h3>
-                    Histórico de conferências
-                </h3>
+                <h3>Histórico de conferências</h3>
 
                 <span class="history-badge">
                     ${hist.length}
@@ -3611,29 +2775,18 @@ function inventario(){
                         'Status'
                     ],
                     hist.map(
-                        h => [
-
+                        h=>[
                             esc(h.data),
                             esc(h.responsavel),
                             esc(h.material),
                             num(h.sistema),
                             num(h.fisico),
                             num(h.divergencia),
-
-                            h.divergencia === 0
-
-                                ? `
-                                    <span class="status ok">
-                                        Sem divergência
-                                    </span>
-                                `
-
-                                : `
-                                    <span class="status bad">
-                                        Divergência
-                                    </span>
-                                `
-
+                            h.divergencia===0
+                                ? '<span class="status ok">Aderente</span>'
+                                : h.divergencia>0
+                                    ? '<span class="status ok">Sobra</span>'
+                                    : '<span class="status bad">Falta</span>'
                         ]
                     )
                 )
@@ -3645,23 +2798,15 @@ function inventario(){
 
             <div class="section-title">
 
-                <h3>
-                    Folha de inventário
-                </h3>
+                <h3>Folha de inventário</h3>
 
-                <button
-                    class="btn"
-                    id="printInventory"
-                >
+                <button class="btn" id="printInventory">
                     🖨️ Imprimir folha
                 </button>
 
             </div>
 
-            <div
-                class="inventory-sheet"
-                id="inventorySheet"
-            >
+            <div class="inventory-sheet" id="inventorySheet">
 
                 <div class="sheet-top">
 
@@ -3678,10 +2823,7 @@ function inventario(){
                     </div>
 
                     <div class="sheet-sub">
-
-                        ${new Date()
-                            .toLocaleDateString('pt-BR')}
-
+                        ${new Date().toLocaleDateString('pt-BR')}
                     </div>
 
                 </div>
@@ -3689,40 +2831,18 @@ function inventario(){
                 <div class="sheet-info">
 
                     <div class="info-box">
-
-                        <small>
-                            Responsável
-                        </small>
-
-                        <b>
-                            ${esc(state.user?.nome || '-')}
-                        </b>
-
+                        <small>Responsável</small>
+                        <b>${esc(state.user?.nome||'-')}</b>
                     </div>
 
                     <div class="info-box">
-
-                        <small>
-                            Data
-                        </small>
-
-                        <b>
-                            ${new Date()
-                                .toLocaleDateString('pt-BR')}
-                        </b>
-
+                        <small>Data</small>
+                        <b>${new Date().toLocaleDateString('pt-BR')}</b>
                     </div>
 
                     <div class="info-box">
-
-                        <small>
-                            Total de materiais
-                        </small>
-
-                        <b>
-                            ${materiais.length}
-                        </b>
-
+                        <small>Total de materiais</small>
+                        <b>${materiais.length}</b>
                     </div>
 
                 </div>
@@ -3737,15 +2857,13 @@ function inventario(){
                         'Divergência'
                     ],
                     materiais.map(
-                        m => [
-
+                        m=>[
                             esc(m.codigo),
                             esc(m.descricao),
                             esc(m.unidade),
                             num(m.estoque),
                             '________________',
                             '________________'
-
                         ]
                     )
                 )}
@@ -3755,244 +2873,159 @@ function inventario(){
         </div>
         `;
 
-    const sync = () => {
+    const sync=()=>{
 
-        const m =
-            materiais.find(
-                x =>
-                    x.codigo ===
-                    $('invForm').material.value
-            );
+        const m=materiais.find(
+            x=>x.codigo===$('invForm').material.value
+        );
 
-        $('invSistema').value =
-            m
-                ? num(m.estoque)
-                : '0';
-
+        $('invSistema').value=
+            m?num(m.estoque):'0';
     };
 
     sync();
 
-    $('invForm')
-        .material
-        .onchange =
-            sync;
+    $('invForm').material.onchange=sync;
 
-    $('invForm').onsubmit =
-        e => {
+    $('invForm').onsubmit=e=>{
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
+        const f=Object.fromEntries(
+            new FormData(e.target)
+        );
 
-            const m =
-                materiais.find(
-                    x =>
-                        x.codigo ===
-                        f.material
-                );
+        const m=materiais.find(
+            x=>x.codigo===f.material
+        );
 
-            if(!m) return;
+        if(!m) return;
 
-            const sistema =
-                +m.estoque || 0;
+        const sistema=+m.estoque||0;
+        const fisico=+f.fisico||0;
+        const divergencia=fisico-sistema;
 
-            const fisico =
-                +f.fisico || 0;
+        hist.unshift({
+            id:crypto.randomUUID(),
+            data:f.data,
+            responsavel:f.responsavel,
+            material:m.descricao,
+            codigo:m.codigo,
+            sistema,
+            fisico,
+            divergencia,
+            status:
+                divergencia===0
+                    ? 'Aderente'
+                    : divergencia>0
+                        ? 'Sobra'
+                        : 'Falta',
+            observacao:f.observacao||'',
+            confirmadoEm:new Date().toISOString()
+        });
 
-            hist.unshift({
+        m.estoque=fisico;
 
-                id:
-                    crypto.randomUUID(),
+        save();
+        inventario();
+    };
 
-                data:
-                    f.data,
-
-                responsavel:
-                    f.responsavel,
-
-                material:
-                    m.descricao,
-
-                codigo:
-                    m.codigo,
-
-                sistema,
-
-                fisico,
-
-                divergencia:
-                    fisico - sistema,
-
-                observacao:
-                    f.observacao || '',
-
-                confirmadoEm:
-                    new Date().toISOString()
-
-            });
-
-            /*
-             * A conferência física passa a ser
-             * o novo saldo oficial do estoque.
-             */
-
-            m.estoque =
-                fisico;
-
-            save();
-
-            inventario();
-
-        };
-
-    $('printInventory').onclick =
-        () => window.print();
-
+    $('printInventory').onclick=()=>window.print();
 }
-
-/* LOCALIZAÇÃO */
 
 function localizacao(){
 
-    const d =
-        state.data;
+    const d=state.data;
+    const mats=d.materiais||[];
 
-    const mats =
-        d.materiais || [];
+    const byPos=Object.fromEntries(
+        mats
+            .filter(m=>m.localizacao)
+            .map(m=>[m.localizacao,m])
+    );
 
-    const byPos =
-        Object.fromEntries(
-            mats
-                .filter(
-                    m => m.localizacao
-                )
-                .map(
-                    m => [
-                        m.localizacao,
-                        m
-                    ]
-                )
-        );
+    let cells='';
 
-    let cells = '';
+    for(let shelf=1;shelf<=10;shelf++){
 
-    for(
-        let shelf = 1;
-        shelf <= 10;
-        shelf++
-    ){
-
-        cells += `
-
+        cells+=`
             <div class="location-shelf">
 
-                <h4>
-                    Prateleira ${shelf}
-                </h4>
+                <h4>Prateleira ${shelf}</h4>
 
                 <div class="location-level">
         `;
 
-        for(
-            let level = 1;
-            level <= 5;
-            level++
-        ){
+        for(let level=1;level<=5;level++){
 
-            for(
-                let apt = 1;
-                apt <= 2;
-                apt++
-            ){
+            for(let apt=1;apt<=2;apt++){
 
-                const pos =
+                const pos=
                     `P${String(shelf).padStart(2,'0')}-N${level}-A${apt}`;
 
-                const m =
-                    byPos[pos];
+                const m=byPos[pos];
 
-                cells += `
-
+                cells+=`
                     <div
-                        class="loc ${m ? 'occupied' : ''}"
+                        class="loc ${m?'occupied':''}"
                         onclick="openLocationModal('${pos}')"
                     >
 
-                        ${
-                            m
-                                ? esc(m.codigo)
-                                : pos
-                        }
+                        ${m?esc(m.codigo):pos}
 
                         ${
                             m
                                 ? `
-                                    <div class="tooltip">
+                                <div class="tooltip">
 
-                                        <b>
-                                            ${esc(m.descricao)}
-                                        </b>
+                                    <b>${esc(m.descricao)}</b>
 
-                                        <br>
+                                    <br>
 
-                                        Quantidade total:
-                                        ${num(m.estoque)}
-                                        ${esc(m.unidade || '')}
+                                    Quantidade total:
+                                    ${num(m.estoque)}
+                                    ${esc(m.unidade||'')}
 
-                                        <br>
+                                    <br>
 
-                                        Valor unitário:
-                                        ${moeda(m.valorUnitario)}
+                                    Valor unitário:
+                                    ${moeda(m.valorUnitario)}
 
-                                        <br>
+                                    <br>
 
-                                        Valor agregado:
-                                        ${moeda(
-                                            (+m.estoque || 0) *
-                                            (+m.valorUnitario || 0)
-                                        )}
+                                    Valor agregado:
+                                    ${moeda(
+                                        (+m.estoque||0)*
+                                        (+m.valorUnitario||0)
+                                    )}
 
-                                    </div>
+                                </div>
                                 `
-                                : ''
+                                :''
                         }
 
                     </div>
-
                 `;
-
             }
-
         }
 
-        cells += `
+        cells+=`
                 </div>
             </div>
         `;
-
     }
 
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Localização',
             'Posições físicas do Almoxarifado da Engenharia. Passe o rato sobre uma posição ocupada para consultar o material.'
-        )
-
-        +
-
+        )+
         `
         <div class="panel">
 
             <div class="section-title">
 
-                <h3>
-                    Mapa físico
-                </h3>
+                <h3>Mapa físico</h3>
 
                 <span class="history-badge">
                     10 prateleiras · 5 níveis · 2 posições
@@ -4006,33 +3039,24 @@ function localizacao(){
 
         </div>
         `;
-
 }
 
 function openLocationModal(pos){
 
-    const mats =
-        state.data.materiais;
+    const mats=state.data.materiais;
 
-    const current =
-        mats.find(
-            m =>
-                m.localizacao === pos
-        );
+    const current=mats.find(
+        m=>m.localizacao===pos
+    );
 
     openModal(
         `Posição ${pos}`,
         `
-        <form
-            id="locForm"
-            class="form-grid"
-        >
+        <form id="locForm" class="form-grid">
 
             <div class="form-group full">
 
-                <label>
-                    Material
-                </label>
+                <label>Material</label>
 
                 <select name="codigo">
 
@@ -4041,23 +3065,17 @@ function openLocationModal(pos){
                     </option>
 
                     ${
-                        mats
-                            .map(
-                                m =>
-                                    `<option
-                                        value="${esc(m.codigo)}"
-                                        ${
-                                            current?.codigo === m.codigo
-                                                ? 'selected'
-                                                : ''
-                                        }
-                                    >
-                                        ${esc(m.codigo)}
-                                        ·
-                                        ${esc(m.descricao)}
-                                    </option>`
-                            )
-                            .join('')
+                        mats.map(
+                            m=>`
+                            <option
+                                value="${esc(m.codigo)}"
+                                ${current?.codigo===m.codigo?'selected':''}
+                            >
+                                ${esc(m.codigo)}
+                                · ${esc(m.descricao)}
+                            </option>
+                            `
+                        ).join('')
                     }
 
                 </select>
@@ -4065,114 +3083,71 @@ function openLocationModal(pos){
             </div>
 
             <div class="form-group full">
-
-                <button class="btn">
-                    Salvar posição
-                </button>
-
+                <button class="btn">Salvar posição</button>
             </div>
 
         </form>
         `
     );
 
-    $('locForm').onsubmit =
-        e => {
+    $('locForm').onsubmit=e=>{
 
-            e.preventDefault();
+        e.preventDefault();
 
-            mats.forEach(
-                m => {
-
-                    if(
-                        m.localizacao ===
-                        pos
-                    ){
-
-                        m.localizacao =
-                            '';
-
-                    }
-
+        mats.forEach(
+            m=>{
+                if(m.localizacao===pos){
+                    m.localizacao='';
                 }
-            );
-
-            const f =
-                Object.fromEntries(
-                    new FormData(e.target)
-                );
-
-            const m =
-                mats.find(
-                    x =>
-                        x.codigo ===
-                        f.codigo
-                );
-
-            if(m){
-
-                m.localizacao =
-                    pos;
-
             }
+        );
 
-            save();
+        const f=Object.fromEntries(
+            new FormData(e.target)
+        );
 
-            closeModal();
+        const m=mats.find(
+            x=>x.codigo===f.codigo
+        );
 
-            localizacao();
+        if(m)m.localizacao=pos;
 
-        };
-
+        save();
+        closeModal();
+        localizacao();
+    };
 }
-
-/* ÁREA DA GESTÃO */
 
 function gestao(){
 
-    const d =
-        state.data;
+    const d=state.data;
 
-    d.gestao =
-        d.gestao ||
-        {
-            eisenhower:{
-                now:[],
-                plan:[],
-                delegate:[],
-                delete:[]
-            },
-            ivy:[]
-        };
+    d.gestao=d.gestao||{
+        eisenhower:{
+            now:[],
+            plan:[],
+            delegate:[],
+            delete:[]
+        },
+        ivy:[]
+    };
 
-    const e =
-        d.gestao.eisenhower;
+    const e=d.gestao.eisenhower;
+    const i=d.gestao.ivy;
 
-    const i =
-        d.gestao.ivy;
-
-    $('main').innerHTML =
-
+    $('main').innerHTML=
         title(
             'Área da Gestão',
             'Métodos dinâmicos para organizar prioridades e execução operacional.'
-        )
-
-        +
-
+        )+
         `
         <div class="panel">
 
             <div class="section-title">
 
-                <h3>
-                    Matriz de Eisenhower
-                </h3>
+                <h3>Matriz de Eisenhower</h3>
 
-                <button
-                    class="btn"
-                    id="saveEisenhower"
-                >
+                <button class="btn" id="saveEisenhower">
                     Salvar matriz
                 </button>
 
@@ -4182,49 +3157,33 @@ function gestao(){
 
                 <div class="gestao-box">
 
-                    <h4>
-                        Urgente + Importante
-                    </h4>
+                    <h4>Urgente + Importante</h4>
 
-                    <textarea
-                        id="eiNow"
-                    >${esc(e.now.join('\n'))}</textarea>
+                    <textarea id="eiNow">${esc(e.now.join('\n'))}</textarea>
 
                 </div>
 
                 <div class="gestao-box">
 
-                    <h4>
-                        Importante + Não urgente
-                    </h4>
+                    <h4>Importante + Não urgente</h4>
 
-                    <textarea
-                        id="eiPlan"
-                    >${esc(e.plan.join('\n'))}</textarea>
+                    <textarea id="eiPlan">${esc(e.plan.join('\n'))}</textarea>
 
                 </div>
 
                 <div class="gestao-box">
 
-                    <h4>
-                        Urgente + Não importante
-                    </h4>
+                    <h4>Urgente + Não importante</h4>
 
-                    <textarea
-                        id="eiDelegate"
-                    >${esc(e.delegate.join('\n'))}</textarea>
+                    <textarea id="eiDelegate">${esc(e.delegate.join('\n'))}</textarea>
 
                 </div>
 
                 <div class="gestao-box">
 
-                    <h4>
-                        Não urgente + Não importante
-                    </h4>
+                    <h4>Não urgente + Não importante</h4>
 
-                    <textarea
-                        id="eiDelete"
-                    >${esc(e.delete.join('\n'))}</textarea>
+                    <textarea id="eiDelete">${esc(e.delete.join('\n'))}</textarea>
 
                 </div>
 
@@ -4236,22 +3195,16 @@ function gestao(){
 
             <div class="section-title">
 
-                <h3>
-                    Método Ivy Lee
-                </h3>
+                <h3>Método Ivy Lee</h3>
 
-                <button
-                    class="btn"
-                    id="addIvy"
-                >
+                <button class="btn" id="addIvy">
                     + Adicionar prioridade
                 </button>
 
             </div>
 
             <p class="muted">
-                Organize até seis prioridades do dia
-                e execute em ordem.
+                Organize até seis prioridades do dia e execute em ordem.
             </p>
 
             <div id="ivyList"></div>
@@ -4259,261 +3212,159 @@ function gestao(){
         </div>
         `;
 
-    const renderIvy =
-        () => {
+    const renderIvy=()=>{
 
-            $('ivyList').innerHTML =
+        $('ivyList').innerHTML=i.length
+            ? i.map(
+                (x,n)=>`
+                <div class="ivy-item">
 
-                i.length
+                    <b>${n+1}</b>
 
-                    ? i.map(
-                        (x,n) => `
+                    <input
+                        class="ivy-input"
+                        data-i="${n}"
+                        value="${esc(x)}"
+                        placeholder="Prioridade"
+                    >
 
-                        <div class="ivy-item">
+                    <button
+                        class="btn btn-danger"
+                        data-del="${n}"
+                    >
+                        ×
+                    </button>
 
-                            <b>
-                                ${n + 1}
-                            </b>
+                </div>
+                `
+            ).join('')
+            : `
+                <div class="empty">
+                    Nenhuma prioridade cadastrada.
+                </div>
+            `;
 
-                            <input
-                                class="ivy-input"
-                                data-i="${n}"
-                                value="${esc(x)}"
-                                placeholder="Prioridade"
-                            >
+        document.querySelectorAll('.ivy-input').forEach(
+            x=>{
+                x.oninput=()=>{
+                    i[+x.dataset.i]=x.value;
+                    save();
+                };
+            }
+        );
 
-                            <button
-                                class="btn btn-danger"
-                                data-del="${n}"
-                            >
-                                ×
-                            </button>
-
-                        </div>
-                        `
-                    ).join('')
-
-                    : `
-                        <div class="empty">
-                            Nenhuma prioridade cadastrada.
-                        </div>
-                    `;
-
-            document
-                .querySelectorAll('.ivy-input')
-                .forEach(
-                    x =>
-                        x.oninput =
-                            () => {
-
-                                i[
-                                    +x.dataset.i
-                                ] =
-                                    x.value;
-
-                                save();
-
-                            }
-                );
-
-            document
-                .querySelectorAll('[data-del]')
-                .forEach(
-                    b =>
-                        b.onclick =
-                            () => {
-
-                                i.splice(
-                                    +b.dataset.del,
-                                    1
-                                );
-
-                                save();
-
-                                renderIvy();
-
-                            }
-                );
-
-        };
+        document.querySelectorAll('[data-del]').forEach(
+            b=>{
+                b.onclick=()=>{
+                    i.splice(+b.dataset.del,1);
+                    save();
+                    renderIvy();
+                };
+            }
+        );
+    };
 
     renderIvy();
 
-    $('addIvy').onclick =
-        () => {
+    $('addIvy').onclick=()=>{
 
-            if(i.length >= 6){
-
-                alert(
-                    'O método Ivy Lee trabalha com até seis prioridades.'
-                );
-
-                return;
-
-            }
-
-            i.push('');
-
-            save();
-
-            renderIvy();
-
-        };
-
-    $('saveEisenhower').onclick =
-        () => {
-
-            d.gestao.eisenhower = {
-
-                now:
-                    $('eiNow')
-                        .value
-                        .split('\n')
-                        .filter(Boolean),
-
-                plan:
-                    $('eiPlan')
-                        .value
-                        .split('\n')
-                        .filter(Boolean),
-
-                delegate:
-                    $('eiDelegate')
-                        .value
-                        .split('\n')
-                        .filter(Boolean),
-
-                delete:
-                    $('eiDelete')
-                        .value
-                        .split('\n')
-                        .filter(Boolean)
-
-            };
-
-            save();
-
+        if(i.length>=6){
             alert(
-                'Matriz de Eisenhower salva.'
+                'O método Ivy Lee trabalha com até seis prioridades.'
             );
+            return;
+        }
 
+        i.push('');
+        save();
+        renderIvy();
+    };
+
+    $('saveEisenhower').onclick=()=>{
+
+        d.gestao.eisenhower={
+            now:$('eiNow').value.split('\n').filter(Boolean),
+            plan:$('eiPlan').value.split('\n').filter(Boolean),
+            delegate:$('eiDelegate').value.split('\n').filter(Boolean),
+            delete:$('eiDelete').value.split('\n').filter(Boolean)
         };
 
-}
+        save();
 
-/* MODAL */
+        alert('Matriz de Eisenhower salva.');
+    };
+}
 
 function openModal(t,c){
 
-    $('modalTitle')
-        .textContent = t;
-
-    $('modalContent')
-        .innerHTML = c;
-
-    $('modal')
-        .classList
-        .add('open');
-
+    $('modalTitle').textContent=t;
+    $('modalContent').innerHTML=c;
+    $('modal').classList.add('open');
 }
 
 function closeModal(){
-
-    $('modal')
-        .classList
-        .remove('open');
-
+    $('modal').classList.remove('open');
 }
-
-/* AUTENTICAÇÃO */
 
 function configureUser(u){
 
-    state.user = u;
+    state.user=u;
 
-    $('envUser').textContent =
+    $('envUser').textContent=
         `${u.nome} · ${u.cargo}`;
 
-    $('eng')
-        .classList
-        .toggle(
-            'hidden',
-            !u.almoxarifados.includes(
-                'engenharia'
-            )
-        );
+    $('eng').classList.toggle(
+        'hidden',
+        !u.almoxarifados.includes('engenharia')
+    );
 
-    $('seg')
-        .classList
-        .toggle(
-            'hidden',
-            !u.almoxarifados.includes(
-                'seguranca'
-            )
-        );
+    $('seg').classList.toggle(
+        'hidden',
+        !u.almoxarifados.includes('seguranca')
+    );
 
     show('env');
-
 }
 
 async function login(e){
 
     e.preventDefault();
 
-    $('msg').textContent = '';
+    $('msg').textContent='';
 
     try{
 
-        const r =
-            await fetch(
-                '/api/auth/login',
-                {
-                    method:'POST',
-                    headers:{
-                        'Content-Type':
-                            'application/json'
-                    },
-                    credentials:'include',
-                    body:
-                        JSON.stringify({
-                            usuario:
-                                $('usuario')
-                                    .value
-                                    .trim(),
-                            senha:
-                                $('senha')
-                                    .value
-                        })
-                }
-            );
+        const r=await fetch(
+            '/api/auth/login',
+            {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                credentials:'include',
+                body:JSON.stringify({
+                    usuario:$('usuario').value.trim(),
+                    senha:$('senha').value
+                })
+            }
+        );
 
-        const d =
-            await r.json();
+        const d=await r.json();
 
-        if(
-            !r.ok ||
-            !d.ok
-        ){
-
+        if(!r.ok||!d.ok){
             throw new Error(
-                d.error ||
+                d.error||
                 'Usuário ou senha inválidos.'
             );
-
         }
 
-        configureUser(
-            d.user
-        );
+        configureUser(d.user);
 
     }catch(err){
 
-        $('msg')
-            .textContent =
-                err.message;
+        $('msg').textContent=err.message;
 
     }
-
 }
 
 async function logout(){
@@ -4530,36 +3381,32 @@ async function logout(){
 
     }catch{}
 
-    state.user = null;
-    state.env = null;
+    state.user=null;
+    state.env=null;
 
     show('login');
 
     $('loginForm').reset();
-
 }
 
 function openEnv(e){
 
     if(
-        !state.user?.almoxarifados
-            .includes(e)
-    ) return;
+        !state.user?.almoxarifados.includes(e)
+    )return;
 
-    state.env = e;
+    state.env=e;
 
-    $('envBadge')
-        .textContent =
-            '· ' +
-            (
-                e === 'engenharia'
-                    ? 'Engenharia'
-                    : 'Segurança'
-            );
+    $('envBadge').textContent=
+        '· '+
+        (
+            e==='engenharia'
+                ? 'Engenharia'
+                : 'Segurança'
+        );
 
-    $('sysUser')
-        .textContent =
-            `${state.user.nome} · ${state.user.cargo}`;
+    $('sysUser').textContent=
+        `${state.user.nome} · ${state.user.cargo}`;
 
     menu();
 
@@ -4567,83 +3414,46 @@ function openEnv(e){
 
     openScreen(
         (
-            state.user.telas?.[e] ||
-            []
-        )[0] ||
-        'dashboard'
+            state.user.telas?.[e]||[]
+        )[0]||'dashboard'
     );
-
 }
 
-/* EVENTOS */
+$('loginForm').addEventListener(
+    'submit',
+    login
+);
 
-$('loginForm')
-    .addEventListener(
-        'submit',
-        login
-    );
-
-$('eng').onclick =
-    () => openEnv(
-        'engenharia'
-    );
-
-$('seg').onclick =
-    () => openEnv(
-        'seguranca'
-    );
-
-$('logoutEnv').onclick =
-    logout;
-
-$('logoutSys').onclick =
-    logout;
-
-$('closeModal').onclick =
-    closeModal;
+$('eng').onclick=()=>openEnv('engenharia');
+$('seg').onclick=()=>openEnv('seguranca');
+$('logoutEnv').onclick=logout;
+$('logoutSys').onclick=logout;
+$('closeModal').onclick=closeModal;
 
 $('modal').addEventListener(
     'click',
-    e => {
-
-        if(
-            e.target ===
-            $('modal')
-        ){
-
+    e=>{
+        if(e.target===$('modal')){
             closeModal();
-
         }
-
     }
 );
-
-/* RECUPERAR SESSÃO */
 
 (async()=>{
 
     try{
 
-        const r =
-            await fetch(
-                '/api/auth/session',
-                {
-                    credentials:'include'
-                }
-            );
+        const r=await fetch(
+            '/api/auth/session',
+            {
+                credentials:'include'
+            }
+        );
 
-        const d =
-            await r.json();
+        const d=await r.json();
 
-        if(
-            r.ok &&
-            d.ok
-        ){
-
-            configureUser(
-                d.user
-            );
-
+        if(r.ok&&d.ok){
+            configureUser(d.user);
         }
 
     }catch{}
