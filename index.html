@@ -1,808 +1,3664 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ALMOX CONTROL | L&L</title>
-
-    <style>
-        :root {
-            --navy: #071426;
-            --navy-light: #10243d;
-            --blue: #2167e8;
-            --blue-hover: #2b73f5;
-            --white: #ffffff;
-            --text: #142033;
-            --muted: #788497;
-            --border: #dfe4ec;
-            --danger: #d83b45;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            margin: 0;
-            min-height: 100%;
-        }
-
-        body {
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Arial,
-                sans-serif;
-            background:
-                radial-gradient(
-                    circle at 50% 20%,
-                    #16345a 0%,
-                    #091a30 42%,
-                    #030b16 100%
-                );
-            color: var(--text);
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .login-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 32px;
-        }
-
-        .login-shell {
-            width: min(100%, 920px);
-            min-height: 580px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-            border-radius: 18px;
-            box-shadow:
-                0 35px 90px rgba(0, 0, 0, .38),
-                0 5px 20px rgba(0, 0, 0, .16);
-        }
-
-        .login-brand-panel {
-            position: relative;
-            overflow: hidden;
-            padding: 34px 38px;
-            display: flex;
-            flex-direction: column;
-            background:
-                linear-gradient(
-                    145deg,
-                    #142b48 0%,
-                    #0b1d33 55%,
-                    #071426 100%
-                );
-            color: white;
-        }
-
-        .login-brand-panel::before {
-            content: "";
-            position: absolute;
-            width: 310px;
-            height: 310px;
-            right: -155px;
-            top: -155px;
-            border: 1px solid rgba(255, 255, 255, .08);
-            border-radius: 50%;
-        }
-
-        .login-brand-panel::after {
-            content: "";
-            position: absolute;
-            width: 210px;
-            height: 210px;
-            right: -105px;
-            top: -105px;
-            border: 1px solid rgba(255, 255, 255, .05);
-            border-radius: 50%;
-        }
-
-        .brand-header {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand-logo {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background:
-                linear-gradient(
-                    145deg,
-                    #526b89,
-                    #334a66
-                );
-            border: 1px solid rgba(255, 255, 255, .18);
-            font-size: 20px;
-            font-weight: 800;
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, .15);
-        }
-
-        .brand-name {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .brand-name strong {
-            font-size: 16px;
-            letter-spacing: -.2px;
-        }
-
-        .brand-name span {
-            color: #91a2b8;
-            font-size: 7px;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-        }
-
-        .brand-content {
-            position: relative;
-            z-index: 1;
-            margin-top: auto;
-            margin-bottom: auto;
-            max-width: 390px;
-        }
-
-        .brand-eyebrow {
-            margin-bottom: 14px;
-            color: #91a5be;
-            font-size: 8px;
-            font-weight: 800;
-            letter-spacing: 1.7px;
-            text-transform: uppercase;
-        }
-
-        .brand-content h1 {
-            margin: 0;
-            max-width: 370px;
-            font-size: clamp(38px, 4vw, 53px);
-            line-height: .98;
-            letter-spacing: -2.8px;
-        }
-
-        .brand-content p {
-            max-width: 330px;
-            margin: 18px 0 0;
-            color: #b1bfd0;
-            font-size: 11px;
-            line-height: 1.55;
-        }
-
-        .brand-footer {
-            position: relative;
-            z-index: 1;
-            color: #73869e;
-            font-size: 8px;
-            line-height: 1.5;
-        }
-
-        .brand-footer strong {
-            display: block;
-            margin-bottom: 3px;
-            color: #8194ab;
-            font-size: 7px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .login-form-panel {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 48px;
-            background: #f9fafc;
-        }
-
-        .login-form-container {
-            width: 100%;
-            max-width: 360px;
-        }
-
-        .login-welcome {
-            margin-bottom: 28px;
-        }
-
-        .login-welcome .eyebrow {
-            margin-bottom: 7px;
-            color: #7d899a;
-            font-size: 8px;
-            font-weight: 800;
-            letter-spacing: 1.7px;
-            text-transform: uppercase;
-        }
-
-        .login-welcome h2 {
-            margin: 0;
-            color: #162237;
-            font-size: 30px;
-            line-height: 1.05;
-            letter-spacing: -1.2px;
-        }
-
-        .login-welcome p {
-            max-width: 300px;
-            margin: 8px 0 0;
-            color: #8b96a5;
-            font-size: 10px;
-            line-height: 1.5;
-        }
-
-        .field {
-            margin-bottom: 17px;
-        }
-
-        .field label {
-            display: block;
-            margin-bottom: 7px;
-            color: #263246;
-            font-size: 9px;
-            font-weight: 800;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .field input {
-            width: 100%;
-            height: 43px;
-            padding: 0 13px;
-            border: 1px solid #dce2ea;
-            border-radius: 6px;
-            outline: none;
-            background: white;
-            color: #172338;
-            font-size: 11px;
-            transition: .18s;
-        }
-
-        .field input::placeholder {
-            color: #a8b1bd;
-        }
-
-        .field input:focus {
-            border-color: #70a2f6;
-            box-shadow:
-                0 0 0 3px rgba(33, 103, 232, .10);
-        }
-
-        .password-input {
-            padding-right: 58px !important;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: 0;
-            padding: 3px;
-            background: transparent;
-            color: #8792a1;
-            font-size: 8px;
-            cursor: pointer;
-        }
-
-        .login-button {
-            width: 100%;
-            height: 43px;
-            margin-top: 5px;
-            border: 0;
-            border-radius: 6px;
-            background:
-                linear-gradient(
-                    135deg,
-                    #2869e7,
-                    #1d5cda
-                );
-            color: white;
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: .1px;
-            cursor: pointer;
-            box-shadow:
-                0 5px 12px rgba(33, 103, 232, .20);
-            transition: .18s;
-        }
-
-        .login-button:hover {
-            background:
-                linear-gradient(
-                    135deg,
-                    #3273ed,
-                    #2163df
-                );
-            transform: translateY(-1px);
-        }
-
-        .login-button:disabled {
-            opacity: .65;
-            cursor: wait;
-            transform: none;
-        }
-
-        .login-message {
-            min-height: 18px;
-            margin-top: 12px;
-            color: var(--danger);
-            text-align: center;
-            font-size: 9px;
-            font-weight: 600;
-        }
-
-        .login-security {
-            margin-top: 30px;
-            padding-top: 16px;
-            border-top: 1px solid #e7eaf0;
-            color: #a3adba;
-            font-size: 8px;
-            line-height: 1.45;
-            text-align: center;
-        }
-
-        .login-signature {
-            margin-top: 13px;
-            color: #566276;
-            font-size: 7px;
-            font-weight: 800;
-            letter-spacing: 1.2px;
-            text-align: center;
-        }
-
-        .environment-page {
-            min-height: 100vh;
-            padding: 30px;
-        }
-
-        .environment-container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .topbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .mini-mark {
-            width: 48px;
-            height: 48px;
-            border-radius: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #2167e8;
-            color: white;
-            font-weight: 900;
-        }
-
-        .topbar-brand strong {
-            display: block;
-            color: white;
-            font-size: 18px;
-        }
-
-        .topbar-brand span {
-            color: #9eafc5;
-            font-size: 12px;
-        }
-
-        .user-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #9eafc5;
-            font-size: 13px;
-        }
-
-        .logout-button {
-            border: 1px solid rgba(255,255,255,.10);
-            background: rgba(255,255,255,.04);
-            color: #e8eef7;
-            padding: 10px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .environment-title {
-            margin-bottom: 26px;
-        }
-
-        .environment-title h2 {
-            margin: 0;
-            color: white;
-            font-size: 30px;
-        }
-
-        .environment-title p {
-            color: #9eafc5;
-            margin: 8px 0 0;
-        }
-
-        .environment-grid {
-            display: grid;
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-            gap: 22px;
-        }
-
-        .environment-card {
-            min-height: 240px;
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,.10);
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(18,51,90,.70),
-                    rgba(7,20,38,.92)
-                );
-            cursor: pointer;
-            transition: .22s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .environment-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(66,165,245,.45);
-            box-shadow:
-                0 20px 50px rgba(0,0,0,.25);
-        }
-
-        .environment-card.disabled {
-            display: none;
-        }
-
-        .environment-icon {
-            font-size: 42px;
-            margin-bottom: 25px;
-        }
-
-        .environment-card h3 {
-            margin: 0 0 10px;
-            color: white;
-            font-size: 22px;
-        }
-
-        .environment-card p {
-            margin: 0;
-            color: #9eafc5;
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        .environment-arrow {
-            position: absolute;
-            right: 25px;
-            bottom: 23px;
-            color: #42a5f5;
-            font-size: 22px;
-        }
-
-        .system-page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background: #071426;
-        }
-
-        .system-header {
-            height: 72px;
-            padding: 0 26px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,.10);
-            background: rgba(4,11,21,.82);
-        }
-
-        .system-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .system-brand .mini-mark {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            font-size: 13px;
-        }
-
-        .system-brand strong {
-            color: white;
-            font-size: 16px;
-        }
-
-        .environment-badge {
-            color: #42a5f5;
-            font-size: 12px;
-            margin-left: 8px;
-        }
-
-        .system-body {
-            display: flex;
-            flex: 1;
-            min-height: calc(100vh - 72px);
-        }
-
-        .sidebar {
-            width: 250px;
-            flex-shrink: 0;
-            padding: 22px 14px;
-            border-right: 1px solid rgba(255,255,255,.10);
-            background: rgba(5,14,26,.85);
-        }
-
-        .sidebar-section {
-            margin-bottom: 22px;
-        }
-
-        .sidebar-label {
-            padding: 0 12px;
-            margin-bottom: 7px;
-            color: #667991;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 1.3px;
-            text-transform: uppercase;
-        }
-
-        .nav-button {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            padding: 11px 12px;
-            margin-bottom: 4px;
-            border: 0;
-            border-radius: 9px;
-            background: transparent;
-            color: #aebed2;
-            text-align: left;
-            cursor: pointer;
-            transition: .15s;
-            font-size: 13px;
-        }
-
-        .nav-button:hover {
-            background: rgba(255,255,255,.05);
-            color: white;
-        }
-
-        .nav-button.active {
-            background: rgba(25,118,210,.18);
-            color: white;
-        }
-
-        .content {
-            flex: 1;
-            padding: 30px;
-            overflow: auto;
-        }
-
-        .content-title {
-            margin-bottom: 25px;
-        }
-
-        .content-title h2 {
-            margin: 0;
-            color: white;
-            font-size: 27px;
-        }
-
-        .content-title p {
-            margin: 7px 0 0;
-            color: #9eafc5;
-        }
-
-        .empty-panel {
-            padding: 40px;
-            border: 1px dashed rgba(255,255,255,.12);
-            border-radius: 16px;
-            color: #9eafc5;
-            text-align: center;
-        }
-
-        @media (max-width: 760px) {
-            .login-page {
-                padding: 16px;
-            }
-
-            .login-shell {
-                min-height: auto;
-                grid-template-columns: 1fr;
-            }
-
-            .login-brand-panel {
-                min-height: 300px;
-                padding: 28px;
-            }
-
-            .brand-content {
-                margin-top: 45px;
-                margin-bottom: 30px;
-            }
-
-            .brand-content h1 {
-                font-size: 39px;
-            }
-
-            .login-form-panel {
-                padding: 34px 25px;
-            }
-
-            .environment-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .environment-page {
-                padding: 20px;
-            }
-
-            .topbar {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .user-area {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .system-body {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                border-right: 0;
-                border-bottom: 1px solid rgba(255,255,255,.10);
-                overflow-x: auto;
-            }
-
-            .sidebar-section {
-                display: flex;
-                gap: 4px;
-                margin-bottom: 0;
-            }
-
-            .sidebar-label {
-                display: none;
-            }
-
-            .nav-button {
-                white-space: nowrap;
-                width: auto;
-            }
-
-            .content {
-                padding: 22px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALMOX CONTROL</title>
+
+<style>
+:root{
+    --navy:#071a33;
+    --navy2:#0d2b4d;
+    --blue:#1261a8;
+    --blue2:#1d78c9;
+    --light:#f4f7fb;
+    --white:#ffffff;
+    --text:#152235;
+    --muted:#687789;
+    --border:#dce3eb;
+    --green:#1d9b62;
+    --red:#d94b4b;
+    --orange:#d98918;
+    --shadow:0 18px 50px rgba(7,26,51,.12);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    min-height:100%;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--light);
+    color:var(--text);
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(29,120,201,.14),transparent 30%),
+        linear-gradient(135deg,#eef3f8,#f8fafc);
+}
+
+.loginbox{
+    width:min(1120px,100%);
+    min-height:650px;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    background:var(--white);
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.login .left{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:52px;
+    color:#fff;
+    background:
+        radial-gradient(circle at 80% 15%,rgba(29,120,201,.35),transparent 28%),
+        linear-gradient(145deg,#06172d,#0b3158);
+}
+
+.brand{
+    font-size:30px;
+    font-weight:800;
+    letter-spacing:-1px;
+}
+
+.brand small{
+    display:block;
+    margin-top:4px;
+    font-size:10px;
+    letter-spacing:2px;
+    font-weight:600;
+    opacity:.65;
+}
+
+.hero{
+    max-width:480px;
+}
+
+.hero small{
+    font-size:11px;
+    letter-spacing:2px;
+    opacity:.65;
+}
+
+.hero h1{
+    margin:18px 0 18px;
+    font-size:48px;
+    line-height:1.04;
+    letter-spacing:-2px;
+}
+
+.hero p{
+    margin:0;
+    max-width:430px;
+    font-size:16px;
+    line-height:1.7;
+    color:rgba(255,255,255,.72);
+}
+
+.login .foot{
+    font-size:11px;
+    line-height:1.7;
+    color:rgba(255,255,255,.48);
+    letter-spacing:.5px;
+}
+
+.login .right{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:52px;
+    background:#fff;
+}
+
+.form{
+    width:min(390px,100%);
+}
+
+.form > small{
+    color:var(--blue);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.form h2{
+    margin:9px 0 9px;
+    font-size:32px;
+    letter-spacing:-1px;
+}
+
+.form > p{
+    margin:0 0 32px;
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+.field{
+    margin-bottom:19px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:13px 14px;
+    outline:none;
+    color:var(--text);
+    background:#fff;
+    transition:.2s;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:var(--blue2);
+    box-shadow:0 0 0 3px rgba(29,120,201,.1);
+}
+
+.field-wrap{
+    position:relative;
+}
+
+.field-wrap input{
+    padding-right:85px;
+}
+
+.password-toggle{
+    position:absolute;
+    top:50%;
+    right:10px;
+    transform:translateY(-50%);
+    border:0;
+    background:transparent;
+    color:var(--blue);
+    font-size:12px;
+    font-weight:700;
+    padding:8px;
+}
+
+.loginbtn{
+    width:100%;
+    border:0;
+    border-radius:10px;
+    padding:14px 18px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--blue),var(--blue2));
+    font-weight:700;
+    box-shadow:0 8px 20px rgba(18,97,168,.22);
+    transition:.2s;
+}
+
+.loginbtn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 24px rgba(18,97,168,.28);
+}
+
+.msg{
+    min-height:22px;
+    margin-top:13px;
+    color:var(--red);
+    font-size:13px;
+    line-height:1.5;
+}
+
+.security{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    color:#8995a4;
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.topbar{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:0 28px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+}
+
+.topbrand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.topbrand-logo{
+    color:#fff;
+    background:var(--navy);
+    border-radius:9px;
+    padding:8px 11px;
+    font-weight:800;
+    font-size:17px;
+}
+
+.topbrand-title{
+    font-weight:800;
+    letter-spacing:-.3px;
+}
+
+.topbrand-sub{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.userbadge{
+    padding:9px 13px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+}
+
+.userbadge strong{
+    display:block;
+    font-size:12px;
+}
+
+.userbadge span{
+    display:block;
+    margin-top:2px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.btn{
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:10px 14px;
+    background:#fff;
+    color:var(--text);
+    font-weight:700;
+    transition:.2s;
+}
+
+.btn:hover{
+    border-color:#b9c5d2;
+    background:#f8fafc;
+}
+
+.btn.primary{
+    color:#fff;
+    border-color:var(--blue);
+    background:var(--blue);
+}
+
+.btn.danger{
+    color:#fff;
+    border-color:var(--red);
+    background:var(--red);
+}
+
+/* =========================
+   ENVIRONMENT
+========================= */
+
+.environment{
+    min-height:calc(100vh - 72px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:50px 28px;
+}
+
+.environment-inner{
+    width:min(1000px,100%);
+}
+
+.environment-head{
+    text-align:center;
+    margin-bottom:38px;
+}
+
+.environment-head small{
+    color:var(--blue);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.environment-head h1{
+    margin:10px 0 8px;
+    font-size:38px;
+    letter-spacing:-1.5px;
+}
+
+.environment-head p{
+    margin:0;
+    color:var(--muted);
+}
+
+.environment-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.env-card{
+    position:relative;
+    min-height:260px;
+    padding:32px;
+    border:1px solid var(--border);
+    border-radius:20px;
+    background:#fff;
+    box-shadow:0 8px 25px rgba(7,26,51,.06);
+    cursor:pointer;
+    transition:.25s;
+    overflow:hidden;
+}
+
+.env-card:hover{
+    transform:translateY(-4px);
+    border-color:#b8cee3;
+    box-shadow:0 18px 35px rgba(7,26,51,.1);
+}
+
+.env-icon{
+    width:58px;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    background:#eaf3fb;
+    color:var(--blue);
+    font-size:29px;
+    margin-bottom:28px;
+}
+
+.env-card.security .env-icon{
+    background:#eef0f4;
+    color:var(--navy);
+}
+
+.env-card h2{
+    margin:0 0 9px;
+    font-size:24px;
+    letter-spacing:-.6px;
+}
+
+.env-card p{
+    margin:0;
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+.env-arrow{
+    position:absolute;
+    right:28px;
+    bottom:25px;
+    color:var(--blue);
+    font-size:22px;
+}
+
+.env-card.security .env-arrow{
+    color:var(--navy);
+}
+
+/* =========================
+   LAYOUT PRINCIPAL
+========================= */
+
+.workspace{
+    display:flex;
+    min-height:calc(100vh - 72px);
+}
+
+.sidebar{
+    width:250px;
+    flex-shrink:0;
+    padding:22px 15px;
+    background:var(--navy);
+    color:#fff;
+}
+
+.sidebar-title{
+    padding:8px 11px 18px;
+    color:rgba(255,255,255,.45);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.nav button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 12px;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:rgba(255,255,255,.7);
+    text-align:left;
+    font-size:13px;
+    font-weight:600;
+}
+
+.nav button:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.nav button.active{
+    background:rgba(29,120,201,.32);
+    color:#fff;
+}
+
+.nav-icon{
+    width:20px;
+    text-align:center;
+    opacity:.9;
+}
+
+.main{
+    min-width:0;
+    flex:1;
+    padding:28px;
+    background:var(--light);
+    overflow:auto;
+}
+
+.page-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.page-head h1{
+    margin:0 0 6px;
+    font-size:28px;
+    letter-spacing:-.8px;
+}
+
+.page-head p{
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.page-actions{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:19px;
+}
+
+.card-label{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+}
+
+.card-value{
+    margin-top:8px;
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:-.8px;
+}
+
+.card-info{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.card-value.green{
+    color:var(--green);
+}
+
+.card-value.orange{
+    color:var(--orange);
+}
+
+.card-value.red{
+    color:var(--red);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.panel{
+    margin-bottom:20px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:#fff;
+    overflow:hidden;
+}
+
+.panel-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:17px 19px;
+    border-bottom:1px solid var(--border);
+}
+
+.panel-head h2{
+    margin:0;
+    font-size:16px;
+    letter-spacing:-.2px;
+}
+
+.panel-head span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.panel-body{
+    padding:19px;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:17px;
+}
+
+.table-wrap{
+    width:100%;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:12px;
+}
+
+th{
+    padding:11px 10px;
+    border-bottom:1px solid var(--border);
+    color:var(--muted);
+    font-size:10px;
+    font-weight:800;
+    text-align:left;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    white-space:nowrap;
+}
+
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #edf1f5;
+    white-space:nowrap;
+}
+
+tbody tr:last-child td{
+    border-bottom:0;
+}
+
+tbody tr:hover{
+    background:#fafcfe;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 8px;
+    border-radius:999px;
+    font-size:10px;
+    font-weight:800;
+}
+
+.status.green{
+    color:#15724a;
+    background:#e8f7ef;
+}
+
+.status.orange{
+    color:#98600d;
+    background:#fff4df;
+}
+
+.status.red{
+    color:#a52e2e;
+    background:#fdecec;
+}
+
+.status.blue{
+    color:#155c93;
+    background:#e9f3fc;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.form-grid .full{
+    grid-column:1 / -1;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.form-footer{
+    display:flex;
+    justify-content:flex-end;
+    gap:9px;
+    margin-top:20px;
+    padding-top:18px;
+    border-top:1px solid var(--border);
+}
+
+/* =========================
+   PROJECTS
+========================= */
+
+.project-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.project-card{
+    padding:19px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:#fff;
+}
+
+.project-card h3{
+    margin:0 0 6px;
+    font-size:15px;
+}
+
+.project-card p{
+    margin:0 0 15px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.progress{
+    height:7px;
+    overflow:hidden;
+    border-radius:99px;
+    background:#e9eef3;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    border-radius:inherit;
+    background:var(--blue);
+}
+
+.project-meta{
+    display:flex;
+    justify-content:space-between;
+    margin-top:8px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* =========================
+   LOCALIZAÇÃO
+========================= */
+
+.location-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.location-cell{
+    min-height:95px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+}
+
+.location-cell strong{
+    font-size:12px;
+}
+
+.location-cell span{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.location-cell.occupied{
+    border-color:#b9d4eb;
+    background:#f2f8fd;
+}
+
+.location-cell.empty{
+    background:#fafbfc;
+}
+
+/* =========================
+   INVENTÁRIO
+========================= */
+
+.inventory-summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.inventory-lock{
+    padding:13px 15px;
+    border:1px solid #f1d6a5;
+    border-radius:10px;
+    background:#fff8e9;
+    color:#8b5b10;
+    font-size:12px;
+}
+
+/* =========================
+   GESTÃO
+========================= */
+
+.management-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.management-card{
+    padding:22px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:#fff;
+}
+
+.management-card h3{
+    margin:0 0 7px;
+    font-size:17px;
+}
+
+.management-card p{
+    margin:0 0 18px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
+}
+
+.eisenhower{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.eisenhower div{
+    min-height:100px;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-size:11px;
+}
+
+.eisenhower strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.ivy{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.ivy-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:8px;
+}
+
+.ivy-num{
+    width:24px;
+    height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    font-size:10px;
+    font-weight:800;
+}
+
+/* =========================
+   SECURITY
+========================= */
+
+.employee-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.employee-card{
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:#fff;
+}
+
+.employee-avatar{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:12px;
+    border-radius:50%;
+    background:#eaf0f6;
+    color:var(--navy);
+    font-weight:800;
+}
+
+.employee-card h3{
+    margin:0 0 4px;
+    font-size:14px;
+}
+
+.employee-card p{
+    margin:0;
+    color:var(--muted);
+    font-size:11px;
+}
+
+@media(max-width:900px){
+    .loginbox{
+        grid-template-columns:1fr;
+    }
+
+    .login .left{
+        min-height:360px;
+    }
+
+    .environment-grid,
+    .management-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .filters,
+    .form-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .project-grid,
+    .employee-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .sidebar{
+        width:220px;
+    }
+}
+
+@media(max-width:650px){
+    .login{
+        padding:0;
+    }
+
+    .loginbox{
+        min-height:100vh;
+        border-radius:0;
+    }
+
+    .login .left,
+    .login .right{
+        padding:32px 24px;
+    }
+
+    .hero h1{
+        font-size:37px;
+    }
+
+    .topbar{
+        height:auto;
+        min-height:72px;
+        padding:14px 16px;
+        flex-wrap:wrap;
+    }
+
+    .workspace{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        padding:10px;
+    }
+
+    .nav{
+        flex-direction:row;
+        overflow:auto;
+    }
+
+    .nav button{
+        min-width:max-content;
+    }
+
+    .main{
+        padding:18px;
+    }
+
+    .page-head{
+        flex-direction:column;
+    }
+
+    .cards,
+    .filters,
+    .form-grid,
+    .project-grid,
+    .employee-grid,
+    .inventory-summary{
+        grid-template-columns:1fr;
+    }
+
+    .location-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <main id="loginPage" class="login-page">
-        <section class="login-shell">
+<div id="login" class="login">
+    <div class="loginbox">
 
-            <div class="login-brand-panel">
+        <div class="left">
 
-                <div class="brand-header">
+            <div class="brand">
+                L&L
+                <small>GESTÃO & CONTROLE</small>
+            </div>
 
-                    <div class="brand-logo">
-                        L
+            <div class="hero">
+                <small>ACESSO RESTRITO</small>
+
+                <h1>
+                    Gestão que começa pelo controle.
+                </h1>
+
+                <p>
+                    Materiais, movimentações, inventários,
+                    localização e gestão operacional em um só lugar.
+                </p>
+            </div>
+
+            <div class="foot">
+                ALMOX CONTROL<br>
+                Plataforma de Gestão de Almoxarifados
+            </div>
+
+        </div>
+
+        <div class="right">
+
+            <div class="form">
+
+                <small>Bem-vindo</small>
+
+                <h2>
+                    Entrar no sistema
+                </h2>
+
+                <p>
+                    Informe suas credenciais para acessar
+                    o ambiente de gestão.
+                </p>
+
+                <form id="loginForm">
+
+                    <div class="field">
+                        <label for="usuario">
+                            Usuário
+                        </label>
+
+                        <input
+                            id="usuario"
+                            required
+                            autocomplete="username"
+                        >
                     </div>
 
-                    <div class="brand-name">
-                        <strong>L&amp;L</strong>
-                        <span>GESTÃO &amp; CONTROLE</span>
+                    <div class="field">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <div class="field-wrap">
+
+                            <input
+                                id="senha"
+                                type="password"
+                                required
+                                autocomplete="current-password"
+                            >
+
+                            <button
+                                type="button"
+                                id="passwordToggle"
+                                class="password-toggle"
+                            >
+                                Mostrar
+                            </button>
+
+                        </div>
+
                     </div>
 
+                    <button
+                        type="submit"
+                        class="loginbtn"
+                    >
+                        Acessar ALMOX CONTROL
+                    </button>
+
+                    <div
+                        id="msg"
+                        class="msg"
+                        aria-live="polite"
+                    ></div>
+
+                    <div class="security">
+                        Acesso protegido por autenticação no servidor.<br>
+                        Sua sessão é mantida por cookie seguro.
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="environment" class="environment hidden">
+
+    <div class="environment-inner">
+
+        <div class="environment-head">
+
+            <small>
+                ALMOX CONTROL
+            </small>
+
+            <h1>
+                Selecione o ambiente
+            </h1>
+
+            <p>
+                Escolha o almoxarifado que deseja acessar.
+            </p>
+
+        </div>
+
+        <div class="environment-grid">
+
+            <div
+                class="env-card"
+                id="engineeringCard"
+            >
+
+                <div class="env-icon">
+                    ⚡
                 </div>
 
-                <div class="brand-content">
+                <h2>
+                    Almoxarifado da Engenharia
+                </h2>
 
-                    <div class="brand-eyebrow">
-                        Acesso restrito
-                    </div>
+                <p>
+                    Controle de materiais, projetos,
+                    entradas, saídas, inventário e localização.
+                </p>
 
-                    <h1>
-                        Gestão que
-                        começa pelo
-                        controle.
-                    </h1>
-
-                    <p>
-                        Um ambiente pensado para organizar
-                        materiais, movimentações, inventários,
-                        localização e gestão operacional em
-                        um só lugar.
-                    </p>
-
-                </div>
-
-                <div class="brand-footer">
-                    <strong>ALMOX CONTROL</strong>
-                    Plataforma de Gestão de Almoxarifados
+                <div class="env-arrow">
+                    →
                 </div>
 
             </div>
 
-            <div class="login-form-panel">
+            <div
+                class="env-card security"
+                id="securityCard"
+            >
 
-                <div class="login-form-container">
+                <div class="env-icon">
+                    🛡
+                </div>
 
-                    <div class="login-welcome">
+                <h2>
+                    Almoxarifado da Segurança
+                </h2>
 
-                        <div class="eyebrow">
-                            Bem-vindo
-                        </div>
+                <p>
+                    Gestão de colaboradores,
+                    equipamentos, materiais e agenda operacional.
+                </p>
 
-                        <h2>
-                            Entrar no sistema
-                        </h2>
+                <div class="env-arrow">
+                    →
+                </div>
 
-                        <p>
-                            Informe suas credenciais para
-                            acessar o ambiente de gestão.
-                        </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="app" class="app hidden">
+
+    <header class="topbar">
+
+        <div class="topbrand">
+
+            <div class="topbrand-logo">
+                L&L
+            </div>
+
+            <div>
+                <div
+                    class="topbrand-title"
+                    id="environmentTitle"
+                >
+                    ALMOX CONTROL
+                </div>
+
+                <div
+                    class="topbrand-sub"
+                    id="environmentSubtitle"
+                >
+                    Gestão de Almoxarifado
+                </div>
+            </div>
+
+        </div>
+
+        <div class="top-actions">
+
+            <div class="userbadge">
+
+                <strong id="userName">
+                    Usuário
+                </strong>
+
+                <span id="userRole">
+                    Perfil
+                </span>
+
+            </div>
+
+            <button
+                class="btn"
+                id="changeEnvironment"
+            >
+                Trocar ambiente
+            </button>
+
+            <button
+                class="btn danger"
+                id="logoutButton"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </header>
+
+    <div class="workspace">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                Navegação
+            </div>
+
+            <nav
+                class="nav"
+                id="navigation"
+            ></nav>
+
+        </aside>
+
+        <main
+            class="main"
+            id="main"
+        ></main>
+
+    </div>
+
+</div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+let currentUser = null;
+let currentEnvironment = null;
+let currentScreen = null;
+
+/*
+ * Dados locais do protótipo.
+ * Posteriormente poderão ser substituídos
+ * por dados persistidos no banco.
+ */
+
+const engineeringData = {
+    estoque: [
+        {
+            codigo:"ENG-001",
+            descricao:"Cabo de cobre 16mm²",
+            unidade:"m",
+            quantidade:1250,
+            minimo:500,
+            localizacao:"A01-N01",
+            projeto:"Projeto Norte",
+            status:"normal"
+        },
+        {
+            codigo:"ENG-002",
+            descricao:"Disjuntor tripolar 100A",
+            unidade:"un",
+            quantidade:18,
+            minimo:10,
+            localizacao:"A02-N02",
+            projeto:"Projeto Norte",
+            status:"normal"
+        },
+        {
+            codigo:"ENG-003",
+            descricao:"Conector elétrico",
+            unidade:"un",
+            quantidade:7,
+            minimo:15,
+            localizacao:"A03-N01",
+            projeto:"Projeto Sul",
+            status:"baixo"
+        },
+        {
+            codigo:"ENG-004",
+            descricao:"Eletroduto PVC 32mm",
+            unidade:"un",
+            quantidade:74,
+            minimo:30,
+            localizacao:"A04-N03",
+            projeto:"Projeto Sul",
+            status:"normal"
+        }
+    ],
+
+    projetos: [
+        {
+            nome:"Projeto Norte",
+            descricao:"Expansão da rede elétrica",
+            progresso:72,
+            materiais:125
+        },
+        {
+            nome:"Projeto Sul",
+            descricao:"Adequação de instalações",
+            progresso:48,
+            materiais:83
+        },
+        {
+            nome:"Projeto Leste",
+            descricao:"Implantação de novos pontos",
+            progresso:26,
+            materiais:61
+        }
+    ]
+};
+
+const securityData = {
+    estoque: [
+        {
+            codigo:"SEG-001",
+            descricao:"Capacete de segurança",
+            unidade:"un",
+            disponivel:48,
+            minimo:20,
+            situacao:"normal"
+        },
+        {
+            codigo:"SEG-002",
+            descricao:"Colete refletivo",
+            unidade:"un",
+            disponivel:35,
+            minimo:15,
+            situacao:"normal"
+        },
+        {
+            codigo:"SEG-003",
+            descricao:"Óculos de proteção",
+            unidade:"un",
+            disponivel:9,
+            minimo:15,
+            situacao:"baixo"
+        }
+    ],
+
+    colaboradores: [
+        {
+            nome:"João Silva",
+            matricula:"COL-001",
+            cargo:"Eletricista",
+            setor:"Engenharia",
+            status:"Ativo"
+        },
+        {
+            nome:"Carlos Santos",
+            matricula:"COL-002",
+            cargo:"Técnico",
+            setor:"Segurança",
+            status:"Ativo"
+        },
+        {
+            nome:"Marcos Oliveira",
+            matricula:"COL-003",
+            cargo:"Auxiliar",
+            setor:"Operação",
+            status:"Ativo"
+        }
+    ]
+};
+
+const navigationDefinitions = {
+    engenharia: [
+        ["dashboard","▦","Dashboard"],
+        ["estoque","▤","Estoque"],
+        ["projetos","◈","Projetos"],
+        ["entradas","↓","Entrada no Almoxarifado"],
+        ["saidas","↑","Saída do Almoxarifado"],
+        ["inventario","✓","Inventário"],
+        ["localizacao","⌖","Localização"],
+        ["gestao","◫","Área da Gestão"]
+    ],
+
+    seguranca: [
+        ["dashboard","▦","Dashboard"],
+        ["estoque","▤","Estoque"],
+        ["colaboradores","♙","Cadastro de colaboradores"],
+        ["estoque-colaborador","♧","Estoque por colaborador"],
+        ["entradas","↓","Entrada no Almoxarifado"],
+        ["saidas","↑","Saída no Almoxarifado"],
+        ["agenda","□","Agenda"]
+    ]
+};
+</script>
+<script>
+function show(id){
+    const elements = [
+        "login",
+        "environment",
+        "app"
+    ];
+
+    elements.forEach(element => {
+        $(element)?.classList.add("hidden");
+    });
+
+    $(id)?.classList.remove("hidden");
+}
+
+function setUser(user){
+    currentUser = user;
+
+    $("userName").textContent =
+        user.nome || user.usuario;
+
+    $("userRole").textContent =
+        user.cargo || "Usuário";
+
+    show("environment");
+
+    configureEnvironmentCards();
+}
+
+function configureEnvironmentCards(){
+
+    const engineeringAllowed =
+        currentUser?.almoxarifados?.includes(
+            "engenharia"
+        );
+
+    const securityAllowed =
+        currentUser?.almoxarifados?.includes(
+            "seguranca"
+        );
+
+    const engineeringCard =
+        $("engineeringCard");
+
+    const securityCard =
+        $("securityCard");
+
+    if(engineeringCard){
+
+        engineeringCard.style.display =
+            engineeringAllowed
+                ? ""
+                : "none";
+
+        engineeringCard.onclick =
+            engineeringAllowed
+                ? () => openEnvironment("engenharia")
+                : null;
+    }
+
+    if(securityCard){
+
+        securityCard.style.display =
+            securityAllowed
+                ? ""
+                : "none";
+
+        securityCard.onclick =
+            securityAllowed
+                ? () => openEnvironment("seguranca")
+                : null;
+    }
+}
+
+function openEnvironment(environment){
+
+    if(!currentUser){
+        show("login");
+        return;
+    }
+
+    const allowed =
+        currentUser.almoxarifados?.includes(
+            environment
+        );
+
+    if(!allowed){
+        return;
+    }
+
+    currentEnvironment =
+        environment;
+
+    $("environmentTitle").textContent =
+        environment === "engenharia"
+            ? "Almoxarifado da Engenharia"
+            : "Almoxarifado da Segurança";
+
+    $("environmentSubtitle").textContent =
+        environment === "engenharia"
+            ? "Gestão de materiais e projetos"
+            : "Gestão de materiais e colaboradores";
+
+    show("app");
+
+    buildNavigation();
+
+    const availableScreens =
+        currentUser.telas?.[environment] || [];
+
+    if(availableScreens.length){
+        openScreen(
+            availableScreens[0]
+        );
+    }else{
+        renderNoPermission();
+    }
+}
+
+function buildNavigation(){
+
+    const navigation =
+        $("navigation");
+
+    if(!navigation){
+        return;
+    }
+
+    navigation.innerHTML = "";
+
+    const definitions =
+        navigationDefinitions[
+            currentEnvironment
+        ] || [];
+
+    const allowedScreens =
+        currentUser?.telas?.[
+            currentEnvironment
+        ] || [];
+
+    definitions.forEach(item => {
+
+        const [
+            id,
+            icon,
+            label
+        ] = item;
+
+        if(!allowedScreens.includes(id)){
+            return;
+        }
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.dataset.screen = id;
+
+        button.innerHTML = `
+            <span class="nav-icon">${icon}</span>
+            <span>${label}</span>
+        `;
+
+        button.addEventListener(
+            "click",
+            () => openScreen(id)
+        );
+
+        navigation.appendChild(button);
+    });
+}
+
+function updateActiveNavigation(){
+
+    document
+        .querySelectorAll(
+            "#navigation button"
+        )
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.screen ===
+                currentScreen
+            );
+        });
+}
+
+function openScreen(screen){
+
+    if(!currentUser ||
+       !currentEnvironment){
+        return;
+    }
+
+    const allowed =
+        currentUser.telas?.[
+            currentEnvironment
+        ]?.includes(screen);
+
+    if(!allowed){
+        renderNoPermission();
+        return;
+    }
+
+    currentScreen = screen;
+
+    updateActiveNavigation();
+
+    if(currentEnvironment === "engenharia"){
+        renderEngineeringScreen(screen);
+        return;
+    }
+
+    renderSecurityScreen(screen);
+}
+
+function renderNoPermission(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+            <div>
+                <h1>Acesso não disponível</h1>
+                <p>
+                    Seu perfil não possui telas
+                    disponíveis neste ambiente.
+                </p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <p>
+                    Solicite ao Administrador a
+                    liberação das telas necessárias.
+                </p>
+            </div>
+        </div>
+    `;
+}
+
+/* =========================
+   ENGENHARIA
+========================= */
+
+function renderEngineeringScreen(screen){
+
+    const renders = {
+        dashboard:
+            renderEngineeringDashboard,
+
+        estoque:
+            renderEngineeringStock,
+
+        projetos:
+            renderEngineeringProjects,
+
+        entradas:
+            renderEngineeringEntry,
+
+        saidas:
+            renderEngineeringExit,
+
+        inventario:
+            renderEngineeringInventory,
+
+        localizacao:
+            renderEngineeringLocation,
+
+        gestao:
+            renderEngineeringManagement
+    };
+
+    const renderer =
+        renders[screen];
+
+    if(renderer){
+        renderer();
+    }else{
+        renderNoPermission();
+    }
+}
+
+function renderEngineeringDashboard(){
+
+    const estoque =
+        engineeringData.estoque;
+
+    const totalItems =
+        estoque.reduce(
+            (sum,item) =>
+                sum + item.quantidade,
+            0
+        );
+
+    const lowStock =
+        estoque.filter(
+            item =>
+                item.quantidade <= item.minimo
+        ).length;
+
+    const projects =
+        engineeringData.projetos.length;
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>Dashboard</h1>
+
+                <p>
+                    Visão geral do Almoxarifado
+                    da Engenharia.
+                </p>
+            </div>
+
+            <div class="page-actions">
+                <button
+                    class="btn primary"
+                    onclick="openScreen('entradas')"
+                >
+                    + Nova entrada
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="openScreen('saidas')"
+                >
+                    Nova saída
+                </button>
+            </div>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-label">
+                    Itens em estoque
+                </div>
+
+                <div class="card-value">
+                    ${totalItems.toLocaleString("pt-BR")}
+                </div>
+
+                <div class="card-info">
+                    Quantidade física registrada
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    Materiais cadastrados
+                </div>
+
+                <div class="card-value">
+                    ${estoque.length}
+                </div>
+
+                <div class="card-info">
+                    Itens ativos no controle
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    Projetos ativos
+                </div>
+
+                <div class="card-value">
+                    ${projects}
+                </div>
+
+                <div class="card-info">
+                    Projetos em acompanhamento
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    Estoque baixo
+                </div>
+
+                <div class="card-value ${
+                    lowStock
+                        ? "red"
+                        : "green"
+                }">
+                    ${lowStock}
+                </div>
+
+                <div class="card-info">
+                    Materiais abaixo do mínimo
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+                <h2>
+                    Materiais em destaque
+                </h2>
+
+                <span>
+                    Controle atual
+                </span>
+            </div>
+
+            <div class="panel-body">
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Material</th>
+                                <th>Quantidade</th>
+                                <th>Mínimo</th>
+                                <th>Projeto</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            ${estoque.map(item => `
+                                <tr>
+
+                                    <td>
+                                        ${item.codigo}
+                                    </td>
+
+                                    <td>
+                                        ${item.descricao}
+                                    </td>
+
+                                    <td>
+                                        ${item.quantidade}
+                                        ${item.unidade}
+                                    </td>
+
+                                    <td>
+                                        ${item.minimo}
+                                    </td>
+
+                                    <td>
+                                        ${item.projeto}
+                                    </td>
+
+                                    <td>
+                                        <span class="status ${
+                                            item.quantidade <= item.minimo
+                                                ? "red"
+                                                : "green"
+                                        }">
+                                            ${
+                                                item.quantidade <= item.minimo
+                                                    ? "Estoque baixo"
+                                                    : "Normal"
+                                            }
+                                        </span>
+                                    </td>
+
+                                </tr>
+                            `).join("")}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function renderEngineeringStock(){
+
+    const estoque =
+        engineeringData.estoque;
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>Estoque</h1>
+
+                <p>
+                    Controle dos materiais
+                    disponíveis no almoxarifado.
+                </p>
+            </div>
+
+            <div class="page-actions">
+
+                <button
+                    class="btn primary"
+                    onclick="openScreen('entradas')"
+                >
+                    + Entrada
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="openScreen('saidas')"
+                >
+                    Saída
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div class="filters">
+
+                    <div class="field">
+                        <label>
+                            Material
+                        </label>
+
+                        <input
+                            id="stockSearch"
+                            placeholder="Pesquisar material..."
+                            oninput="filterEngineeringStock()"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>
+                            Projeto
+                        </label>
+
+                        <select
+                            id="stockProject"
+                            onchange="filterEngineeringStock()"
+                        >
+                            <option value="">
+                                Todos
+                            </option>
+
+                            ${engineeringData.projetos.map(
+                                project => `
+                                    <option value="${project.nome}">
+                                        ${project.nome}
+                                    </option>
+                                `
+                            ).join("")}
+
+                        </select>
 
                     </div>
 
-                    <form id="loginForm">
+                    <div class="field">
+                        <label>
+                            Status
+                        </label>
+
+                        <select
+                            id="stockStatus"
+                            onchange="filterEngineeringStock()"
+                        >
+                            <option value="">
+                                Todos
+                            </option>
+
+                            <option value="normal">
+                                Normal
+                            </option>
+
+                            <option value="baixo">
+                                Estoque baixo
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>
+                            Localização
+                        </label>
+
+                        <input
+                            id="stockLocation"
+                            placeholder="Ex.: A01"
+                            oninput="filterEngineeringStock()"
+                        >
+                    </div>
+
+                </div>
+
+                <div
+                    class="table-wrap"
+                    id="engineeringStockTable"
+                >
+                    ${engineeringStockTable(
+                        estoque
+                    )}
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function engineeringStockTable(items){
+
+    if(!items.length){
+
+        return `
+            <div class="inventory-lock">
+                Nenhum material encontrado
+                com os filtros informados.
+            </div>
+        `;
+    }
+
+    return `
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th>Un.</th>
+                    <th>Quantidade</th>
+                    <th>Mínimo</th>
+                    <th>Localização</th>
+                    <th>Projeto</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                ${items.map(item => `
+
+                    <tr>
+
+                        <td>
+                            ${item.codigo}
+                        </td>
+
+                        <td>
+                            ${item.descricao}
+                        </td>
+
+                        <td>
+                            ${item.unidade}
+                        </td>
+
+                        <td>
+                            ${item.quantidade}
+                        </td>
+
+                        <td>
+                            ${item.minimo}
+                        </td>
+
+                        <td>
+                            ${item.localizacao}
+                        </td>
+
+                        <td>
+                            ${item.projeto}
+                        </td>
+
+                        <td>
+                            <span class="status ${
+                                item.quantidade <= item.minimo
+                                    ? "red"
+                                    : "green"
+                            }">
+                                ${
+                                    item.quantidade <= item.minimo
+                                        ? "Baixo"
+                                        : "Normal"
+                                }
+                            </span>
+                        </td>
+
+                    </tr>
+
+                `).join("")}
+
+            </tbody>
+
+        </table>
+    `;
+}
+
+function filterEngineeringStock(){
+
+    const search =
+        ($("stockSearch")?.value || "")
+            .toLowerCase()
+            .trim();
+
+    const project =
+        $("stockProject")?.value || "";
+
+    const status =
+        $("stockStatus")?.value || "";
+
+    const location =
+        ($("stockLocation")?.value || "")
+            .toLowerCase()
+            .trim();
+
+    const filtered =
+        engineeringData.estoque.filter(item => {
+
+            const matchesSearch =
+                !search ||
+                item.codigo.toLowerCase().includes(search) ||
+                item.descricao.toLowerCase().includes(search);
+
+            const matchesProject =
+                !project ||
+                item.projeto === project;
+
+            const itemStatus =
+                item.quantidade <= item.minimo
+                    ? "baixo"
+                    : "normal";
+
+            const matchesStatus =
+                !status ||
+                itemStatus === status;
+
+            const matchesLocation =
+                !location ||
+                item.localizacao
+                    .toLowerCase()
+                    .includes(location);
+
+            return (
+                matchesSearch &&
+                matchesProject &&
+                matchesStatus &&
+                matchesLocation
+            );
+        });
+
+    $("engineeringStockTable").innerHTML =
+        engineeringStockTable(filtered);
+}
+
+function renderEngineeringProjects(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>Projetos</h1>
+
+                <p>
+                    Projetos tratados como
+                    mini-almoxarifados.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="project-grid">
+
+            ${engineeringData.projetos.map(
+                project => `
+
+                    <div class="project-card">
+
+                        <h3>
+                            ${project.nome}
+                        </h3>
+
+                        <p>
+                            ${project.descricao}
+                        </p>
+
+                        <div class="progress">
+                            <span
+                                style="width:${project.progresso}%"
+                            ></span>
+                        </div>
+
+                        <div class="project-meta">
+
+                            <span>
+                                ${project.progresso}% concluído
+                            </span>
+
+                            <span>
+                                ${project.materiais} materiais
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `
+            ).join("")}
+
+        </div>
+
+        <div class="panel" style="margin-top:20px">
+
+            <div class="panel-head">
+
+                <h2>
+                    Estrutura dos projetos
+                </h2>
+
+                <span>
+                    Mini-almoxarifado
+                </span>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Projeto</th>
+                                <th>Planejado</th>
+                                <th>Recebido</th>
+                                <th>Utilizado</th>
+                                <th>Saldo</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${engineeringData.projetos.map(
+                                project => `
+
+                                    <tr>
+
+                                        <td>
+                                            ${project.nome}
+                                        </td>
+
+                                        <td>
+                                            ${project.materiais + 30}
+                                        </td>
+
+                                        <td>
+                                            ${project.materiais + 15}
+                                        </td>
+
+                                        <td>
+                                            ${Math.round(
+                                                project.materiais * .45
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${Math.round(
+                                                project.materiais * .55
+                                            )}
+                                        </td>
+
+                                    </tr>
+
+                                `
+                            ).join("")}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function renderEngineeringEntry(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>
+                    Entrada no Almoxarifado
+                </h1>
+
+                <p>
+                    Registre o recebimento
+                    de materiais.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <form
+                    onsubmit="registerEngineeringEntry(event)"
+                >
+
+                    <div class="form-grid">
 
                         <div class="field">
-
-                            <label for="usuario">
-                                Usuário
+                            <label>
+                                Data
                             </label>
 
                             <input
-                                id="usuario"
-                                name="usuario"
-                                type="text"
-                                autocomplete="username"
-                                placeholder="Digite seu usuário"
+                                type="date"
+                                id="entryDate"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Material
+                            </label>
+
+                            <select
+                                id="entryMaterial"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                ${engineeringData.estoque.map(
+                                    item => `
+                                        <option value="${item.codigo}">
+                                            ${item.codigo} - ${item.descricao}
+                                        </option>
+                                    `
+                                ).join("")}
+
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Quantidade
+                            </label>
+
+                            <input
+                                type="number"
+                                min="1"
+                                id="entryQuantity"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Documento
+                            </label>
+
+                            <input
+                                id="entryDocument"
+                                placeholder="NF / documento"
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Fornecedor
+                            </label>
+
+                            <input
+                                id="entrySupplier"
+                                placeholder="Fornecedor"
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Projeto
+                            </label>
+
+                            <select id="entryProject">
+
+                                <option value="">
+                                    Sem projeto
+                                </option>
+
+                                ${engineeringData.projetos.map(
+                                    project => `
+                                        <option>
+                                            ${project.nome}
+                                        </option>
+                                    `
+                                ).join("")}
+
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Responsável
+                            </label>
+
+                            <input
+                                id="entryResponsible"
+                                value="${currentUser?.nome || ""}"
+                                required
+                            >
+                        </div>
+
+                        <div class="field full">
+                            <label>
+                                Observações
+                            </label>
+
+                            <textarea
+                                id="entryNotes"
+                                placeholder="Observações da entrada..."
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-footer">
+
+                        <button
+                            type="button"
+                            class="btn"
+                            onclick="openScreen('estoque')"
+                        >
+                            Cancelar
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn primary"
+                        >
+                            Registrar entrada
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function registerEngineeringEntry(event){
+
+    event.preventDefault();
+
+    const codigo =
+        $("entryMaterial").value;
+
+    const quantity =
+        Number(
+            $("entryQuantity").value
+        );
+
+    const material =
+        engineeringData.estoque.find(
+            item =>
+                item.codigo === codigo
+        );
+
+    if(!material || quantity <= 0){
+        return;
+    }
+
+    material.quantidade += quantity;
+
+    material.status =
+        material.quantidade <= material.minimo
+            ? "baixo"
+            : "normal";
+
+    alert(
+        "Entrada registrada com sucesso."
+    );
+
+    openScreen("estoque");
+}
+
+function renderEngineeringExit(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>
+                    Saída do Almoxarifado
+                </h1>
+
+                <p>
+                    Registre a retirada de materiais.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <form
+                    onsubmit="registerEngineeringExit(event)"
+                >
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>
+                                Data
+                            </label>
+
+                            <input
+                                type="date"
+                                id="exitDate"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Material
+                            </label>
+
+                            <select
+                                id="exitMaterial"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                ${engineeringData.estoque.map(
+                                    item => `
+                                        <option value="${item.codigo}">
+                                            ${item.codigo} - ${item.descricao}
+                                        </option>
+                                    `
+                                ).join("")}
+
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Quantidade
+                            </label>
+
+                            <input
+                                type="number"
+                                min="1"
+                                id="exitQuantity"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Projeto
+                            </label>
+
+                            <select id="exitProject">
+
+                                <option value="">
+                                    Sem projeto
+                                </option>
+
+                                ${engineeringData.projetos.map(
+                                    project => `
+                                        <option>
+                                            ${project.nome}
+                                        </option>
+                                    `
+                                ).join("")}
+
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Solicitante
+                            </label>
+
+                            <input
+                                id="exitRequester"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>
+                                Responsável
+                            </label>
+
+                            <input
+                                id="exitResponsible"
+                                value="${currentUser?.nome || ""}"
+                                required
+                            >
+                        </div>
+
+                        <div class="field full">
+                            <label>
+                                Destino
+                            </label>
+
+                            <input
+                                id="exitDestination"
+                                placeholder="Destino / aplicação"
+                            >
+                        </div>
+
+                        <div class="field full">
+                            <label>
+                                Observações
+                            </label>
+
+                            <textarea
+                                id="exitNotes"
+                                placeholder="Observações da saída..."
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-footer">
+
+                        <button
+                            type="button"
+                            class="btn"
+                            onclick="openScreen('estoque')"
+                        >
+                            Cancelar
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn primary"
+                        >
+                            Registrar saída
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function registerEngineeringExit(event){
+
+    event.preventDefault();
+
+    const codigo =
+        $("exitMaterial").value;
+
+    const quantity =
+        Number(
+            $("exitQuantity").value
+        );
+
+    const material =
+        engineeringData.estoque.find(
+            item =>
+                item.codigo === codigo
+        );
+
+    if(!material || quantity <= 0){
+        return;
+    }
+
+    if(quantity > material.quantidade){
+
+        alert(
+            "Quantidade superior ao estoque disponível."
+        );
+
+        return;
+    }
+
+    material.quantidade -= quantity;
+
+    material.status =
+        material.quantidade <= material.minimo
+            ? "baixo"
+            : "normal";
+
+    alert(
+        "Saída registrada com sucesso."
+    );
+
+    openScreen("estoque");
+}
+
+function renderEngineeringInventory(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>Inventário</h1>
+
+                <p>
+                    Conferência entre estoque
+                    sistêmico e quantidade física.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="inventory-summary">
+
+            <div class="card">
+                <div class="card-label">
+                    Materiais selecionados
+                </div>
+
+                <div class="card-value">
+                    ${engineeringData.estoque.length}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    Conferência
+                </div>
+
+                <div class="card-value green">
+                    Pronto
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    Divergências
+                </div>
+
+                <div class="card-value">
+                    0
+                </div>
+            </div>
+
+        </div>
+
+        <div class="inventory-lock">
+            A quantidade física deverá ser informada
+            durante a realização do inventário.
+        </div>
+
+        <div class="panel" style="margin-top:18px">
+
+            <div class="panel-head">
+
+                <h2>
+                    Lista de conferência
+                </h2>
+
+                <span>
+                    Imprimir guia
+                </span>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Código</th>
+                                <th>Material</th>
+                                <th>Localização</th>
+                                <th>Qtd. sistema</th>
+                                <th>Qtd. física</th>
+                                <th>Divergência</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${engineeringData.estoque.map(
+                                item => `
+
+                                    <tr>
+
+                                        <td>
+                                            ${item.codigo}
+                                        </td>
+
+                                        <td>
+                                            ${item.descricao}
+                                        </td>
+
+                                        <td>
+                                            ${item.localizacao}
+                                        </td>
+
+                                        <td>
+                                            ${item.quantidade}
+                                        </td>
+
+                                        <td>
+                                            —
+                                        </td>
+
+                                        <td>
+                                            —
+                                        </td>
+
+                                    </tr>
+
+                                `
+                            ).join("")}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+</script>
+<script>
+function renderEngineeringLocation(){
+
+    const cells = [];
+
+    for(let shelf = 1; shelf <= 10; shelf++){
+
+        for(let level = 1; level <= 5; level++){
+
+            for(let apartment of ["A","B"]){
+
+                const code =
+                    `${apartment}${String(shelf).padStart(2,"0")}-N${level}`;
+
+                const occupied =
+                    engineeringData.estoque.some(
+                        item =>
+                            item.localizacao === code
+                    );
+
+                cells.push(`
+                    <div class="location-cell ${
+                        occupied
+                            ? "occupied"
+                            : "empty"
+                    }">
+
+                        <strong>
+                            ${code}
+                        </strong>
+
+                        <span>
+                            ${
+                                occupied
+                                    ? "Ocupado"
+                                    : "Livre"
+                            }
+                        </span>
+
+                    </div>
+                `);
+            }
+        }
+    }
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>Localização</h1>
+
+                <p>
+                    Mapa das posições disponíveis
+                    no almoxarifado.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <h2>
+                    Estrutura física
+                </h2>
+
+                <span>
+                    10 corredores × 5 níveis × 2 posições
+                </span>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="location-grid">
+                    ${cells.join("")}
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function renderEngineeringManagement(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>Área da Gestão</h1>
+
+                <p>
+                    Ferramentas de organização
+                    e priorização.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="management-grid">
+
+            <div class="management-card">
+
+                <h3>
+                    Matriz de Eisenhower
+                </h3>
+
+                <p>
+                    Organize as atividades conforme
+                    urgência e importância.
+                </p>
+
+                <div class="eisenhower">
+
+                    <div>
+                        <strong>
+                            Fazer agora
+                        </strong>
+
+                        Urgente e importante.
+                    </div>
+
+                    <div>
+                        <strong>
+                            Planejar
+                        </strong>
+
+                        Importante, mas não urgente.
+                    </div>
+
+                    <div>
+                        <strong>
+                            Delegar
+                        </strong>
+
+                        Urgente, mas menos importante.
+                    </div>
+
+                    <div>
+                        <strong>
+                            Eliminar
+                        </strong>
+
+                        Nem urgente nem importante.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="management-card">
+
+                <h3>
+                    Método Ivy Lee
+                </h3>
+
+                <p>
+                    Priorize as principais tarefas
+                    do dia em ordem de importância.
+                </p>
+
+                <div class="ivy">
+
+                    <div class="ivy-item">
+                        <div class="ivy-num">1</div>
+                        <span>
+                            Resolver pendências críticas
+                        </span>
+                    </div>
+
+                    <div class="ivy-item">
+                        <div class="ivy-num">2</div>
+                        <span>
+                            Atualizar controles logísticos
+                        </span>
+                    </div>
+
+                    <div class="ivy-item">
+                        <div class="ivy-num">3</div>
+                        <span>
+                            Conferir movimentações
+                        </span>
+                    </div>
+
+                    <div class="ivy-item">
+                        <div class="ivy-num">4</div>
+                        <span>
+                            Acompanhar projetos
+                        </span>
+                    </div>
+
+                    <div class="ivy-item">
+                        <div class="ivy-num">5</div>
+                        <span>
+                            Verificar estoque baixo
+                        </span>
+                    </div>
+
+                    <div class="ivy-item">
+                        <div class="ivy-num">6</div>
+                        <span>
+                            Organizar próximas atividades
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+/* =========================
+   SEGURANÇA
+========================= */
+
+function renderSecurityScreen(screen){
+
+    const renders = {
+
+        dashboard:
+            renderSecurityDashboard,
+
+        estoque:
+            renderSecurityStock,
+
+        colaboradores:
+            renderSecurityEmployees,
+
+        "estoque-colaborador":
+            renderSecurityEmployeeStock,
+
+        entradas:
+            renderSecurityEntry,
+
+        saidas:
+            renderSecurityExit,
+
+        agenda:
+            renderSecurityAgenda
+
+    };
+
+    const renderer =
+        renders[screen];
+
+    if(renderer){
+        renderer();
+    }else{
+        renderNoPermission();
+    }
+}
+
+function renderSecurityDashboard(){
+
+    const estoque =
+        securityData.estoque;
+
+    const colaboradores =
+        securityData.colaboradores;
+
+    const available =
+        estoque.reduce(
+            (sum,item) =>
+                sum + item.disponivel,
+            0
+        );
+
+    const lowStock =
+        estoque.filter(
+            item =>
+                item.disponivel <= item.minimo
+        ).length;
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+                <h1>Dashboard</h1>
+
+                <p>
+                    Visão geral do Almoxarifado
+                    da Segurança.
+                </p>
+            </div>
+
+            <div class="page-actions">
+
+                <button
+                    class="btn primary"
+                    onclick="openScreen('saidas')"
+                >
+                    Nova entrega
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="openScreen('agenda')"
+                >
+                    Ver agenda
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-label">
+                    Materiais disponíveis
+                </div>
+
+                <div class="card-value">
+                    ${available}
+                </div>
+
+                <div class="card-info">
+                    Quantidade física disponível
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-label">
+                    Colaboradores
+                </div>
+
+                <div class="card-value">
+                    ${colaboradores.length}
+                </div>
+
+                <div class="card-info">
+                    Colaboradores cadastrados
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-label">
+                    Materiais controlados
+                </div>
+
+                <div class="card-value">
+                    ${estoque.length}
+                </div>
+
+                <div class="card-info">
+                    Itens no estoque
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-label">
+                    Estoque baixo
+                </div>
+
+                <div class="card-value ${
+                    lowStock
+                        ? "red"
+                        : "green"
+                }">
+                    ${lowStock}
+                </div>
+
+                <div class="card-info">
+                    Materiais abaixo do mínimo
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <h2>
+                    Estoque disponível
+                </h2>
+
+                <span>
+                    Segurança
+                </span>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Código</th>
+                                <th>Material</th>
+                                <th>Un.</th>
+                                <th>Disponível</th>
+                                <th>Mínimo</th>
+                                <th>Situação</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${estoque.map(item => `
+
+                                <tr>
+
+                                    <td>
+                                        ${item.codigo}
+                                    </td>
+
+                                    <td>
+                                        ${item.descricao}
+                                    </td>
+
+                                    <td>
+                                        ${item.unidade}
+                                    </td>
+
+                                    <td>
+                                        ${item.disponivel}
+                                    </td>
+
+                                    <td>
+                                        ${item.minimo}
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status ${
+                                            item.disponivel <= item.minimo
+                                                ? "red"
+                                                : "green"
+                                        }">
+
+                                            ${
+                                                item.disponivel <= item.minimo
+                                                    ? "Baixo"
+                                                    : "Normal"
+                                            }
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                            `).join("")}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function renderSecurityStock(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <h1>Estoque</h1>
+
+                <p>
+                    Controle do estoque físico
+                    disponível e dos materiais
+                    entregues aos colaboradores.
+                </p>
+
+            </div>
+
+            <div class="page-actions">
+
+                <button
+                    class="btn primary"
+                    onclick="openScreen('saidas')"
+                >
+                    Nova entrega
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="openScreen('estoque-colaborador')"
+                >
+                    Estoque por colaborador
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Código</th>
+                                <th>Material</th>
+                                <th>Unidade</th>
+                                <th>Disponível</th>
+                                <th>Mínimo</th>
+                                <th>Com colaboradores</th>
+                                <th>Situação</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${securityData.estoque.map(item => {
+
+                                const entregue =
+                                    item.codigo === "SEG-001"
+                                        ? 7
+                                        : item.codigo === "SEG-002"
+                                            ? 5
+                                            : 3;
+
+                                return `
+
+                                    <tr>
+
+                                        <td>
+                                            ${item.codigo}
+                                        </td>
+
+                                        <td>
+                                            ${item.descricao}
+                                        </td>
+
+                                        <td>
+                                            ${item.unidade}
+                                        </td>
+
+                                        <td>
+                                            ${item.disponivel}
+                                        </td>
+
+                                        <td>
+                                            ${item.minimo}
+                                        </td>
+
+                                        <td>
+                                            ${entregue}
+                                        </td>
+
+                                        <td>
+
+                                            <span class="status ${
+                                                item.disponivel <= item.minimo
+                                                    ? "red"
+                                                    : "green"
+                                            }">
+
+                                                ${
+                                                    item.disponivel <= item.minimo
+                                                        ? "Estoque baixo"
+                                                        : "Normal"
+                                                }
+
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+                                `;
+                            }).join("")}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function renderSecurityEmployees(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <h1>
+                    Cadastro de colaboradores
+                </h1>
+
+                <p>
+                    Cadastro das pessoas que
+                    recebem materiais e equipamentos.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="employee-grid">
+
+            ${securityData.colaboradores.map(
+                employee => `
+
+                    <div class="employee-card">
+
+                        <div class="employee-avatar">
+                            ${employee.nome
+                                .charAt(0)
+                                .toUpperCase()}
+                        </div>
+
+                        <h3>
+                            ${employee.nome}
+                        </h3>
+
+                        <p>
+                            ${employee.matricula}
+                        </p>
+
+                        <p style="margin-top:5px">
+                            ${employee.cargo}
+                        </p>
+
+                        <p style="margin-top:5px">
+                            ${employee.setor}
+                        </p>
+
+                        <div style="margin-top:14px">
+
+                            <span class="status green">
+                                ${employee.status}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `
+            ).join("")}
+
+        </div>
+
+        <div class="panel" style="margin-top:20px">
+
+            <div class="panel-head">
+
+                <h2>
+                    Novo colaborador
+                </h2>
+
+            </div>
+
+            <div class="panel-body">
+
+                <form
+                    onsubmit="registerEmployee(event)"
+                >
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>
+                                Nome completo
+                            </label>
+
+                            <input
+                                id="employeeName"
                                 required
                             >
 
@@ -810,751 +3666,1040 @@
 
                         <div class="field">
 
-                            <label for="senha">
-                                Senha
+                            <label>
+                                Matrícula
                             </label>
 
-                            <div class="input-wrapper">
-
-                                <input
-                                    id="senha"
-                                    name="senha"
-                                    class="password-input"
-                                    type="password"
-                                    autocomplete="current-password"
-                                    placeholder="Digite sua senha"
-                                    required
-                                >
-
-                                <button
-                                    id="passwordToggle"
-                                    class="password-toggle"
-                                    type="button"
-                                >
-                                    Mostrar
-                                </button>
-
-                            </div>
+                            <input
+                                id="employeeId"
+                                required
+                            >
 
                         </div>
 
+                        <div class="field">
+
+                            <label>
+                                Cargo
+                            </label>
+
+                            <input
+                                id="employeePosition"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Setor
+                            </label>
+
+                            <input
+                                id="employeeSector"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                CPF
+                            </label>
+
+                            <input
+                                id="employeeCpf"
+                                placeholder="Opcional"
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Data de admissão
+                            </label>
+
+                            <input
+                                type="date"
+                                id="employeeAdmission"
+                            >
+
+                        </div>
+
+                        <div class="field full">
+
+                            <label>
+                                Observações
+                            </label>
+
+                            <textarea
+                                id="employeeNotes"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-footer">
+
                         <button
-                            id="loginButton"
-                            class="login-button"
                             type="submit"
+                            class="btn primary"
                         >
-                            Acessar ALMOX CONTROL
+                            Cadastrar colaborador
                         </button>
 
-                        <div
-                            id="loginMessage"
-                            class="login-message"
-                            aria-live="polite"
-                        ></div>
-
-                    </form>
-
-                    <div class="login-security">
-                        Acesso protegido por autenticação no servidor.
-                        <br>
-                        Sua sessão é mantida de forma segura no navegador.
                     </div>
 
-                    <div class="login-signature">
-                        L&amp;L · ALMOX CONTROL
-                    </div>
-
-                </div>
+                </form>
 
             </div>
 
-        </section>
-    </main>
+        </div>
+    `;
+}
 
-    <main id="environmentPage" class="environment-page hidden">
+function registerEmployee(event){
 
-        <div class="environment-container">
+    event.preventDefault();
 
-            <header class="topbar">
+    const name =
+        $("employeeName").value.trim();
 
-                <div class="topbar-brand">
+    const id =
+        $("employeeId").value.trim();
 
-                    <div class="mini-mark">
-                        L&amp;L
-                    </div>
+    const position =
+        $("employeePosition").value.trim();
 
-                    <div>
-                        <strong>ALMOX CONTROL</strong>
-                        <span>Seleção de ambiente</span>
-                    </div>
+    const sector =
+        $("employeeSector").value.trim();
 
-                </div>
+    if(!name || !id || !position || !sector){
+        return;
+    }
 
-                <div class="user-area">
+    securityData.colaboradores.push({
+        nome:name,
+        matricula:id,
+        cargo:position,
+        setor:sector,
+        status:"Ativo"
+    });
 
-                    <span id="environmentUser">
-                        Usuário
-                    </span>
+    alert(
+        "Colaborador cadastrado com sucesso."
+    );
 
-                    <button
-                        id="environmentLogout"
-                        class="logout-button"
-                        type="button"
-                    >
-                        Sair
-                    </button>
+    renderSecurityEmployees();
+}
 
-                </div>
+function renderSecurityEmployeeStock(){
 
-            </header>
+    $("main").innerHTML = `
+        <div class="page-head">
 
-            <section class="environment-title">
+            <div>
 
-                <h2>
-                    Escolha o almoxarifado
-                </h2>
+                <h1>
+                    Estoque por colaborador
+                </h1>
 
                 <p>
-                    Selecione o ambiente que deseja acessar.
+                    Consulte os materiais atualmente
+                    sob responsabilidade de cada colaborador.
                 </p>
 
-            </section>
-
-            <section class="environment-grid">
-
-                <article
-                    id="engineeringCard"
-                    class="environment-card"
-                    data-environment="engenharia"
-                >
-
-                    <div class="environment-icon">
-                        ⚡
-                    </div>
-
-                    <h3>
-                        Almoxarifado da Engenharia
-                    </h3>
-
-                    <p>
-                        Gestão de materiais, projetos,
-                        estoque, movimentações,
-                        inventário e localização.
-                    </p>
-
-                    <div class="environment-arrow">
-                        →
-                    </div>
-
-                </article>
-
-                <article
-                    id="securityCard"
-                    class="environment-card"
-                    data-environment="seguranca"
-                >
-
-                    <div class="environment-icon">
-                        🛡️
-                    </div>
-
-                    <h3>
-                        Almoxarifado da Segurança
-                    </h3>
-
-                    <p>
-                        Gestão de colaboradores,
-                        materiais entregues,
-                        estoque e agenda operacional.
-                    </p>
-
-                    <div class="environment-arrow">
-                        →
-                    </div>
-
-                </article>
-
-            </section>
+            </div>
 
         </div>
 
-    </main>
+        <div class="panel">
 
-    <main id="systemPage" class="system-page hidden">
+            <div class="panel-body">
 
-        <header class="system-header">
+                <div class="table-wrap">
 
-            <div class="system-brand">
+                    <table>
 
-                <div class="mini-mark">
-                    L&amp;L
+                        <thead>
+
+                            <tr>
+                                <th>Colaborador</th>
+                                <th>Matrícula</th>
+                                <th>Material</th>
+                                <th>Quantidade</th>
+                                <th>Data de entrega</th>
+                                <th>Situação</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            ${securityData.colaboradores.map(
+                                (employee,index) => {
+
+                                    const item =
+                                        securityData.estoque[
+                                            index %
+                                            securityData.estoque.length
+                                        ];
+
+                                    return `
+
+                                        <tr>
+
+                                            <td>
+                                                ${employee.nome}
+                                            </td>
+
+                                            <td>
+                                                ${employee.matricula}
+                                            </td>
+
+                                            <td>
+                                                ${item.descricao}
+                                            </td>
+
+                                            <td>
+                                                ${index + 1}
+                                            </td>
+
+                                            <td>
+                                                2026-10-${10 + index}
+                                            </td>
+
+                                            <td>
+
+                                                <span class="status green">
+                                                    Em uso
+                                                </span>
+
+                                            </td>
+
+                                        </tr>
+
+                                    `;
+                                }
+                            ).join("")}
+
+                        </tbody>
+
+                    </table>
+
                 </div>
-
-                <strong>
-                    ALMOX CONTROL
-                </strong>
-
-                <span
-                    id="systemEnvironment"
-                    class="environment-badge"
-                ></span>
 
             </div>
 
-            <div class="user-area">
+        </div>
+    `;
+}
 
-                <span id="systemUser">
-                    Usuário
-                </span>
+function renderSecurityEntry(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <h1>
+                    Entrada no Almoxarifado
+                </h1>
+
+                <p>
+                    Registre o recebimento de
+                    equipamentos e materiais.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <form
+                    onsubmit="registerSecurityEntry(event)"
+                >
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>
+                                Data
+                            </label>
+
+                            <input
+                                type="date"
+                                id="securityEntryDate"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Material
+                            </label>
+
+                            <select
+                                id="securityEntryMaterial"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                ${securityData.estoque.map(
+                                    item => `
+                                        <option value="${item.codigo}">
+                                            ${item.codigo} - ${item.descricao}
+                                        </option>
+                                    `
+                                ).join("")}
+
+                            </select>
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Quantidade
+                            </label>
+
+                            <input
+                                type="number"
+                                min="1"
+                                id="securityEntryQuantity"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Documento
+                            </label>
+
+                            <input
+                                id="securityEntryDocument"
+                                placeholder="NF / documento"
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Fornecedor
+                            </label>
+
+                            <input
+                                id="securityEntrySupplier"
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Responsável
+                            </label>
+
+                            <input
+                                id="securityEntryResponsible"
+                                value="${currentUser?.nome || ""}"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field full">
+
+                            <label>
+                                Observações
+                            </label>
+
+                            <textarea
+                                id="securityEntryNotes"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-footer">
+
+                        <button
+                            type="submit"
+                            class="btn primary"
+                        >
+                            Registrar entrada
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function registerSecurityEntry(event){
+
+    event.preventDefault();
+
+    const codigo =
+        $("securityEntryMaterial").value;
+
+    const quantity =
+        Number(
+            $("securityEntryQuantity").value
+        );
+
+    const material =
+        securityData.estoque.find(
+            item =>
+                item.codigo === codigo
+        );
+
+    if(!material || quantity <= 0){
+        return;
+    }
+
+    material.disponivel += quantity;
+
+    material.situacao =
+        material.disponivel <= material.minimo
+            ? "baixo"
+            : "normal";
+
+    alert(
+        "Entrada registrada com sucesso."
+    );
+
+    openScreen("estoque");
+}
+
+function renderSecurityExit(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <h1>
+                    Saída no Almoxarifado
+                </h1>
+
+                <p>
+                    Registre a entrega de materiais
+                    para um colaborador.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <form
+                    onsubmit="registerSecurityExit(event)"
+                >
+
+                    <div class="form-grid">
+
+                        <div class="field full">
+
+                            <label>
+                                Colaborador
+                            </label>
+
+                            <select
+                                id="securityExitEmployee"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecione o colaborador
+                                </option>
+
+                                ${securityData.colaboradores.map(
+                                    employee => `
+                                        <option value="${employee.matricula}">
+                                            ${employee.nome} - ${employee.matricula}
+                                        </option>
+                                    `
+                                ).join("")}
+
+                            </select>
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Material
+                            </label>
+
+                            <select
+                                id="securityExitMaterial"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                ${securityData.estoque.map(
+                                    item => `
+                                        <option value="${item.codigo}">
+                                            ${item.codigo} - ${item.descricao}
+                                        </option>
+                                    `
+                                ).join("")}
+
+                            </select>
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Quantidade
+                            </label>
+
+                            <input
+                                type="number"
+                                min="1"
+                                id="securityExitQuantity"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Data
+                            </label>
+
+                            <input
+                                type="date"
+                                id="securityExitDate"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field">
+
+                            <label>
+                                Responsável
+                            </label>
+
+                            <input
+                                id="securityExitResponsible"
+                                value="${currentUser?.nome || ""}"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="field full">
+
+                            <label>
+                                Observações
+                            </label>
+
+                            <textarea
+                                id="securityExitNotes"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-footer">
+
+                        <button
+                            type="submit"
+                            class="btn primary"
+                        >
+                            Registrar entrega
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function registerSecurityExit(event){
+
+    event.preventDefault();
+
+    const employee =
+        $("securityExitEmployee").value;
+
+    const codigo =
+        $("securityExitMaterial").value;
+
+    const quantity =
+        Number(
+            $("securityExitQuantity").value
+        );
+
+    const material =
+        securityData.estoque.find(
+            item =>
+                item.codigo === codigo
+        );
+
+    const collaborator =
+        securityData.colaboradores.find(
+            item =>
+                item.matricula === employee
+        );
+
+    if(
+        !material ||
+        !collaborator ||
+        quantity <= 0
+    ){
+        return;
+    }
+
+    if(quantity > material.disponivel){
+
+        alert(
+            "Quantidade superior ao estoque disponível."
+        );
+
+        return;
+    }
+
+    material.disponivel -= quantity;
+
+    material.situacao =
+        material.disponivel <= material.minimo
+            ? "baixo"
+            : "normal";
+
+    alert(
+        `Entrega registrada para ${collaborator.nome}.`
+    );
+
+    openScreen("estoque");
+}
+
+function renderSecurityAgenda(){
+
+    $("main").innerHTML = `
+        <div class="page-head">
+
+            <div>
+
+                <h1>
+                    Agenda
+                </h1>
+
+                <p>
+                    Acompanhamento de entregas,
+                    trocas, devoluções e inspeções.
+                </p>
+
+            </div>
+
+            <div class="page-actions">
 
                 <button
-                    id="systemLogout"
-                    class="logout-button"
-                    type="button"
+                    class="btn primary"
+                    onclick="addAgendaItem()"
                 >
-                    Sair
+                    + Novo compromisso
                 </button>
 
             </div>
 
-        </header>
-
-        <div class="system-body">
-
-            <aside
-                id="sidebar"
-                class="sidebar"
-            ></aside>
-
-            <section
-                id="content"
-                class="content"
-            >
-
-                <div class="content-title">
-
-                    <h2 id="contentTitle">
-                        Dashboard
-                    </h2>
-
-                    <p id="contentDescription">
-                        Visão geral do almoxarifado.
-                    </p>
-
-                </div>
-
-                <div
-                    id="contentPanel"
-                    class="empty-panel"
-                >
-                    Selecione uma tela no menu.
-                </div>
-
-            </section>
-
         </div>
 
-    </main>
+        <div class="panel">
 
-    <script>
-        const state = {
-            user: null,
-            environment: null,
-            currentScreen: null
-        };
+            <div class="panel-head">
 
-        const screenNames = {
-            engenharia: {
-                dashboard: {
-                    label: "Dashboard",
-                    icon: "▦",
-                    description:
-                        "Visão geral do Almoxarifado da Engenharia."
-                },
-                estoque: {
-                    label: "Estoque",
-                    icon: "▤",
-                    description:
-                        "Controle dos materiais disponíveis."
-                },
-                projetos: {
-                    label: "Projetos",
-                    icon: "⌂",
-                    description:
-                        "Gestão de materiais por projeto."
-                },
-                entradas: {
-                    label: "Entrada no Almoxarifado",
-                    icon: "↓",
-                    description:
-                        "Registro de entradas de materiais."
-                },
-                saidas: {
-                    label: "Saída do Almoxarifado",
-                    icon: "↑",
-                    description:
-                        "Registro de saídas de materiais."
-                },
-                inventario: {
-                    label: "Inventário",
-                    icon: "✓",
-                    description:
-                        "Conferência física e divergências."
-                },
-                localizacao: {
-                    label: "Localização",
-                    icon: "⌖",
-                    description:
-                        "Mapa físico das posições do almoxarifado."
-                },
-                gestao: {
-                    label: "Área da Gestão",
-                    icon: "◆",
-                    description:
-                        "Ferramentas de gestão e organização."
+                <h2>
+                    Próximas atividades
+                </h2>
+
+                <span>
+                    Agenda operacional
+                </span>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Colaborador</th>
+                                <th>Material</th>
+                                <th>Situação</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    20/10/2026
+                                </td>
+
+                                <td>
+                                    Devolução
+                                </td>
+
+                                <td>
+                                    João Silva
+                                </td>
+
+                                <td>
+                                    Capacete de segurança
+                                </td>
+
+                                <td>
+                                    <span class="status blue">
+                                        Agendado
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+                                    22/10/2026
+                                </td>
+
+                                <td>
+                                    Inspeção
+                                </td>
+
+                                <td>
+                                    Carlos Santos
+                                </td>
+
+                                <td>
+                                    Colete refletivo
+                                </td>
+
+                                <td>
+                                    <span class="status orange">
+                                        Pendente
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+                                    25/10/2026
+                                </td>
+
+                                <td>
+                                    Troca
+                                </td>
+
+                                <td>
+                                    Marcos Oliveira
+                                </td>
+
+                                <td>
+                                    Óculos de proteção
+                                </td>
+
+                                <td>
+                                    <span class="status green">
+                                        Programado
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function addAgendaItem(){
+
+    alert(
+        "A estrutura da agenda está pronta para receber novos registros."
+    );
+}
+
+/* =========================
+   AUTENTICAÇÃO
+========================= */
+
+async function login(event){
+
+    event.preventDefault();
+
+    $("msg").textContent = "";
+
+    const usuario =
+        $("usuario").value.trim();
+
+    const senha =
+        $("senha").value;
+
+    if(!usuario || !senha){
+
+        $("msg").textContent =
+            "Informe usuário e senha.";
+
+        return;
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                "/api/auth/login",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    credentials:"include",
+
+                    body:JSON.stringify({
+                        usuario,
+                        senha
+                    })
                 }
-            },
+            );
 
-            seguranca: {
-                dashboard: {
-                    label: "Dashboard",
-                    icon: "▦",
-                    description:
-                        "Visão geral do Almoxarifado da Segurança."
-                },
-                estoque: {
-                    label: "Estoque",
-                    icon: "▤",
-                    description:
-                        "Controle de materiais disponíveis e entregues."
-                },
-                colaboradores: {
-                    label: "Cadastro de Colaboradores",
-                    icon: "♙",
-                    description:
-                        "Cadastro e gestão dos colaboradores."
-                },
-                "estoque-colaborador": {
-                    label: "Estoque por Colaborador",
-                    icon: "♙",
-                    description:
-                        "Materiais atualmente sob responsabilidade de cada colaborador."
-                },
-                entradas: {
-                    label: "Entrada no Almoxarifado",
-                    icon: "↓",
-                    description:
-                        "Registro de entradas de materiais."
-                },
-                saidas: {
-                    label: "Saída no Almoxarifado",
-                    icon: "↑",
-                    description:
-                        "Entrega de materiais aos colaboradores."
-                },
-                agenda: {
-                    label: "Agenda",
-                    icon: "□",
-                    description:
-                        "Agenda operacional do almoxarifado."
-                }
-            }
-        };
+        let data;
 
-        const loginPage =
-            document.getElementById("loginPage");
+        try{
 
-        const environmentPage =
-            document.getElementById("environmentPage");
+            data =
+                await response.json();
 
-        const systemPage =
-            document.getElementById("systemPage");
+        }catch{
 
-        const loginForm =
-            document.getElementById("loginForm");
-
-        const loginButton =
-            document.getElementById("loginButton");
-
-        const loginMessage =
-            document.getElementById("loginMessage");
-
-        const environmentUser =
-            document.getElementById("environmentUser");
-
-        const systemUser =
-            document.getElementById("systemUser");
-
-        const systemEnvironment =
-            document.getElementById("systemEnvironment");
-
-        const sidebar =
-            document.getElementById("sidebar");
-
-        const contentTitle =
-            document.getElementById("contentTitle");
-
-        const contentDescription =
-            document.getElementById("contentDescription");
-
-        const contentPanel =
-            document.getElementById("contentPanel");
-
-        function mostrarPagina(pagina) {
-            loginPage.classList.add("hidden");
-            environmentPage.classList.add("hidden");
-            systemPage.classList.add("hidden");
-
-            pagina.classList.remove("hidden");
+            data = null;
         }
 
-        function limparLoginMensagem() {
-            loginMessage.textContent = "";
+        if(
+            !response.ok ||
+            !data?.ok
+        ){
+
+            throw new Error(
+                data?.error ||
+                "Não foi possível autenticar."
+            );
         }
 
-        function mostrarSelecaoAmbiente(user) {
-            state.user = user;
-            state.environment = null;
-            state.currentScreen = null;
+        setUser(data.user);
 
-            environmentUser.textContent =
-                `${user.nome} · ${user.cargo}`;
+    }catch(error){
 
-            const podeEngenharia =
-                Array.isArray(user.almoxarifados) &&
-                user.almoxarifados.includes("engenharia");
+        console.error(
+            "LOGIN_ERROR:",
+            error
+        );
 
-            const podeSeguranca =
-                Array.isArray(user.almoxarifados) &&
-                user.almoxarifados.includes("seguranca");
+        $("msg").textContent =
+            error.message ||
+            "Não foi possível autenticar.";
+    }
+}
 
-            document
-                .getElementById("engineeringCard")
-                .classList.toggle(
-                    "disabled",
-                    !podeEngenharia
-                );
+async function logout(){
 
-            document
-                .getElementById("securityCard")
-                .classList.toggle(
-                    "disabled",
-                    !podeSeguranca
-                );
+    try{
 
-            mostrarPagina(environmentPage);
-        }
-
-        function abrirAmbiente(environment) {
-            if (!state.user) {
-                return;
-            }
-
-            if (
-                !Array.isArray(state.user.almoxarifados) ||
-                !state.user.almoxarifados.includes(environment)
-            ) {
-                return;
-            }
-
-            state.environment = environment;
-
-            const telas =
-                state.user.telas?.[environment] || [];
-
-            if (!Array.isArray(telas) || !telas.length) {
-                return;
-            }
-
-            systemEnvironment.textContent =
-                environment === "engenharia"
-                    ? "· Engenharia"
-                    : "· Segurança";
-
-            systemUser.textContent =
-                `${state.user.nome} · ${state.user.cargo}`;
-
-            montarMenu(telas);
-
-            mostrarPagina(systemPage);
-
-            abrirTela(telas[0]);
-        }
-
-        function montarMenu(telas) {
-            sidebar.innerHTML = "";
-
-            const section =
-                document.createElement("div");
-
-            section.className =
-                "sidebar-section";
-
-            const label =
-                document.createElement("div");
-
-            label.className =
-                "sidebar-label";
-
-            label.textContent =
-                state.environment === "engenharia"
-                    ? "Engenharia"
-                    : "Segurança";
-
-            section.appendChild(label);
-
-            telas.forEach(tela => {
-                const config =
-                    screenNames[
-                        state.environment
-                    ]?.[tela];
-
-                if (!config) {
-                    return;
-                }
-
-                const button =
-                    document.createElement("button");
-
-                button.type = "button";
-                button.className = "nav-button";
-                button.dataset.screen = tela;
-
-                button.innerHTML = `
-                    <span>${config.icon}</span>
-                    <span>${config.label}</span>
-                `;
-
-                button.addEventListener(
-                    "click",
-                    () => abrirTela(tela)
-                );
-
-                section.appendChild(button);
-            });
-
-            sidebar.appendChild(section);
-        }
-
-        function abrirTela(tela) {
-            state.currentScreen = tela;
-
-            const config =
-                screenNames[
-                    state.environment
-                ]?.[tela];
-
-            if (!config) {
-                return;
-            }
-
-            document
-                .querySelectorAll(".nav-button")
-                .forEach(button => {
-                    button.classList.toggle(
-                        "active",
-                        button.dataset.screen === tela
-                    );
-                });
-
-            contentTitle.textContent =
-                config.label;
-
-            contentDescription.textContent =
-                config.description;
-
-            contentPanel.innerHTML = `
-                <strong>${config.label}</strong>
-                <br><br>
-                Esta tela está preparada para
-                receber o módulo operacional.
-            `;
-        }
-
-        async function fazerLogout() {
-            try {
-                await fetch(
-                    "/api/auth/logout",
-                    {
-                        method: "POST",
-                        credentials: "include"
-                    }
-                );
-            } catch {
-                // Limpeza local continua normalmente.
-            }
-
-            state.user = null;
-            state.environment = null;
-            state.currentScreen = null;
-
-            loginForm.reset();
-            limparLoginMensagem();
-
-            mostrarPagina(loginPage);
-        }
-
-        loginForm.addEventListener(
-            "submit",
-            async event => {
-                event.preventDefault();
-
-                limparLoginMensagem();
-
-                const usuario =
-                    document
-                        .getElementById("usuario")
-                        .value
-                        .trim();
-
-                const senha =
-                    document
-                        .getElementById("senha")
-                        .value;
-
-                if (!usuario || !senha) {
-                    loginMessage.textContent =
-                        "Informe usuário e senha.";
-
-                    return;
-                }
-
-                loginButton.disabled = true;
-                loginButton.textContent =
-                    "Acessando...";
-
-                try {
-                    const response =
-                        await fetch(
-                            "/api/auth/login",
-                            {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type":
-                                        "application/json"
-                                },
-                                credentials: "include",
-                                body: JSON.stringify({
-                                    usuario,
-                                    senha
-                                })
-                            }
-                        );
-
-                    const data =
-                        await response.json();
-
-                    if (!response.ok || !data.ok) {
-                        throw new Error(
-                            data.error ||
-                            "Usuário ou senha inválidos."
-                        );
-                    }
-
-                    mostrarSelecaoAmbiente(
-                        data.user
-                    );
-
-                } catch (error) {
-                    loginMessage.textContent =
-                        error.message ||
-                        "Não foi possível realizar o login.";
-
-                } finally {
-                    loginButton.disabled = false;
-                    loginButton.textContent =
-                        "Acessar ALMOX CONTROL";
-                }
+        await fetch(
+            "/api/auth/logout",
+            {
+                method:"POST",
+                credentials:"include"
             }
         );
 
-        document
-            .getElementById("passwordToggle")
-            .addEventListener(
-                "click",
-                () => {
-                    const senha =
-                        document.getElementById("senha");
+    }catch(error){
 
-                    const visivel =
-                        senha.type === "text";
+        console.error(
+            "LOGOUT_ERROR:",
+            error
+        );
 
-                    senha.type =
-                        visivel ? "password" : "text";
+    }finally{
 
-                    document
-                        .getElementById("passwordToggle")
-                        .textContent =
-                        visivel ? "Mostrar" : "Ocultar";
+        currentUser = null;
+        currentEnvironment = null;
+        currentScreen = null;
+
+        show("login");
+
+        $("usuario").value = "";
+        $("senha").value = "";
+        $("msg").textContent = "";
+    }
+}
+
+async function checkSession(){
+
+    try{
+
+        const response =
+            await fetch(
+                "/api/auth/session",
+                {
+                    credentials:"include"
                 }
             );
 
-        document
-            .getElementById("engineeringCard")
-            .addEventListener(
-                "click",
-                () => abrirAmbiente("engenharia")
-            );
+        if(!response.ok){
 
-        document
-            .getElementById("securityCard")
-            .addEventListener(
-                "click",
-                () => abrirAmbiente("seguranca")
-            );
+            show("login");
 
-        document
-            .getElementById("environmentLogout")
-            .addEventListener(
-                "click",
-                fazerLogout
-            );
-
-        document
-            .getElementById("systemLogout")
-            .addEventListener(
-                "click",
-                fazerLogout
-            );
-
-        async function verificarSessao() {
-            try {
-                const response =
-                    await fetch(
-                        "/api/auth/session",
-                        {
-                            method: "GET",
-                            credentials: "include"
-                        }
-                    );
-
-                if (!response.ok) {
-                    mostrarPagina(loginPage);
-                    return;
-                }
-
-                const data =
-                    await response.json();
-
-                if (
-                    data.ok &&
-                    data.authenticated &&
-                    data.user
-                ) {
-                    mostrarSelecaoAmbiente(
-                        data.user
-                    );
-                } else {
-                    mostrarPagina(loginPage);
-                }
-
-            } catch {
-                mostrarPagina(loginPage);
-            }
+            return;
         }
 
-        verificarSessao();
-    </script>
+        const data =
+            await response.json();
+
+        if(
+            data.ok &&
+            data.authenticated &&
+            data.user
+        ){
+
+            setUser(data.user);
+
+        }else{
+
+            show("login");
+        }
+
+    }catch(error){
+
+        console.error(
+            "SESSION_ERROR:",
+            error
+        );
+
+        show("login");
+    }
+}
+
+/* =========================
+   EVENTOS
+========================= */
+
+$("loginForm").addEventListener(
+    "submit",
+    login
+);
+
+$("passwordToggle").addEventListener(
+    "click",
+    () => {
+
+        const password =
+            $("senha");
+
+        if(
+            password.type ===
+            "password"
+        ){
+
+            password.type =
+                "text";
+
+            $("passwordToggle")
+                .textContent =
+                "Ocultar";
+
+        }else{
+
+            password.type =
+                "password";
+
+            $("passwordToggle")
+                .textContent =
+                "Mostrar";
+        }
+    }
+);
+
+$("changeEnvironment").addEventListener(
+    "click",
+    () => {
+
+        currentEnvironment = null;
+        currentScreen = null;
+
+        show("environment");
+
+        configureEnvironmentCards();
+    }
+);
+
+$("logoutButton").addEventListener(
+    "click",
+    logout
+);
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+checkSession();
+</script>
 
 </body>
 </html>
