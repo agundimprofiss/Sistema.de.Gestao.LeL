@@ -56,10 +56,6 @@
             display: none !important;
         }
 
-        /* =========================================================
-           LOGIN
-        ========================================================= */
-
         .login-page {
             min-height: 100vh;
             display: flex;
@@ -79,8 +75,6 @@
                 0 35px 90px rgba(0, 0, 0, .38),
                 0 5px 20px rgba(0, 0, 0, .16);
         }
-
-        /* LADO ESQUERDO */
 
         .login-brand-panel {
             position: relative;
@@ -216,8 +210,6 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-
-        /* LADO DIREITO */
 
         .login-form-panel {
             display: flex;
@@ -383,10 +375,6 @@
             text-align: center;
         }
 
-        /* =========================================================
-           SELEÇÃO DE AMBIENTE
-        ========================================================= */
-
         .environment-page {
             min-height: 100vh;
             padding: 30px;
@@ -527,10 +515,6 @@
             color: #42a5f5;
             font-size: 22px;
         }
-
-        /* =========================================================
-           SISTEMA
-        ========================================================= */
 
         .system-page {
             min-height: 100vh;
@@ -738,15 +722,8 @@
 
 <body>
 
-    <!-- LOGIN -->
-
-    <main
-        id="loginPage"
-        class="login-page"
-    >
+    <main id="loginPage" class="login-page">
         <section class="login-shell">
-
-            <!-- PAINEL L&L -->
 
             <div class="login-brand-panel">
 
@@ -762,7 +739,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="brand-content">
 
@@ -785,19 +761,12 @@
 
                 </div>
 
-
                 <div class="brand-footer">
-
                     <strong>ALMOX CONTROL</strong>
-
                     Plataforma de Gestão de Almoxarifados
-
                 </div>
 
             </div>
-
-
-            <!-- FORMULÁRIO -->
 
             <div class="login-form-panel">
 
@@ -820,7 +789,6 @@
 
                     </div>
 
-
                     <form id="loginForm">
 
                         <div class="field">
@@ -839,7 +807,6 @@
                             >
 
                         </div>
-
 
                         <div class="field">
 
@@ -871,7 +838,6 @@
 
                         </div>
 
-
                         <button
                             id="loginButton"
                             class="login-button"
@@ -880,7 +846,6 @@
                             Acessar ALMOX CONTROL
                         </button>
 
-
                         <div
                             id="loginMessage"
                             class="login-message"
@@ -888,7 +853,6 @@
                         ></div>
 
                     </form>
-
 
                     <div class="login-security">
                         Acesso protegido por autenticação no servidor.
@@ -907,13 +871,8 @@
         </section>
     </main>
 
+    <main id="environmentPage" class="environment-page hidden">
 
-    <!-- SELEÇÃO DO ALMOXARIFADO -->
-
-    <main
-        id="environmentPage"
-        class="environment-page hidden"
-    >
         <div class="environment-container">
 
             <header class="topbar">
@@ -926,14 +885,10 @@
 
                     <div>
                         <strong>ALMOX CONTROL</strong>
-
-                        <span>
-                            Seleção de ambiente
-                        </span>
+                        <span>Seleção de ambiente</span>
                     </div>
 
                 </div>
-
 
                 <div class="user-area">
 
@@ -953,7 +908,6 @@
 
             </header>
 
-
             <section class="environment-title">
 
                 <h2>
@@ -966,7 +920,6 @@
 
             </section>
 
-
             <section class="environment-grid">
 
                 <article
@@ -974,8 +927,9 @@
                     class="environment-card"
                     data-environment="engenharia"
                 >
+
                     <div class="environment-icon">
-                        🏗️
+                        ⚡
                     </div>
 
                     <h3>
@@ -991,14 +945,15 @@
                     <div class="environment-arrow">
                         →
                     </div>
-                </article>
 
+                </article>
 
                 <article
                     id="securityCard"
                     class="environment-card"
                     data-environment="seguranca"
                 >
+
                     <div class="environment-icon">
                         🛡️
                     </div>
@@ -1016,20 +971,16 @@
                     <div class="environment-arrow">
                         →
                     </div>
+
                 </article>
 
             </section>
 
         </div>
+
     </main>
 
-
-    <!-- SISTEMA -->
-
-    <main
-        id="systemPage"
-        class="system-page hidden"
-    >
+    <main id="systemPage" class="system-page hidden">
 
         <header class="system-header">
 
@@ -1050,7 +1001,6 @@
 
             </div>
 
-
             <div class="user-area">
 
                 <span id="systemUser">
@@ -1069,14 +1019,12 @@
 
         </header>
 
-
         <div class="system-body">
 
             <aside
                 id="sidebar"
                 class="sidebar"
             ></aside>
-
 
             <section
                 id="content"
@@ -1095,7 +1043,6 @@
 
                 </div>
 
-
                 <div
                     id="contentPanel"
                     class="empty-panel"
@@ -1108,7 +1055,6 @@
         </div>
 
     </main>
-
 
     <script>
         const state = {
@@ -1125,49 +1071,42 @@
                     description:
                         "Visão geral do Almoxarifado da Engenharia."
                 },
-
                 estoque: {
                     label: "Estoque",
                     icon: "▤",
                     description:
                         "Controle dos materiais disponíveis."
                 },
-
                 projetos: {
                     label: "Projetos",
                     icon: "⌂",
                     description:
                         "Gestão de materiais por projeto."
                 },
-
                 entradas: {
                     label: "Entrada no Almoxarifado",
                     icon: "↓",
                     description:
                         "Registro de entradas de materiais."
                 },
-
                 saidas: {
                     label: "Saída do Almoxarifado",
                     icon: "↑",
                     description:
                         "Registro de saídas de materiais."
                 },
-
                 inventario: {
                     label: "Inventário",
                     icon: "✓",
                     description:
                         "Conferência física e divergências."
                 },
-
                 localizacao: {
                     label: "Localização",
                     icon: "⌖",
                     description:
                         "Mapa físico das posições do almoxarifado."
                 },
-
                 gestao: {
                     label: "Área da Gestão",
                     icon: "◆",
@@ -1183,42 +1122,36 @@
                     description:
                         "Visão geral do Almoxarifado da Segurança."
                 },
-
                 estoque: {
                     label: "Estoque",
                     icon: "▤",
                     description:
                         "Controle de materiais disponíveis e entregues."
                 },
-
                 colaboradores: {
                     label: "Cadastro de Colaboradores",
                     icon: "♙",
                     description:
                         "Cadastro e gestão dos colaboradores."
                 },
-
                 "estoque-colaborador": {
                     label: "Estoque por Colaborador",
                     icon: "♙",
                     description:
                         "Materiais atualmente sob responsabilidade de cada colaborador."
                 },
-
                 entradas: {
                     label: "Entrada no Almoxarifado",
                     icon: "↓",
                     description:
                         "Registro de entradas de materiais."
                 },
-
                 saidas: {
                     label: "Saída no Almoxarifado",
                     icon: "↑",
                     description:
                         "Entrega de materiais aos colaboradores."
                 },
-
                 agenda: {
                     label: "Agenda",
                     icon: "□",
@@ -1227,7 +1160,6 @@
                 }
             }
         };
-
 
         const loginPage =
             document.getElementById("loginPage");
@@ -1268,7 +1200,6 @@
         const contentPanel =
             document.getElementById("contentPanel");
 
-
         function mostrarPagina(pagina) {
             loginPage.classList.add("hidden");
             environmentPage.classList.add("hidden");
@@ -1277,11 +1208,9 @@
             pagina.classList.remove("hidden");
         }
 
-
         function limparLoginMensagem() {
             loginMessage.textContent = "";
         }
-
 
         function mostrarSelecaoAmbiente(user) {
             state.user = user;
@@ -1292,9 +1221,11 @@
                 `${user.nome} · ${user.cargo}`;
 
             const podeEngenharia =
+                Array.isArray(user.almoxarifados) &&
                 user.almoxarifados.includes("engenharia");
 
             const podeSeguranca =
+                Array.isArray(user.almoxarifados) &&
                 user.almoxarifados.includes("seguranca");
 
             document
@@ -1314,16 +1245,14 @@
             mostrarPagina(environmentPage);
         }
 
-
         function abrirAmbiente(environment) {
             if (!state.user) {
                 return;
             }
 
             if (
-                !state.user.almoxarifados.includes(
-                    environment
-                )
+                !Array.isArray(state.user.almoxarifados) ||
+                !state.user.almoxarifados.includes(environment)
             ) {
                 return;
             }
@@ -1333,7 +1262,7 @@
             const telas =
                 state.user.telas?.[environment] || [];
 
-            if (!telas.length) {
+            if (!Array.isArray(telas) || !telas.length) {
                 return;
             }
 
@@ -1351,7 +1280,6 @@
 
             abrirTela(telas[0]);
         }
-
 
         function montarMenu(telas) {
             sidebar.innerHTML = "";
@@ -1408,7 +1336,6 @@
             sidebar.appendChild(section);
         }
 
-
         function abrirTela(tela) {
             state.currentScreen = tela;
 
@@ -1444,7 +1371,6 @@
             `;
         }
 
-
         async function fazerLogout() {
             try {
                 await fetch(
@@ -1467,7 +1393,6 @@
 
             mostrarPagina(loginPage);
         }
-
 
         loginForm.addEventListener(
             "submit",
@@ -1543,7 +1468,6 @@
             }
         );
 
-
         document
             .getElementById("passwordToggle")
             .addEventListener(
@@ -1565,14 +1489,12 @@
                 }
             );
 
-
         document
             .getElementById("engineeringCard")
             .addEventListener(
                 "click",
                 () => abrirAmbiente("engenharia")
             );
-
 
         document
             .getElementById("securityCard")
@@ -1581,7 +1503,6 @@
                 () => abrirAmbiente("seguranca")
             );
 
-
         document
             .getElementById("environmentLogout")
             .addEventListener(
@@ -1589,14 +1510,12 @@
                 fazerLogout
             );
 
-
         document
             .getElementById("systemLogout")
             .addEventListener(
                 "click",
                 fazerLogout
             );
-
 
         async function verificarSessao() {
             try {
@@ -1633,7 +1552,6 @@
                 mostrarPagina(loginPage);
             }
         }
-
 
         verificarSessao();
     </script>
