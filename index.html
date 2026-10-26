@@ -6,1240 +6,255 @@
     <title>ALMOX CONTROL</title>
 
     <style>
-        :root {
-            --navy: #071426;
-            --navy-2: #0c1d33;
-            --blue: #2563eb;
-            --blue-dark: #1d4ed8;
-            --blue-light: #eff6ff;
-            --white: #ffffff;
-            --bg: #f4f7fb;
-            --text: #172033;
-            --muted: #6b7280;
-            --border: #e5e7eb;
-            --green: #16a34a;
-            --yellow: #d97706;
-            --red: #dc2626;
-            --purple: #7c3aed;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        button,
-        input,
-        select,
-        textarea {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        /* =====================================================
-           LOGIN
-        ===================================================== */
-
-        .login-screen {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            background: var(--white);
-        }
-
-        .login-left {
-            background:
-                radial-gradient(circle at 20% 20%, rgba(37,99,235,.25), transparent 35%),
-                linear-gradient(145deg, #061121, #0b1e35);
-            color: white;
-            padding: 70px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .brand {
-            font-size: 34px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 60px;
-        }
-
-        .brand span {
-            color: #60a5fa;
-        }
-
-        .login-left h1 {
-            font-size: clamp(38px, 5vw, 68px);
-            line-height: 1.02;
-            max-width: 650px;
-            margin-bottom: 25px;
-        }
-
-        .login-left p {
-            max-width: 580px;
-            color: #cbd5e1;
-            font-size: 18px;
-            line-height: 1.7;
-        }
-
-        .login-right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            background: #fff;
-        }
-
-        .login-box {
-            width: min(420px, 100%);
-        }
-
-        .login-box h2 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .login-subtitle {
-            color: var(--muted);
-            margin-bottom: 30px;
-        }
-
-        .field {
-            margin-bottom: 18px;
-        }
-
-        .field label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .field input,
-        .field select,
-        .field textarea {
-            width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 13px 14px;
-            outline: none;
-            background: white;
-        }
-
-        .field input:focus,
-        .field select:focus,
-        .field textarea:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 3px rgba(37,99,235,.10);
-        }
-
-        .password-wrap {
-            position: relative;
-        }
-
-        .password-wrap input {
-            padding-right: 80px;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: 0;
-            background: transparent;
-            color: var(--blue);
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        .login-button {
-            width: 100%;
-            border: 0;
-            border-radius: 10px;
-            padding: 14px;
-            background: var(--blue);
-            color: white;
-            font-weight: 800;
-            margin-top: 5px;
-            transition: .2s;
-        }
-
-        .login-button:hover {
-            background: var(--blue-dark);
-        }
-
-        .login-error {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 9px;
-            background: #fef2f2;
-            color: var(--red);
-            font-size: 14px;
-        }
-
-        .security-footer {
-            margin-top: 25px;
-            color: #9ca3af;
-            font-size: 12px;
-            text-align: center;
-        }
-
-        /* =====================================================
-           AMBIENTE
-        ===================================================== */
-
-        .environment-screen {
-            display: none;
-            min-height: 100vh;
-            background: var(--bg);
-            padding: 50px;
-        }
-
-        .environment-header {
-            max-width: 1100px;
-            margin: 0 auto 35px;
-        }
-
-        .environment-header h1 {
-            font-size: 34px;
-            margin-bottom: 8px;
-        }
-
-        .environment-header p {
-            color: var(--muted);
-        }
-
-        .environment-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-        }
-
-        .environment-grid {
-            max-width: 1100px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 25px;
-        }
-
-        .environment-card {
-            border: 1px solid var(--border);
-            background: white;
-            border-radius: 18px;
-            padding: 35px;
-            min-height: 250px;
-            text-align: left;
-            transition: .2s;
-        }
-
-        .environment-card:hover {
-            border-color: var(--blue);
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(15,23,42,.08);
-        }
-
-        .environment-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            background: var(--blue-light);
-            color: var(--blue);
-            margin-bottom: 25px;
-        }
-
-        .environment-card.security .environment-icon {
-            background: #f5f3ff;
-            color: var(--purple);
-        }
-
-        .environment-card h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .environment-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        /* =====================================================
-           SISTEMA
-        ===================================================== */
-
-        .system-screen {
-            display: none;
-            min-height: 100vh;
-        }
-
-        .header {
-            height: 70px;
-            background: white;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 25px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .header-brand {
-            font-weight: 900;
-            color: var(--navy);
-            font-size: 21px;
-        }
-
-        .header-brand span {
-            color: var(--blue);
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-user {
-            text-align: right;
-        }
-
-        .header-user strong {
-            display: block;
-            font-size: 14px;
-        }
-
-        .header-user small {
-            color: var(--muted);
-        }
-
-        .layout {
-            display: grid;
-            grid-template-columns: 245px 1fr;
-            min-height: calc(100vh - 70px);
-        }
-
-        .sidebar {
-            background: var(--navy);
-            padding: 20px 12px;
-        }
-
-        .sidebar-title {
-            color: #94a3b8;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 12px;
-            letter-spacing: .8px;
-        }
-
-        .nav-button {
-            width: 100%;
-            border: 0;
-            background: transparent;
-            color: #cbd5e1;
-            padding: 12px 14px;
-            border-radius: 9px;
-            text-align: left;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 11px;
-        }
-
-        .nav-button:hover {
-            background: #10233d;
-            color: white;
-        }
-
-        .nav-button.active {
-            background: var(--blue);
-            color: white;
-        }
-
-        .nav-icon {
-            width: 22px;
-            text-align: center;
-        }
-
-        .main {
-            padding: 30px;
-            overflow: auto;
-        }
-
-        .page-title {
-            margin-bottom: 25px;
-        }
-
-        .page-title h1 {
-            font-size: 28px;
-            margin-bottom: 6px;
-        }
-
-        .page-title p {
-            color: var(--muted);
-        }
-
-        /* =====================================================
-           COMPONENTES
-        ===================================================== */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 16px;
-            margin-bottom: 25px;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 20px;
-        }
-
-        .card-label {
-            color: var(--muted);
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
-
-        .card-value {
-            font-size: 28px;
-            font-weight: 900;
-        }
-
-        .card-value.blue {
-            color: var(--blue);
-        }
-
-        .card-value.green {
-            color: var(--green);
-        }
-
-        .card-value.yellow {
-            color: var(--yellow);
-        }
-
-        .card-value.red {
-            color: var(--red);
-        }
-
-        .panel {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 22px;
-            margin-bottom: 22px;
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-
-        .panel-header h2 {
-            font-size: 18px;
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 12px 10px;
-            border-bottom: 1px solid var(--border);
-            text-align: left;
-            font-size: 13px;
-        }
-
-        th {
-            color: var(--muted);
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-        .status {
-            display: inline-flex;
-            padding: 5px 9px;
-            border-radius: 999px;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .status.ativo {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status.concluido {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .status.cancelado {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .status.alerta {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .progress {
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 999px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--blue);
-        }
-
-        .btn {
-            border: 0;
-            border-radius: 8px;
-            padding: 9px 13px;
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        .btn-primary {
-            background: var(--blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--blue-dark);
-        }
-
-        .btn-secondary {
-            background: #e5e7eb;
-            color: #374151;
-        }
-
-        .btn-danger {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .btn-light {
-            background: white;
-            border: 1px solid var(--border);
-            color: #374151;
-        }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
-        }
-
-        .form-full {
-            grid-column: 1 / -1;
-        }
-
-        .empty {
-            padding: 35px;
-            text-align: center;
-            color: var(--muted);
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 16px;
-        }
-
-        .project-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        .project-card:hover {
-            border-color: var(--blue);
-            box-shadow: 0 10px 25px rgba(15,23,42,.06);
-        }
-
-        .project-card h3 {
-            margin-bottom: 8px;
-        }
-
-        .project-card p {
-            color: var(--muted);
-            font-size: 13px;
-            margin-bottom: 14px;
-        }
-
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 12px;
-            font-size: 12px;
-        }
-
-        .info-box {
-            background: var(--blue-light);
-            border: 1px solid #bfdbfe;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 18px;
-        }
-
-        .info-box strong {
-            color: #1d4ed8;
-        }
-
-        .search {
-            width: 100%;
-            border: 1px solid var(--border);
-            padding: 11px 13px;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .search:focus {
-            border-color: var(--blue);
-        }
-
-        .kpi-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .kpi {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 12px 16px;
-        }
-
-        .kpi small {
-            display: block;
-            color: var(--muted);
-            margin-bottom: 4px;
-        }
-
-        .kpi strong {
-            font-size: 18px;
-        }
-
-        .location-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-        }
-
-        .location-slot {
-            border: 1px solid var(--border);
-            background: white;
-            border-radius: 8px;
-            padding: 15px 8px;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .location-slot.occupied {
-            border-color: #93c5fd;
-            background: #eff6ff;
-        }
-
-        .eisenhower-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .eisenhower-box {
-            min-height: 180px;
-            border-radius: 12px;
-            padding: 18px;
-            border: 1px solid var(--border);
-        }
-
-        .eisenhower-box h3 {
-            margin-bottom: 12px;
-        }
-
-        .eisenhower-box ul {
-            padding-left: 18px;
-        }
-
-        .eisenhower-box li {
-            margin-bottom: 8px;
-        }
-
-        .ivy-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .ivy-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            padding: 12px;
-            background: white;
-        }
-
-        .ivy-number {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--navy);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-        }
-
-        /* =====================================================
-           RESPONSIVO
-        ===================================================== */
-
-        @media (max-width: 1000px) {
-            .login-screen {
-                grid-template-columns: 1fr;
-            }
-
-            .login-left {
-                padding: 45px 30px;
-            }
-
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .project-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 700px) {
-            .environment-screen {
-                padding: 25px;
-            }
-
-            .environment-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: static;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-full {
-                grid-column: auto;
-            }
-
-            .eisenhower-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .location-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .main {
-                padding: 20px;
-            }
+        *{box-sizing:border-box}
+        body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#172033}
+        button,input,select,textarea{font:inherit}
+        button{cursor:pointer}
+        .app{display:flex;min-height:100vh}
+        .sidebar{width:250px;background:#081a2d;color:#fff;padding:20px 14px;position:fixed;left:0;top:0;bottom:0;overflow:auto}
+        .brand{padding:10px 12px 22px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:15px}
+        .brand strong{font-size:22px}
+        .brand small{display:block;color:#9fb5d0;margin-top:5px}
+        .user-box{background:#102945;border-radius:12px;padding:12px;margin-bottom:15px}
+        .user-box strong{display:block}
+        .user-box small{color:#9fb5d0}
+        .nav-title{font-size:11px;color:#7189a5;text-transform:uppercase;margin:18px 10px 7px}
+        .nav button{width:100%;border:0;background:transparent;color:#dbe7f4;text-align:left;padding:11px 12px;border-radius:8px;margin-bottom:3px}
+        .nav button:hover,.nav button.active{background:#17395e;color:#fff}
+        .logout{margin-top:18px;width:100%;border:1px solid #375270;background:transparent;color:#fff;padding:10px;border-radius:8px}
+        .content{margin-left:250px;width:calc(100% - 250px);padding:24px}
+        .topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}
+        .topbar h1{margin:0;font-size:26px}
+        .topbar p{margin:5px 0 0;color:#718096;font-size:13px}
+        .warehouse{background:#fff;border:1px solid #e5e7eb;border-radius:9px;padding:9px 13px;font-size:12px;color:#334155}
+        .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+        .stat{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:17px}
+        .stat small{display:block;color:#718096;margin-bottom:8px}
+        .stat b{font-size:23px}
+        .stat.blue{border-top:4px solid #2563eb}
+        .stat.green{border-top:4px solid #16a34a}
+        .stat.orange{border-top:4px solid #f59e0b}
+        .stat.red{border-top:4px solid #dc2626}
+        .panel{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;margin-bottom:16px}
+        .panel h3{margin:0 0 14px}
+        .dashboard-hero{display:grid;grid-template-columns:1.6fr .8fr;gap:14px;margin-bottom:16px}
+        .hero-panel{background:linear-gradient(135deg,#0b1d33,#123866);color:#fff;border-radius:14px;padding:22px}
+        .hero-panel small{color:#9fb5d0}
+        .hero-panel h3{font-size:24px;margin:7px 0}
+        .hero-panel p{color:#c9d6e5;font-size:13px;line-height:1.5}
+        .quick-panel{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px}
+        .quick-panel h3{margin-top:0}
+        .section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+        .section-title h3{margin:0}
+        .stock-highlight{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+        .mini-stat{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+        .mini-stat small{display:block;color:#718096}
+        .mini-stat strong{display:block;font-size:18px;margin-top:4px}
+        .project-toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+        .history-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .history-badge{background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:bold}
+        .edit-material{white-space:nowrap}
+        .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+        .form-group{display:flex;flex-direction:column;gap:6px}
+        .form-group.full{grid-column:1/-1}
+        .form-group label{font-size:12px;font-weight:bold;color:#475569}
+        .form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid #d7dee8;border-radius:8px;padding:10px;background:#fff;color:#172033;outline:none}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#2563eb}
+        .btn{border:0;background:#2563eb;color:#fff;border-radius:8px;padding:10px 15px;font-weight:bold}
+        .btn:hover{background:#1d4ed8}
+        .btn-secondary{background:#e8eef6;color:#243b53}
+        .btn-secondary:hover{background:#dbe5f0}
+        .btn-danger{background:#dc2626}
+        .btn-danger:hover{background:#b91c1c}
+        table{width:100%;border-collapse:collapse}
+        th{text-align:left;background:#f8fafc;color:#64748b;font-size:11px;text-transform:uppercase;padding:11px;border-bottom:1px solid #e5e7eb}
+        td{padding:11px;border-bottom:1px solid #edf0f4;font-size:13px}
+        tr:last-child td{border-bottom:0}
+        .status{display:inline-block;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:bold}
+        .status.ok{background:#dcfce7;color:#166534}
+        .status.low{background:#fef3c7;color:#92400e}
+        .status.active{background:#dbeafe;color:#1d4ed8}
+        .status.done{background:#dcfce7;color:#166534}
+        .status.cancelled{background:#fee2e2;color:#991b1b}
+        .search{width:280px;border:1px solid #d7dee8;border-radius:8px;padding:9px}
+        .progress{background:#e5e7eb;border-radius:999px;height:8px;overflow:hidden;min-width:90px}
+        .progress>span{display:block;height:100%;background:#2563eb}
+        .summary-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+        .summary{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:13px}
+        .summary small{display:block;color:#718096}
+        .summary strong{font-size:18px;display:block;margin-top:5px}
+        .location-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
+        .loc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:12px;text-align:center;font-weight:bold;font-size:12px}
+        .loc small{color:#718096;font-weight:normal}
+        .empty{text-align:center;padding:35px;color:#718096}
+        .back{margin-bottom:12px}
+        .modal-backdrop{position:fixed;inset:0;background:rgba(2,12,24,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100}
+        .modal{width:min(650px,100%);background:#fff;border-radius:15px;padding:22px;max-height:90vh;overflow:auto}
+        .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+        .modal-header h3{margin:0}
+        .modal-close{border:0;background:#eef2f7;width:34px;height:34px;border-radius:50%;font-size:18px}
+        .login-screen{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:#fff}
+        .login-left{background:#081a2d;color:#fff;padding:70px;display:flex;flex-direction:column;justify-content:center}
+        .login-left .logo{font-size:30px;font-weight:bold}
+        .login-left h1{font-size:45px;line-height:1.08;max-width:520px;margin:35px 0 18px}
+        .login-left p{color:#a9bdd3;max-width:500px;line-height:1.7}
+        .login-right{display:flex;align-items:center;justify-content:center;padding:35px;background:#f7f9fc}
+        .login-card{width:min(430px,100%)}
+        .login-card h2{font-size:28px;margin-bottom:8px}
+        .login-card>p{color:#718096;margin-bottom:25px}
+        .login-card .form-group{margin-bottom:15px}
+        .login-button{width:100%;margin-top:10px;padding:13px}
+        .password-wrap{position:relative}
+        .password-wrap input{padding-right:75px}
+        .show-pass{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#2563eb;font-size:12px;font-weight:bold}
+        .security-footer{margin-top:18px;font-size:11px;color:#94a3b8;text-align:center}
+        @media(max-width:1050px){
+            .grid{grid-template-columns:repeat(2,1fr)}
+            .summary-row{grid-template-columns:repeat(3,1fr)}
+            .dashboard-hero{grid-template-columns:1fr}
+        }
+        @media(max-width:800px){
+            .sidebar{width:210px}
+            .content{margin-left:210px;width:calc(100% - 210px)}
+            .form-grid{grid-template-columns:1fr}
+            .form-group.full{grid-column:auto}
+            .location-grid{grid-template-columns:repeat(5,1fr)}
+            .login-screen{grid-template-columns:1fr}
+            .login-left{display:none}
+        }
+        @media(max-width:600px){
+            .sidebar{position:static;width:100%;height:auto}
+            .app{display:block}
+            .content{margin-left:0;width:100%;padding:14px}
+            .grid{grid-template-columns:1fr}
+            .summary-row{grid-template-columns:repeat(2,1fr)}
+            .stock-highlight{grid-template-columns:1fr}
+            .topbar{align-items:flex-start;flex-direction:column}
+            .search{width:100%}
+            .section-title{align-items:flex-start;flex-direction:column}
+            .location-grid{grid-template-columns:repeat(2,1fr)}
+            table{display:block;overflow-x:auto}
         }
     </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     LOGIN
-========================================================= -->
-
-<section id="loginScreen" class="login-screen">
-
-    <div class="login-left">
-        <div class="brand">
-            L&L <span>CONTROL</span>
-        </div>
-
-        <h1>Gestão que começa pelo controle.</h1>
-
-        <p>
-            Controle de materiais, movimentações, projetos,
-            colaboradores e operações dos almoxarifados
-            da Engenharia e da Segurança.
-        </p>
-    </div>
-
-    <div class="login-right">
-
-        <div class="login-box">
-
-            <h2>Acesso ao sistema</h2>
-
-            <p class="login-subtitle">
-                Entre com seu usuário corporativo.
-            </p>
-
-            <form id="loginForm">
-
-                <div class="field">
-                    <label for="loginUsuario">
-                        Usuário
-                    </label>
-
-                    <input
-                        id="loginUsuario"
-                        type="text"
-                        autocomplete="username"
-                        placeholder="Digite seu usuário"
-                        required
-                    >
-                </div>
-
-                <div class="field">
-
-                    <label for="loginSenha">
-                        Senha
-                    </label>
-
-                    <div class="password-wrap">
-
-                        <input
-                            id="loginSenha"
-                            type="password"
-                            autocomplete="current-password"
-                            placeholder="Digite sua senha"
-                            required
-                        >
-
-                        <button
-                            id="passwordToggle"
-                            class="password-toggle"
-                            type="button"
-                        >
-                            Mostrar
-                        </button>
-
-                    </div>
-                </div>
-
-                <button
-                    id="loginButton"
-                    class="login-button"
-                    type="submit"
-                >
-                    Entrar
-                </button>
-
-                <div
-                    id="loginError"
-                    class="login-error"
-                ></div>
-
-            </form>
-
-            <div class="security-footer">
-                Acesso protegido • ALMOX CONTROL
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     ESCOLHA DO ALMOXARIFADO
-========================================================= -->
-
-<section id="environmentScreen" class="environment-screen">
-
-    <div class="environment-header">
-
-        <div class="environment-actions">
-            <button
-                id="environmentLogout"
-                class="btn btn-light"
-                type="button"
-            >
-                Sair
-            </button>
-        </div>
-
-        <h1>Selecione o almoxarifado</h1>
-
-        <p>
-            Escolha o ambiente que deseja acessar.
-        </p>
-
-    </div>
-
-    <div class="environment-grid">
-
-        <button
-            id="engineeringEnvironment"
-            class="environment-card"
-            type="button"
-        >
-
-            <div class="environment-icon">
-                ⚡
-            </div>
-
-            <h2>Almoxarifado da Engenharia</h2>
-
-            <p>
-                Controle de materiais, projetos,
-                entradas, saídas, inventário,
-                localização e gestão.
-            </p>
-
-        </button>
-
-
-        <button
-            id="securityEnvironment"
-            class="environment-card security"
-            type="button"
-        >
-
-            <div class="environment-icon">
-                🛡️
-            </div>
-
-            <h2>Almoxarifado da Segurança</h2>
-
-            <p>
-                Controle de colaboradores,
-                equipamentos, materiais,
-                entregas e agenda.
-            </p>
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     SISTEMA
-========================================================= -->
-
-<section id="systemScreen" class="system-screen">
-
-    <header class="header">
-
-        <div class="header-brand">
-            L&L <span>CONTROL</span>
-        </div>
-
-        <div class="header-right">
-
-            <div class="header-user">
-                <strong id="headerUser">
-                    Usuário
-                </strong>
-
-                <small id="headerEnvironment">
-                    Ambiente
-                </small>
-            </div>
-
-            <button
-                id="environmentBack"
-                class="btn btn-light"
-                type="button"
-            >
-                Almoxarifados
-            </button>
-
-            <button
-                id="logoutButton"
-                class="btn btn-danger"
-                type="button"
-            >
-                Sair
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <div class="layout">
-
-        <aside class="sidebar">
-
-            <div class="sidebar-title">
-                Menu
-            </div>
-
-            <nav id="navigation"></nav>
-
-        </aside>
-
-
-        <main id="content" class="main"></main>
-
-    </div>
-
-</section>
-
+<div id="root"></div>
 
 <script>
 "use strict";
 
-/* =========================================================
-   CONFIGURAÇÃO
-========================================================= */
-
-const APP = {
-    usuario: null,
-    almoxarifado: null,
-    telaAtual: null
-};
-
-const MENUS = {
-    engenharia: [
-        ["dashboard", "▦", "Dashboard"],
-        ["estoque", "▤", "Estoque"],
-        ["projetos", "◈", "Projetos"],
-        ["entradas", "↓", "Entrada no Almoxarifado"],
-        ["saidas", "↑", "Saída do Almoxarifado"],
-        ["inventario", "✓", "Inventário"],
-        ["localizacao", "⌖", "Localização"],
-        ["gestao", "◫", "Área da Gestão"]
-    ],
-
-    seguranca: [
-        ["dashboard", "▦", "Dashboard"],
-        ["estoque", "▤", "Estoque"],
-        ["colaboradores", "♙", "Cadastro de colaboradores"],
-        ["estoque-colaborador", "♧", "Estoque por colaborador"],
-        ["entradas", "↓", "Entrada no Almoxarifado"],
-        ["saidas", "↑", "Saída no Almoxarifado"],
-        ["agenda", "□", "Agenda"]
-    ]
-};
-
-
-/* =========================================================
-   DADOS INICIAIS
-========================================================= */
-
-const DADOS = {
-
-    engenharia: {
-
+const state = {
+    user: null,
+    environment: null,
+    currentScreen: null,
+    data: {
         materiais: [
             {
-                codigo: "ENG-001",
-                descricao: "Cabo de potência 0,6/1kV",
-                unidade: "m",
-                quantidade: 250,
-                minimo: 100,
-                valor: 12.50,
+                codigo: "MAT-001",
+                descricao: "Cabo elétrico 10mm",
+                unidade: "M",
+                estoque: 850,
+                valorUnitario: 18.5,
+                minimo: 200,
                 localizacao: "A01",
-                projeto: "ALMOXARIFADO SANTARÉM"
+                projeto: "ALMOXARIFADO SANTARÉM",
+                categoria: "Elétrica"
             },
             {
-                codigo: "ENG-002",
-                descricao: "Conector elétrico",
-                unidade: "un",
-                quantidade: 80,
-                minimo: 30,
-                valor: 18.90,
+                codigo: "MAT-002",
+                descricao: "Disjuntor 32A",
+                unidade: "UN",
+                estoque: 45,
+                valorUnitario: 42.9,
+                minimo: 20,
                 localizacao: "A02",
-                projeto: "ALMOXARIFADO SANTARÉM"
+                projeto: "ALMOXARIFADO SANTARÉM",
+                categoria: "Elétrica"
             },
             {
-                codigo: "ENG-003",
-                descricao: "Disjuntor tripolar",
-                unidade: "un",
-                quantidade: 25,
+                codigo: "MAT-003",
+                descricao: "Luva isolante",
+                unidade: "PAR",
+                estoque: 12,
+                valorUnitario: 75,
                 minimo: 10,
-                valor: 145.00,
                 localizacao: "B01",
-                projeto: "ALMOXARIFADO SANTARÉM"
+                projeto: "ALMOXARIFADO SANTARÉM",
+                categoria: "EPI"
             }
         ],
-
         projetos: [
             {
-                id: "P001",
-                nome: "Projeto Expansão Santarém",
+                id: "P-001",
+                nome: "Projeto Santarém",
                 status: "Ativo",
+                percentual: 62,
                 materiais: [
                     {
-                        material: "Cabo de potência 0,6/1kV",
-                        planejado: 1000,
-                        recebido: 700,
-                        utilizado: 350
+                        descricao: "Cabo elétrico 10mm",
+                        planejado: 500,
+                        recebido: 310,
+                        utilizado: 120
                     },
                     {
-                        material: "Conector elétrico",
-                        planejado: 200,
-                        recebido: 200,
-                        utilizado: 130
-                    }
-                ]
-            },
-            {
-                id: "P002",
-                nome: "Projeto Subestação Norte",
-                status: "Ativo",
-                materiais: [
-                    {
-                        material: "Disjuntor tripolar",
-                        planejado: 30,
+                        descricao: "Disjuntor 32A",
+                        planejado: 20,
                         recebido: 15,
-                        utilizado: 5
+                        utilizado: 4
                     }
                 ]
             },
             {
-                id: "P003",
-                nome: "Projeto Rede Secundária",
-                status: "Concluído",
+                id: "P-002",
+                nome: "Expansão Engenharia",
+                status: "Ativo",
+                percentual: 38,
                 materiais: [
                     {
-                        material: "Cabo de potência 0,6/1kV",
-                        planejado: 500,
-                        recebido: 500,
-                        utilizado: 500
+                        descricao: "Cabo elétrico 10mm",
+                        planejado: 350,
+                        recebido: 160,
+                        utilizado: 70
                     }
                 ]
             }
         ],
-
         entradas: [],
-        saidas: [],
-        inventarios: []
-
-    },
-
-
-    seguranca: {
-
-        materiais: [
-            {
-                codigo: "SEG-001",
-                descricao: "Capacete de segurança",
-                unidade: "un",
-                quantidade: 30,
-                minimo: 10,
-                valor: 55.00,
-                localizacao: "S01"
-            },
-            {
-                codigo: "SEG-002",
-                descricao: "Colete refletivo",
-                unidade: "un",
-                quantidade: 50,
-                minimo: 15,
-                valor: 32.00,
-                localizacao: "S02"
-            }
-        ],
-
-        colaboradores: [
-            {
-                id: "COL-001",
-                nome: "João Silva",
-                matricula: "001",
-                cargo: "Eletricista",
-                setor: "Engenharia",
-                status: "Ativo"
-            }
-        ],
-
-        entregas: [],
-
-        entradas: [],
-
-        saidas: [],
-
-        agenda: []
-
+        saidas: []
     }
-
 };
 
-
-/* =========================================================
-   UTILITÁRIOS
-========================================================= */
+const USERS = {
+    Gundim: {
+        usuario: "Gundim",
+        senha: "Gundim@adm01",
+        cargo: "Administrador"
+    },
+    Jorge: {
+        usuario: "Jorge",
+        senha: "Jorge@gestor01",
+        cargo: "Gestor"
+    },
+    Felipe: {
+        usuario: "Felipe",
+        senha: "Felipe@consultor01",
+        cargo: "Consultor"
+    },
+    Robert: {
+        usuario: "Robert",
+        senha: "Robert@auxiliar01",
+        cargo: "Auxiliar"
+    }
+};
 
 function $(id) {
     return document.getElementById(id);
 }
 
-function escapar(valor) {
-    return String(valor ?? "")
+function esc(value) {
+    return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
@@ -1247,2875 +262,2357 @@ function escapar(valor) {
         .replaceAll("'", "&#039;");
 }
 
-function numero(valor) {
-    const n = Number(valor);
-    return Number.isFinite(n) ? n : 0;
+function num(value) {
+    return Number(value || 0).toLocaleString("pt-BR", {
+        maximumFractionDigits: 2
+    });
 }
 
-function dinheiro(valor) {
-    return numero(valor).toLocaleString(
-        "pt-BR",
-        {
-            style: "currency",
-            currency: "BRL"
-        }
-    );
+function moeda(value) {
+    return Number(value || 0).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
 }
 
-function percentual(valor) {
-    return Math.max(
-        0,
-        Math.min(100, numero(valor))
-    );
+function progress(value) {
+    const n = Math.max(0, Math.min(100, Number(value || 0)));
+
+    return `
+        <div style="display:flex;align-items:center;gap:8px">
+            <div class="progress">
+                <span style="width:${n}%"></span>
+            </div>
+            <small>${n.toFixed(1)}%</small>
+        </div>
+    `;
 }
 
-function hoje() {
-    return new Date().toLocaleDateString("pt-BR");
+function status(value) {
+    const v = String(value || "");
+
+    let cls = "active";
+
+    if (v === "Concluído") cls = "done";
+    if (v === "Cancelado") cls = "cancelled";
+
+    return `<span class="status ${cls}">${esc(v)}</span>`;
 }
 
-function dadosAtuais() {
-    return DADOS[APP.almoxarifado];
-}
-
-function usuarioPodeTela(tela) {
-
-    if (!APP.usuario) {
-        return false;
+function table(headers, rows) {
+    if (!rows.length) {
+        return `<div class="empty">Nenhum registro encontrado.</div>`;
     }
 
-    const telas =
-        APP.usuario.telas?.[APP.almoxarifado] || [];
-
-    return telas.includes(tela);
+    return `
+        <table>
+            <thead>
+                <tr>
+                    ${headers.map(h => `<th>${h}</th>`).join("")}
+                </tr>
+            </thead>
+            <tbody>
+                ${rows.map(row => `
+                    <tr>
+                        ${row.map(cell => `<td>${cell}</td>`).join("")}
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    `;
 }
 
-function statusClasse(status) {
-    return String(status || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+function title(titleText, subtitle) {
+    return `
+        <div class="topbar">
+            <div>
+                <h1>${esc(titleText)}</h1>
+                <p>${esc(subtitle || "")}</p>
+            </div>
+            <div class="warehouse">
+                ALMOXARIFADO SANTARÉM
+            </div>
+        </div>
+    `;
 }
 
-function telaTitulo(tela) {
-
-    const menu =
-        MENUS[APP.almoxarifado] || [];
-
-    const item =
-        menu.find(x => x[0] === tela);
-
-    return item ? item[2] : "Tela";
+function save() {
+    localStorage.setItem(
+        "almox_control_data",
+        JSON.stringify(state.data)
+    );
 }
 
-function mostrarSistema() {
+function load() {
+    try {
+        const saved = localStorage.getItem(
+            "almox_control_data"
+        );
 
-    $("loginScreen").style.display = "none";
-    $("environmentScreen").style.display = "none";
-    $("systemScreen").style.display = "block";
+        if (saved) {
+            state.data = JSON.parse(saved);
+        }
+    } catch {
+        console.warn("Não foi possível carregar os dados.");
+    }
 }
 
-function mostrarAmbientes() {
+function openModal(titleText, content) {
+    const div = document.createElement("div");
 
-    $("loginScreen").style.display = "none";
-    $("systemScreen").style.display = "none";
-    $("environmentScreen").style.display = "block";
+    div.className = "modal-backdrop";
+
+    div.innerHTML = `
+        <div class="modal">
+            <div class="modal-header">
+                <h3>${esc(titleText)}</h3>
+                <button class="modal-close">×</button>
+            </div>
+            ${content}
+        </div>
+    `;
+
+    document.body.appendChild(div);
+
+    div.querySelector(".modal-close").onclick =
+        () => div.remove();
+
+    div.addEventListener("click", e => {
+        if (e.target === div) {
+            div.remove();
+        }
+    });
 }
 
-function mostrarLogin() {
-
-    $("systemScreen").style.display = "none";
-    $("environmentScreen").style.display = "none";
-    $("loginScreen").style.display = "grid";
+function closeModal() {
+    document.querySelector(".modal-backdrop")?.remove();
 }
 
-function sairDoSistema() {
+function loginScreen() {
+    document.body.innerHTML = `
+        <div class="login-screen">
+            <div class="login-left">
+                <div class="logo">L&L</div>
 
-    APP.usuario = null;
-    APP.almoxarifado = null;
-    APP.telaAtual = null;
+                <h1>
+                    Gestão que começa pelo controle.
+                </h1>
 
-    sessionStorage.removeItem("almox_user");
+                <p>
+                    ALMOX CONTROL centraliza estoque,
+                    projetos e movimentações para tornar
+                    a operação mais organizada, rastreável
+                    e eficiente.
+                </p>
+            </div>
 
-    mostrarLogin();
+            <div class="login-right">
+                <div class="login-card">
+                    <h2>Entrar no sistema</h2>
 
-    $("loginSenha").value = "";
-}
+                    <p>
+                        Informe suas credenciais para acessar
+                        o ALMOX CONTROL.
+                    </p>
 
+                    <form id="loginForm">
 
-/* =========================================================
-   MENU
-========================================================= */
+                        <div class="form-group">
+                            <label>Usuário</label>
+                            <input
+                                id="loginUser"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
 
-function construirMenu() {
+                        <div class="form-group">
+                            <label>Senha</label>
 
-    const nav = $("navigation");
+                            <div class="password-wrap">
+                                <input
+                                    id="loginPassword"
+                                    type="password"
+                                    autocomplete="current-password"
+                                    required
+                                >
 
-    nav.innerHTML = "";
+                                <button
+                                    type="button"
+                                    class="show-pass"
+                                    id="showPassword"
+                                >
+                                    Mostrar
+                                </button>
+                            </div>
+                        </div>
 
-    const menus =
-        MENUS[APP.almoxarifado] || [];
+                        <button
+                            class="btn login-button"
+                            type="submit"
+                        >
+                            Entrar
+                        </button>
 
-    menus.forEach(([id, icon, nome]) => {
+                    </form>
 
-        if (!usuarioPodeTela(id)) {
+                    <div class="security-footer">
+                        Acesso protegido • ALMOX CONTROL
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    $("showPassword").onclick = () => {
+        const input = $("loginPassword");
+
+        if (input.type === "password") {
+            input.type = "text";
+            $("showPassword").textContent = "Ocultar";
+        } else {
+            input.type = "password";
+            $("showPassword").textContent = "Mostrar";
+        }
+    };
+
+    $("loginForm").onsubmit = e => {
+        e.preventDefault();
+
+        const usuario = $("loginUser").value.trim();
+        const senha = $("loginPassword").value;
+
+        const user = USERS[usuario];
+
+        if (!user || user.senha !== senha) {
+            alert("Usuário ou senha inválidos.");
             return;
         }
 
-        const button =
-            document.createElement("button");
-
-        button.type = "button";
-        button.className = "nav-button";
-        button.dataset.screen = id;
-
-        button.innerHTML = `
-            <span class="nav-icon">${icon}</span>
-            <span>${escapar(nome)}</span>
-        `;
-
-        button.addEventListener(
-            "click",
-            () => abrirTela(id)
-        );
-
-        nav.appendChild(button);
-    });
-}
-
-function atualizarMenuAtivo() {
-
-    document
-        .querySelectorAll(".nav-button")
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.screen ===
-                APP.telaAtual
-            );
-        });
-}
-
-
-/* =========================================================
-   ABERTURA DE AMBIENTE
-========================================================= */
-
-function abrirAlmoxarifado(ambiente) {
-
-    if (!APP.usuario) {
-        return;
-    }
-
-    const permitidos =
-        APP.usuario.almoxarifados || [];
-
-    if (!permitidos.includes(ambiente)) {
-        return;
-    }
-
-    APP.almoxarifado = ambiente;
-
-    $("headerUser").textContent =
-        `${APP.usuario.nome || APP.usuario.usuario} • ${APP.usuario.cargo}`;
-
-    $("headerEnvironment").textContent =
-        ambiente === "engenharia"
-            ? "Almoxarifado da Engenharia"
-            : "Almoxarifado da Segurança";
-
-    construirMenu();
-    mostrarSistema();
-
-    const primeiroMenu =
-        (MENUS[ambiente] || [])
-            .map(x => x[0])
-            .find(usuarioPodeTela);
-
-    if (primeiroMenu) {
-        abrirTela(primeiroMenu);
-    }
-}
-
-
-/* =========================================================
-   ABRIR TELA
-========================================================= */
-
-function abrirTela(tela) {
-
-    if (!usuarioPodeTela(tela)) {
-
-        $("content").innerHTML = `
-            <div class="panel">
-                <div class="empty">
-                    Você não possui permissão para acessar esta tela.
-                </div>
-            </div>
-        `;
-
-        return;
-    }
-
-    APP.telaAtual = tela;
-
-    atualizarMenuAtivo();
-
-    if (APP.almoxarifado === "engenharia") {
-
-        const telas = {
-            dashboard: dashboardEngenharia,
-            estoque: estoqueEngenharia,
-            projetos: projetosEngenharia,
-            entradas: entradasEngenharia,
-            saidas: saidasEngenharia,
-            inventario: inventarioEngenharia,
-            localizacao: localizacaoEngenharia,
-            gestao: gestaoEngenharia
+        state.user = {
+            usuario: user.usuario,
+            cargo: user.cargo
         };
 
-        if (telas[tela]) {
-            telas[tela]();
-        }
-
-        return;
-    }
-
-    const telas = {
-        dashboard: dashboardSeguranca,
-        estoque: estoqueSeguranca,
-        colaboradores: colaboradoresSeguranca,
-        "estoque-colaborador":
-            estoqueColaboradorSeguranca,
-        entradas: entradasSeguranca,
-        saidas: saidasSeguranca,
-        agenda: agendaSeguranca
-    };
-
-    if (telas[tela]) {
-        telas[tela]();
-    }
-}
-
-
-/* =========================================================
-   DASHBOARD — ENGENHARIA
-========================================================= */
-
-function dashboardEngenharia() {
-
-    const d = DADOS.engenharia;
-
-    const valorTotal =
-        d.materiais.reduce(
-            (total, material) =>
-                total +
-                numero(material.quantidade) *
-                numero(material.valor),
-            0
+        localStorage.setItem(
+            "almox_control_user",
+            JSON.stringify(state.user)
         );
 
-    const estoqueBaixo =
-        d.materiais.filter(
-            material =>
-                numero(material.quantidade) <=
-                numero(material.minimo)
-        ).length;
-
-    const ativos =
-        d.projetos.filter(
-            p => p.status === "Ativo"
-        ).length;
-
-    const concluidos =
-        d.projetos.filter(
-            p => p.status === "Concluído"
-        ).length;
-
-    const cancelados =
-        d.projetos.filter(
-            p => p.status === "Cancelado"
-        ).length;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Dashboard</h1>
-            <p>Visão geral do Almoxarifado da Engenharia.</p>
-        </div>
-
-        <div class="cards">
-
-            <div class="card">
-                <div class="card-label">
-                    Valor agregado do almoxarifado
-                </div>
-                <div class="card-value blue">
-                    ${dinheiro(valorTotal)}
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-label">
-                    Materiais cadastrados
-                </div>
-                <div class="card-value">
-                    ${d.materiais.length}
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-label">
-                    Projetos ativos
-                </div>
-                <div class="card-value green">
-                    ${ativos}
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-label">
-                    Estoque baixo
-                </div>
-                <div class="card-value ${estoqueBaixo ? "red" : "green"}">
-                    ${estoqueBaixo}
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-header">
-                <h2>Status dos projetos</h2>
-            </div>
-
-            <div class="kpi-row">
-
-                <div class="kpi">
-                    <small>Concluídos</small>
-                    <strong>${concluidos}</strong>
-                </div>
-
-                <div class="kpi">
-                    <small>Ativos</small>
-                    <strong>${ativos}</strong>
-                </div>
-
-                <div class="kpi">
-                    <small>Cancelados</small>
-                    <strong>${cancelados}</strong>
-                </div>
-
-            </div>
-
-            <div class="table-wrap">
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Projeto</th>
-                            <th>Status</th>
-                            <th>Planejado</th>
-                            <th>Recebido</th>
-                            <th>Pendente</th>
-                            <th>Conclusão</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${d.projetos.map(projeto => {
-
-                            const planejado =
-                                projeto.materiais.reduce(
-                                    (soma, item) =>
-                                        soma +
-                                        numero(item.planejado),
-                                    0
-                                );
-
-                            const recebido =
-                                projeto.materiais.reduce(
-                                    (soma, item) =>
-                                        soma +
-                                        numero(item.recebido),
-                                    0
-                                );
-
-                            const pendente =
-                                Math.max(
-                                    0,
-                                    planejado - recebido
-                                );
-
-                            const pct =
-                                planejado > 0
-                                    ? percentual(
-                                        recebido /
-                                        planejado *
-                                        100
-                                    )
-                                    : 0;
-
-                            return `
-                                <tr>
-                                    <td>
-                                        <strong>
-                                            ${escapar(projeto.nome)}
-                                        </strong>
-                                    </td>
-
-                                    <td>
-                                        <span class="status ${statusClasse(projeto.status)}">
-                                            ${escapar(projeto.status)}
-                                        </span>
-                                    </td>
-
-                                    <td>${planejado}</td>
-                                    <td>${recebido}</td>
-                                    <td>${pendente}</td>
-
-                                    <td style="min-width:160px">
-                                        <strong>${pct.toFixed(1)}%</strong>
-                                        <div class="progress">
-                                            <div
-                                                class="progress-bar"
-                                                style="width:${pct}%"
-                                            ></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            `;
-                        }).join("")}
-
-                    </tbody>
-
-                </table>
-            </div>
-
-        </div>
-    `;
+        environmentScreen();
+    };
 }
 
+function environmentScreen() {
+    document.body.innerHTML = `
+        <div class="login-screen">
 
-/* =========================================================
-   ESTOQUE — ENGENHARIA
-========================================================= */
+            <div class="login-left">
+                <div class="logo">ALMOX CONTROL</div>
 
-function estoqueEngenharia() {
+                <h1>
+                    Escolha o ambiente.
+                </h1>
 
-    const d = DADOS.engenharia;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Estoque</h1>
-            <p>Materiais disponíveis no Almoxarifado de Santarém.</p>
-        </div>
-
-        <div class="panel">
-
-            <div class="panel-header">
-
-                <h2>Materiais cadastrados</h2>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="abrirTela('entradas')"
-                >
-                    Nova entrada
-                </button>
-
+                <p>
+                    Selecione o almoxarifado que deseja
+                    administrar nesta sessão.
+                </p>
             </div>
 
-            <div class="table-wrap">
+            <div class="login-right">
+                <div class="login-card">
 
-                <table>
+                    <h2>Ambiente</h2>
 
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Descrição</th>
-                            <th>Unidade</th>
-                            <th>Quantidade</th>
-                            <th>Valor unitário</th>
-                            <th>Valor total</th>
-                            <th>Mínimo</th>
-                            <th>Localização</th>
-                            <th>Projeto</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${d.materiais.map(m => {
-
-                            const total =
-                                numero(m.quantidade) *
-                                numero(m.valor);
-
-                            const baixo =
-                                numero(m.quantidade) <=
-                                numero(m.minimo);
-
-                            return `
-                                <tr>
-
-                                    <td>${escapar(m.codigo)}</td>
-
-                                    <td>
-                                        <strong>
-                                            ${escapar(m.descricao)}
-                                        </strong>
-                                    </td>
-
-                                    <td>${escapar(m.unidade)}</td>
-                                    <td>${m.quantidade}</td>
-
-                                    <td>
-                                        ${dinheiro(m.valor)}
-                                    </td>
-
-                                    <td>
-                                        <strong>
-                                            ${dinheiro(total)}
-                                        </strong>
-                                    </td>
-
-                                    <td>${m.minimo}</td>
-
-                                    <td>${escapar(m.localizacao)}</td>
-
-                                    <td>
-                                        ALMOXARIFADO SANTARÉM
-                                    </td>
-
-                                    <td>
-                                        <span class="status ${baixo ? "alerta" : "ativo"}">
-                                            ${baixo ? "Estoque baixo" : "Normal"}
-                                        </span>
-                                    </td>
-
-                                </tr>
-                            `;
-
-                        }).join("")}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   PROJETOS — ENGENHARIA
-========================================================= */
-
-function projetosEngenharia() {
-
-    const d = DADOS.engenharia;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-
-            <div class="panel-header">
-
-                <div>
-                    <h1>Projetos</h1>
                     <p>
-                        Controle de material planejado,
-                        recebido, utilizado, saldo e pendências.
+                        Olá, ${esc(state.user.usuario)}.
+                        Escolha onde deseja trabalhar.
                     </p>
-                </div>
 
-                <button
-                    class="btn btn-primary"
-                    onclick="novoProjeto()"
-                >
-                    Novo projeto
-                </button>
+                    <div style="display:grid;gap:12px">
 
-            </div>
-
-        </div>
-
-
-        <div class="project-grid">
-
-            ${d.projetos.map(projeto => {
-
-                const planejado =
-                    projeto.materiais.reduce(
-                        (s, m) =>
-                            s + numero(m.planejado),
-                        0
-                    );
-
-                const recebido =
-                    projeto.materiais.reduce(
-                        (s, m) =>
-                            s + numero(m.recebido),
-                        0
-                    );
-
-                const pendente =
-                    Math.max(
-                        0,
-                        planejado - recebido
-                    );
-
-                const pct =
-                    planejado > 0
-                        ? percentual(
-                            recebido /
-                            planejado *
-                            100
-                        )
-                        : 0;
-
-                return `
-
-                    <div
-                        class="project-card"
-                        onclick="abrirDetalhesProjeto('${projeto.id}')"
-                    >
-
-                        <span class="status ${statusClasse(projeto.status)}">
-                            ${escapar(projeto.status)}
-                        </span>
-
-                        <h3 style="margin-top:14px">
-                            ${escapar(projeto.nome)}
-                        </h3>
-
-                        <p>
-                            ${projeto.materiais.length}
-                            material(is) controlado(s).
-                        </p>
-
-                        <div class="progress">
-                            <div
-                                class="progress-bar"
-                                style="width:${pct}%"
-                            ></div>
-                        </div>
-
-                        <div class="project-meta">
-                            <span>
-                                Conclusão
-                            </span>
-
-                            <strong>
-                                ${pct.toFixed(1)}%
-                            </strong>
-                        </div>
-
-                        <div class="project-meta">
-                            <span>
-                                Pendente
-                            </span>
-
-                            <strong>
-                                ${pendente}
-                            </strong>
-                        </div>
-
-                    </div>
-                `;
-
-            }).join("")}
-
-        </div>
-    `;
-}
-
-function novoProjeto() {
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Novo projeto</h1>
-            <p>Cadastre um novo projeto da Engenharia.</p>
-        </div>
-
-        <div class="panel">
-
-            <form id="novoProjetoForm">
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Nome do projeto</label>
-                        <input
-                            id="novoProjetoNome"
-                            required
-                            placeholder="Nome do projeto"
+                        <button
+                            class="btn"
+                            id="engEnvironment"
+                            style="padding:18px;text-align:left"
                         >
+                            ⚡
+                            <strong style="display:block;font-size:16px">
+                                Almoxarifado da Engenharia
+                            </strong>
+                            <small style="opacity:.8">
+                                Materiais, projetos e movimentações
+                            </small>
+                        </button>
+
+                        <button
+                            class="btn"
+                            id="secEnvironment"
+                            style="padding:18px;text-align:left;background:#0f766e"
+                        >
+                            🛡️
+                            <strong style="display:block;font-size:16px">
+                                Almoxarifado da Segurança
+                            </strong>
+                            <small style="opacity:.8">
+                                Colaboradores, equipamentos e agenda
+                            </small>
+                        </button>
+
                     </div>
-
-                    <div class="field">
-                        <label>Status</label>
-
-                        <select id="novoProjetoStatus">
-
-                            <option value="Ativo">
-                                Ativo
-                            </option>
-
-                            <option value="Concluído">
-                                Concluído
-                            </option>
-
-                            <option value="Cancelado">
-                                Cancelado
-                            </option>
-
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="actions">
-                    <button
-                        class="btn btn-primary"
-                        type="submit"
-                    >
-                        Cadastrar projeto
-                    </button>
 
                     <button
                         class="btn btn-secondary"
-                        type="button"
-                        onclick="abrirTela('projetos')"
+                        id="logoutEnvironment"
+                        style="width:100%;margin-top:15px"
                     >
-                        Cancelar
+                        Sair
                     </button>
-                </div>
 
-            </form>
+                </div>
+            </div>
 
         </div>
     `;
 
-    $("novoProjetoForm")
-        .addEventListener("submit", event => {
+    $("engEnvironment").onclick = () => {
+        state.environment = "engenharia";
+        state.currentScreen = "dashboard";
+        renderApp();
+    };
 
-            event.preventDefault();
+    $("secEnvironment").onclick = () => {
+        state.environment = "seguranca";
+        state.currentScreen = "dashboard";
+        renderSecurity();
+    };
 
-            const nome =
-                $("novoProjetoNome").value.trim();
-
-            if (!nome) {
-                return;
-            }
-
-            DADOS.engenharia.projetos.push({
-                id: "P" +
-                    String(
-                        DADOS.engenharia.projetos.length + 1
-                    ).padStart(3, "0"),
-
-                nome,
-
-                status:
-                    $("novoProjetoStatus").value,
-
-                materiais: []
-            });
-
-            abrirTela("projetos");
-        });
+    $("logoutEnvironment").onclick = () => {
+        state.user = null;
+        localStorage.removeItem("almox_control_user");
+        loginScreen();
+    };
 }
 
-function abrirDetalhesProjeto(id) {
+function renderApp() {
+    document.body.innerHTML = `
+        <div class="app">
 
-    const projeto =
-        DADOS.engenharia.projetos.find(
-            p => p.id === id
+            <aside class="sidebar">
+
+                <div class="brand">
+                    <strong>ALMOX CONTROL</strong>
+                    <small>Engenharia</small>
+                </div>
+
+                <div class="user-box">
+                    <strong>${esc(state.user.usuario)}</strong>
+                    <small>${esc(state.user.cargo)}</small>
+                </div>
+
+                <div class="nav">
+
+                    <div class="nav-title">Operação</div>
+
+                    <button data-screen="dashboard">
+                        Dashboard
+                    </button>
+
+                    <button data-screen="estoque">
+                        Estoque
+                    </button>
+
+                    <button data-screen="projetos">
+                        Projetos
+                    </button>
+
+                    <button data-screen="entradas">
+                        Entrada no Almoxarifado
+                    </button>
+
+                    <button data-screen="saidas">
+                        Saída do Almoxarifado
+                    </button>
+
+                    <div class="nav-title">Controle</div>
+
+                    <button data-screen="inventario">
+                        Inventário
+                    </button>
+
+                    <button data-screen="localizacao">
+                        Localização
+                    </button>
+
+                    <button data-screen="gestao">
+                        Área da Gestão
+                    </button>
+
+                </div>
+
+                <button
+                    class="logout"
+                    id="logout"
+                >
+                    Sair
+                </button>
+
+            </aside>
+
+            <main class="content" id="main"></main>
+
+        </div>
+    `;
+
+    document
+        .querySelectorAll("[data-screen]")
+        .forEach(button => {
+            button.onclick = () => {
+                state.currentScreen =
+                    button.dataset.screen;
+
+                renderCurrentScreen();
+            };
+        });
+
+    $("logout").onclick = () => {
+        state.user = null;
+        state.environment = null;
+
+        localStorage.removeItem(
+            "almox_control_user"
         );
 
-    if (!projeto) {
-        return;
+        loginScreen();
+    };
+
+    renderCurrentScreen();
+}
+
+function renderCurrentScreen() {
+    document
+        .querySelectorAll("[data-screen]")
+        .forEach(button => {
+            button.classList.toggle(
+                "active",
+                button.dataset.screen ===
+                    state.currentScreen
+            );
+        });
+
+    const screens = {
+        dashboard,
+        estoque,
+        projetos,
+        entradas,
+        saidas,
+        inventario,
+        localizacao,
+        gestao
+    };
+
+    const fn =
+        screens[state.currentScreen] ||
+        dashboard;
+
+    fn();
+}
+
+function dashboard() {
+    const m = state.data.materiais;
+    const p = state.data.projetos;
+
+    const valor = m.reduce(
+        (s, x) =>
+            s +
+            (Number(x.estoque) || 0) *
+            (Number(x.valorUnitario) || 0),
+        0
+    );
+
+    const baixos = m.filter(
+        x =>
+            (Number(x.estoque) || 0) <=
+            (Number(x.minimo) || 0)
+    ).length;
+
+    const ativos =
+        p.filter(x => x.status === "Ativo").length;
+
+    const concl =
+        p.filter(x => x.status === "Concluído").length;
+
+    const canc =
+        p.filter(x => x.status === "Cancelado").length;
+
+    const totalPlan = p.reduce(
+        (s, projeto) =>
+            s +
+            (projeto.materiais || []).reduce(
+                (a, m) =>
+                    a + (Number(m.planejado) || 0),
+                0
+            ),
+        0
+    );
+
+    const totalRec = p.reduce(
+        (s, projeto) =>
+            s +
+            (projeto.materiais || []).reduce(
+                (a, m) =>
+                    a + (Number(m.recebido) || 0),
+                0
+            ),
+        0
+    );
+
+    const totalPend =
+        Math.max(0, totalPlan - totalRec);
+
+    $("main").innerHTML =
+        title(
+            "Dashboard",
+            "Visão geral do Almoxarifado da Engenharia"
+        ) +
+
+        `
+        <div class="dashboard-hero">
+
+            <div class="hero-panel">
+                <small>ALMOXARIFADO SANTARÉM</small>
+
+                <h3>
+                    Controle operacional da Engenharia
+                </h3>
+
+                <p>
+                    Acompanhe o valor do estoque,
+                    os materiais críticos e o avanço
+                    dos projetos em um único painel.
+                </p>
+            </div>
+
+            <div class="quick-panel">
+
+                <h3>
+                    Atendimento de projetos
+                </h3>
+
+                <div class="mini-stat">
+                    <small>Material pendente</small>
+                    <strong>
+                        ${num(totalPend)}
+                    </strong>
+                </div>
+
+                <div
+                    style="margin-top:10px"
+                    class="mini-stat"
+                >
+                    <small>Atendimento geral</small>
+
+                    <strong>
+                        ${
+                            totalPlan
+                                ? ((totalRec / totalPlan) * 100).toFixed(1)
+                                : 0
+                        }%
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="grid">
+
+            <div class="stat blue">
+                <small>
+                    Valor agregado do almoxarifado
+                </small>
+                <b>${moeda(valor)}</b>
+            </div>
+
+            <div class="stat blue">
+                <small>
+                    Materiais cadastrados
+                </small>
+                <b>${m.length}</b>
+            </div>
+
+            <div class="stat green">
+                <small>
+                    Projetos ativos
+                </small>
+                <b>${ativos}</b>
+            </div>
+
+            <div class="stat orange">
+                <small>
+                    Materiais com estoque baixo
+                </small>
+                <b>${baixos}</b>
+            </div>
+
+            <div class="stat green">
+                <small>
+                    Projetos concluídos
+                </small>
+                <b>${concl}</b>
+            </div>
+
+            <div class="stat red">
+                <small>
+                    Projetos cancelados
+                </small>
+                <b>${canc}</b>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="section-title">
+                <h3>Status dos projetos</h3>
+
+                <span class="history-badge">
+                    ${p.length} projetos
+                </span>
+            </div>
+
+            ${
+                p.length
+                    ? table(
+                        [
+                            "Projeto",
+                            "Conclusão",
+                            "Status",
+                            "Pendente"
+                        ],
+                        p.map(x => {
+
+                            const plan =
+                                (x.materiais || [])
+                                    .reduce(
+                                        (a, m) =>
+                                            a +
+                                            (Number(m.planejado) || 0),
+                                        0
+                                    );
+
+                            const rec =
+                                (x.materiais || [])
+                                    .reduce(
+                                        (a, m) =>
+                                            a +
+                                            (Number(m.recebido) || 0),
+                                        0
+                                    );
+
+                            return [
+                                esc(x.nome),
+                                progress(x.percentual),
+                                status(x.status),
+                                num(
+                                    Math.max(
+                                        0,
+                                        plan - rec
+                                    )
+                                )
+                            ];
+                        })
+                    )
+                    : '<div class="empty">Nenhum projeto cadastrado.</div>'
+            }
+
+        </div>
+        `;
+}
+
+function estoque() {
+    const m = state.data.materiais;
+
+    const totalQtd =
+        m.reduce(
+            (s, x) =>
+                s + (Number(x.estoque) || 0),
+            0
+        );
+
+    const valor =
+        m.reduce(
+            (s, x) =>
+                s +
+                (Number(x.estoque) || 0) *
+                (Number(x.valorUnitario) || 0),
+            0
+        );
+
+    const baixos =
+        m.filter(
+            x =>
+                (Number(x.estoque) || 0) <=
+                (Number(x.minimo) || 0)
+        ).length;
+
+    $("main").innerHTML =
+        title(
+            "Estoque",
+            "Todos os materiais pertencem ao projeto ALMOXARIFADO SANTARÉM."
+        ) +
+
+        `
+        <div class="stock-highlight">
+
+            <div class="mini-stat">
+                <small>Materiais</small>
+                <strong>${m.length}</strong>
+            </div>
+
+            <div class="mini-stat">
+                <small>Quantidade total</small>
+                <strong>${num(totalQtd)}</strong>
+            </div>
+
+            <div class="mini-stat">
+                <small>Valor total</small>
+                <strong>${moeda(valor)}</strong>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="section-title">
+
+                <h3>Cadastrar material</h3>
+
+                <span class="history-badge">
+                    ${baixos} em nível crítico
+                </span>
+
+            </div>
+
+            <form id="materialForm" class="form-grid">
+
+                <div class="form-group">
+                    <label>Código</label>
+                    <input name="codigo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <input name="descricao" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Unidade</label>
+                    <input
+                        name="unidade"
+                        placeholder="UN, M, KG..."
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Quantidade actual</label>
+                    <input
+                        name="estoque"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value="0"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Valor unitário</label>
+                    <input
+                        name="valorUnitario"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value="0"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Estoque mínimo</label>
+                    <input
+                        name="minimo"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value="0"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Localização</label>
+                    <input name="localizacao">
+                </div>
+
+                <div class="form-group">
+                    <label>Projeto</label>
+                    <input
+                        value="ALMOXARIFADO SANTARÉM"
+                        disabled
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <input name="categoria">
+                </div>
+
+                <div class="form-group full">
+                    <button class="btn">
+                        Cadastrar material
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="section-title">
+
+                <h3>Materiais cadastrados</h3>
+
+                <input
+                    id="stockSearch"
+                    class="search"
+                    placeholder="Pesquisar por código ou descrição..."
+                >
+
+            </div>
+
+            <div id="stockTable"></div>
+
+        </div>
+        `;
+
+    const render = () => {
+
+        const q =
+            ($("stockSearch").value || "")
+                .toLowerCase();
+
+        const rows =
+            m
+                .filter(x =>
+                    `${x.codigo} ${x.descricao} ${x.localizacao || ""}`
+                        .toLowerCase()
+                        .includes(q)
+                )
+                .map(x => [
+                    esc(x.codigo),
+                    esc(x.descricao),
+                    esc(x.unidade),
+                    num(x.estoque),
+                    moeda(x.valorUnitario),
+                    moeda(
+                        (Number(x.estoque) || 0) *
+                        (Number(x.valorUnitario) || 0)
+                    ),
+                    esc("ALMOXARIFADO SANTARÉM"),
+                    esc(x.localizacao || "-"),
+                    Number(x.estoque || 0) <=
+                    Number(x.minimo || 0)
+                        ? '<span class="status low">Baixo</span>'
+                        : '<span class="status ok">Normal</span>'
+                ]);
+
+        $("stockTable").innerHTML =
+            table(
+                [
+                    "Código",
+                    "Descrição",
+                    "Un.",
+                    "Qtd.",
+                    "Valor unit.",
+                    "Valor total",
+                    "Projeto",
+                    "Localização",
+                    "Status"
+                ],
+                rows
+            );
+    };
+
+    render();
+
+    $("stockSearch").oninput = render;
+
+    $("materialForm").onsubmit = e => {
+
+        e.preventDefault();
+
+        const f =
+            Object.fromEntries(
+                new FormData(e.target)
+            );
+
+        m.push({
+            ...f,
+            estoque: Number(f.estoque) || 0,
+            valorUnitario:
+                Number(f.valorUnitario) || 0,
+            minimo: Number(f.minimo) || 0,
+            projeto:
+                "ALMOXARIFADO SANTARÉM"
+        });
+
+        save();
+        estoque();
+    };
+}
+
+function projetos() {
+
+    const p = state.data.projetos;
+
+    $("main").innerHTML =
+        title(
+            "Projetos",
+            "Controle dos materiais planejados, recebidos e utilizados."
+        ) +
+
+        `
+        <div class="panel">
+
+            <div class="section-title">
+
+                <h3>Projetos cadastrados</h3>
+
+                <span class="history-badge">
+                    ${p.length} projetos
+                </span>
+
+            </div>
+
+            ${
+                p.length
+                    ? table(
+                        [
+                            "Projeto",
+                            "Conclusão",
+                            "Status",
+                            "Materiais",
+                            "Ação"
+                        ],
+                        p.map(x => [
+                            esc(x.nome),
+                            progress(x.percentual),
+                            status(x.status),
+                            num(
+                                (x.materiais || []).length
+                            ),
+                            `
+                            <button
+                                class="btn btn-secondary"
+                                onclick="projectDetail('${x.id}')"
+                            >
+                                Abrir
+                            </button>
+                            `
+                        ])
+                    )
+                    : '<div class="empty">Nenhum projeto cadastrado.</div>'
+            }
+
+        </div>
+        `;
+}
+
+function projectDetail(id) {
+
+    const p =
+        state.data.projetos.find(
+            x => x.id === id
+        );
+
+    if (!p) {
+        return projetos();
     }
 
-    $("content").innerHTML = `
+    const mats = p.materiais || [];
 
-        <div class="page-title">
+    const plan =
+        mats.reduce(
+            (s, m) =>
+                s + (Number(m.planejado) || 0),
+            0
+        );
 
-            <div class="panel-header">
+    const rec =
+        mats.reduce(
+            (s, m) =>
+                s + (Number(m.recebido) || 0),
+            0
+        );
 
-                <div>
-                    <h1>${escapar(projeto.nome)}</h1>
+    const use =
+        mats.reduce(
+            (s, m) =>
+                s + (Number(m.utilizado) || 0),
+            0
+        );
 
-                    <p>
-                        Detalhamento dos materiais do projeto.
-                    </p>
+    const saldo =
+        mats.reduce(
+            (s, m) =>
+                s +
+                Math.max(
+                    0,
+                    (Number(m.recebido) || 0) -
+                    (Number(m.utilizado) || 0)
+                ),
+            0
+        );
+
+    const pend =
+        Math.max(
+            0,
+            plan - rec
+        );
+
+    $("main").innerHTML =
+
+        `
+        <button
+            class="btn btn-secondary back"
+            id="backProjects"
+        >
+            ← Voltar para projetos
+        </button>
+        ` +
+
+        title(
+            p.nome,
+            "Detalhamento do atendimento de materiais do projeto"
+        ) +
+
+        `
+        <div class="panel">
+
+            <div class="summary-row">
+
+                <div class="summary">
+                    <small>Planejado</small>
+                    <strong>${num(plan)}</strong>
                 </div>
 
+                <div class="summary">
+                    <small>Recebido</small>
+                    <strong>${num(rec)}</strong>
+                </div>
+
+                <div class="summary">
+                    <small>Utilizado</small>
+                    <strong>${num(use)}</strong>
+                </div>
+
+                <div class="summary">
+                    <small>Saldo</small>
+                    <strong>${num(saldo)}</strong>
+                </div>
+
+                <div class="summary">
+                    <small>Pendente</small>
+                    <strong>${num(pend)}</strong>
+                </div>
+
+                <div class="summary">
+                    <small>Conclusão</small>
+                    <strong>${progress(p.percentual)}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="section-title">
+
+                <h3>Materiais do projeto</h3>
+
                 <button
-                    class="btn btn-secondary"
-                    onclick="abrirTela('projetos')"
+                    class="btn"
+                    id="addProjectMaterial"
                 >
-                    Voltar
+                    Adicionar material
                 </button>
 
             </div>
 
-        </div>
+            ${
+                table(
+                    [
+                        "Material",
+                        "Planejado",
+                        "Recebido",
+                        "Utilizado",
+                        "Saldo",
+                        "Pendente",
+                        "Ação"
+                    ],
+                    mats.map((m, i) => {
 
+                        const saldo =
+                            Math.max(
+                                0,
+                                (Number(m.recebido) || 0) -
+                                (Number(m.utilizado) || 0)
+                            );
 
-        <div class="panel">
+                        const pend =
+                            Math.max(
+                                0,
+                                (Number(m.planejado) || 0) -
+                                (Number(m.recebido) || 0)
+                            );
 
-            <div class="kpi-row">
-
-                <div class="kpi">
-                    <small>Planejado</small>
-                    <strong>
-                        ${projeto.materiais.reduce(
-                            (s,m) => s + numero(m.planejado),
-                            0
-                        )}
-                    </strong>
-                </div>
-
-                <div class="kpi">
-                    <small>Recebido</small>
-                    <strong>
-                        ${projeto.materiais.reduce(
-                            (s,m) => s + numero(m.recebido),
-                            0
-                        )}
-                    </strong>
-                </div>
-
-                <div class="kpi">
-                    <small>Utilizado</small>
-                    <strong>
-                        ${projeto.materiais.reduce(
-                            (s,m) => s + numero(m.utilizado),
-                            0
-                        )}
-                    </strong>
-                </div>
-
-                <div class="kpi">
-                    <small>Saldo</small>
-                    <strong>
-                        ${projeto.materiais.reduce(
-                            (s,m) =>
-                                s +
-                                Math.max(
-                                    0,
-                                    numero(m.recebido) -
-                                    numero(m.utilizado)
-                                ),
-                            0
-                        )}
-                    </strong>
-                </div>
-
-            </div>
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Material</th>
-                            <th>Planejado</th>
-                            <th>Recebido</th>
-                            <th>Utilizado</th>
-                            <th>Saldo</th>
-                            <th>Pendente</th>
-                            <th>Conclusão</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${
-                            projeto.materiais.length
-                            ? projeto.materiais.map(m => {
-
-                                const saldo =
-                                    Math.max(
-                                        0,
-                                        numero(m.recebido) -
-                                        numero(m.utilizado)
-                                    );
-
-                                const pendente =
-                                    Math.max(
-                                        0,
-                                        numero(m.planejado) -
-                                        numero(m.recebido)
-                                    );
-
-                                const pct =
-                                    numero(m.planejado) > 0
-                                    ? percentual(
-                                        numero(m.recebido) /
-                                        numero(m.planejado) *
-                                        100
-                                    )
-                                    : 0;
-
-                                return `
-                                    <tr>
-
-                                        <td>
-                                            <strong>
-                                                ${escapar(m.material)}
-                                            </strong>
-                                        </td>
-
-                                        <td>${m.planejado}</td>
-                                        <td>${m.recebido}</td>
-                                        <td>${m.utilizado}</td>
-                                        <td>${saldo}</td>
-                                        <td>${pendente}</td>
-
-                                        <td>
-                                            <strong>
-                                                ${pct.toFixed(1)}%
-                                            </strong>
-
-                                            <div class="progress">
-                                                <div
-                                                    class="progress-bar"
-                                                    style="width:${pct}%"
-                                                ></div>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                `;
-
-                            }).join("")
-                            : `
-                                <tr>
-                                    <td colspan="7">
-                                        <div class="empty">
-                                            Nenhum material cadastrado neste projeto.
-                                        </div>
-                                    </td>
-                                </tr>
+                        return [
+                            esc(m.descricao),
+                            num(m.planejado),
+                            num(m.recebido),
+                            num(m.utilizado),
+                            num(saldo),
+                            num(pend),
                             `
-                        }
-
-                    </tbody>
-
-                </table>
-
-            </div>
+                            <button
+                                class="btn btn-secondary edit-material"
+                                onclick="openEditProjectMaterialModal('${p.id}', ${i})"
+                            >
+                                Editar
+                            </button>
+                            `
+                        ];
+                    })
+                )
+            }
 
         </div>
-    `;
+        `;
+
+    $("backProjects").onclick =
+        () => projetos();
+
+    $("addProjectMaterial").onclick =
+        () => openProjectMaterialModal(p);
 }
 
+function openProjectMaterialModal(p) {
 
-/* =========================================================
-   ENTRADAS — ENGENHARIA
-========================================================= */
+    openModal(
+        "Adicionar material ao projeto",
 
-function entradasEngenharia() {
+        `
+        <form
+            id="pmForm"
+            class="form-grid"
+        >
 
-    const d = DADOS.engenharia;
+            <div class="form-group full">
+                <label>Material</label>
 
-    $("content").innerHTML = `
+                <select
+                    name="descricao"
+                    required
+                >
+                    ${
+                        state.data.materiais
+                            .map(m =>
+                                `
+                                <option value="${esc(m.descricao)}">
+                                    ${esc(m.descricao)}
+                                </option>
+                                `
+                            )
+                            .join("")
+                    }
+                </select>
+            </div>
 
-        <div class="page-title">
-            <h1>Entrada no Almoxarifado</h1>
-            <p>Registre materiais recebidos.</p>
-        </div>
+            <div class="form-group">
+                <label>
+                    Planejado — material necessário
+                </label>
 
+                <input
+                    name="planejado"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Recebido — material enviado
+                </label>
+
+                <input
+                    name="recebido"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Utilizado — material usado
+                </label>
+
+                <input
+                    name="utilizado"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                >
+            </div>
+
+            <div class="form-group full">
+                <button class="btn">
+                    Adicionar ao projeto
+                </button>
+            </div>
+
+        </form>
+        `
+    );
+
+    $("pmForm").onsubmit = e => {
+
+        e.preventDefault();
+
+        const f =
+            Object.fromEntries(
+                new FormData(e.target)
+            );
+
+        p.materiais.push({
+            descricao: f.descricao,
+            planejado:
+                Number(f.planejado) || 0,
+            recebido:
+                Number(f.recebido) || 0,
+            utilizado:
+                Number(f.utilizado) || 0
+        });
+
+        recalcProject(p);
+        save();
+        closeModal();
+        projectDetail(p.id);
+    };
+}
+
+function openEditProjectMaterialModal(
+    projectId,
+    index
+) {
+
+    const p =
+        state.data.projetos.find(
+            x => x.id === projectId
+        );
+
+    const m =
+        p?.materiais?.[index];
+
+    if (!m) return;
+
+    openModal(
+        "Editar material do projeto",
+
+        `
+        <form
+            id="editPmForm"
+            class="form-grid"
+        >
+
+            <div class="form-group full">
+                <label>Material</label>
+
+                <input
+                    name="descricao"
+                    value="${esc(m.descricao)}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Planejado</label>
+
+                <input
+                    name="planejado"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="${m.planejado}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Recebido / entregue</label>
+
+                <input
+                    name="recebido"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="${m.recebido}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Utilizado</label>
+
+                <input
+                    name="utilizado"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="${m.utilizado}"
+                    required
+                >
+            </div>
+
+            <div class="form-group full">
+                <button class="btn">
+                    Salvar alterações
+                </button>
+            </div>
+
+        </form>
+        `
+    );
+
+    $("editPmForm").onsubmit = e => {
+
+        e.preventDefault();
+
+        const f =
+            Object.fromEntries(
+                new FormData(e.target)
+            );
+
+        m.descricao = f.descricao;
+        m.planejado =
+            Number(f.planejado) || 0;
+        m.recebido =
+            Number(f.recebido) || 0;
+        m.utilizado =
+            Number(f.utilizado) || 0;
+
+        recalcProject(p);
+        save();
+        closeModal();
+        projectDetail(p.id);
+    };
+}
+
+function recalcProject(p) {
+
+    const total =
+        p.materiais.reduce(
+            (s, m) =>
+                s + (Number(m.planejado) || 0),
+            0
+        );
+
+    const rec =
+        p.materiais.reduce(
+            (s, m) =>
+                s + (Number(m.recebido) || 0),
+            0
+        );
+
+    p.percentual =
+        total
+            ? Math.min(
+                100,
+                (rec / total) * 100
+            )
+            : 0;
+
+    p.materiais.forEach(m => {
+
+        m.saldo =
+            Math.max(
+                0,
+                (Number(m.recebido) || 0) -
+                (Number(m.utilizado) || 0)
+            );
+
+        m.pendente =
+            Math.max(
+                0,
+                (Number(m.planejado) || 0) -
+                (Number(m.recebido) || 0)
+            );
+    });
+}
+
+function entradas() {
+
+    const d = state.data;
+
+    $("main").innerHTML =
+
+        title(
+            "Entrada no Almoxarifado",
+            "Registo claro e organizado de todos os materiais recebidos."
+        ) +
+
+        `
         <div class="panel">
 
-            <form id="entradaForm">
+            <div class="section-title">
 
-                <div class="form-grid">
+                <h3>Nova entrada</h3>
 
-                    <div class="field">
-                        <label>Material</label>
+                <span class="history-badge">
+                    ${d.entradas.length} registos
+                </span>
 
-                        <select id="entradaMaterial" required>
+            </div>
 
-                            <option value="">
-                                Selecione
-                            </option>
+            <form
+                id="entradaForm"
+                class="form-grid"
+            >
 
-                            ${d.materiais.map(m => `
-                                <option value="${escapar(m.codigo)}">
-                                    ${escapar(m.descricao)}
-                                </option>
-                            `).join("")}
+                <div class="form-group">
+                    <label>Data</label>
 
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label>Quantidade</label>
-                        <input
-                            id="entradaQuantidade"
-                            type="number"
-                            min="1"
-                            required
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Documento</label>
-                        <input
-                            id="entradaDocumento"
-                            placeholder="NF, pedido ou documento"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Fornecedor</label>
-                        <input
-                            id="entradaFornecedor"
-                        >
-                    </div>
-
-                    <div class="field form-full">
-                        <label>Observações</label>
-                        <textarea
-                            id="entradaObservacao"
-                            rows="3"
-                        ></textarea>
-                    </div>
-
+                    <input
+                        name="data"
+                        type="date"
+                        required
+                    >
                 </div>
 
-                <div class="actions">
+                <div class="form-group">
+                    <label>Material</label>
 
-                    <button
-                        class="btn btn-primary"
-                        type="submit"
+                    <select
+                        name="material"
+                        required
                     >
-                        Registrar entrada
-                    </button>
+                        ${
+                            d.materiais
+                                .map(m =>
+                                    `
+                                    <option value="${esc(m.codigo)}">
+                                        ${esc(m.descricao)}
+                                    </option>
+                                    `
+                                )
+                                .join("")
+                        }
+                    </select>
+                </div>
 
+                <div class="form-group">
+                    <label>Quantidade</label>
+
+                    <input
+                        name="quantidade"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Documento</label>
+                    <input name="documento">
+                </div>
+
+                <div class="form-group">
+                    <label>Fornecedor</label>
+                    <input name="fornecedor">
+                </div>
+
+                <div class="form-group">
+                    <label>Responsável</label>
+
+                    <input
+                        name="responsavel"
+                        value="${esc(state.user?.nome || "")}"
+                    >
+                </div>
+
+                <div class="form-group full">
+                    <label>Observação</label>
+
+                    <textarea
+                        name="observacao"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <button class="btn">
+                        Salvar entrada
+                    </button>
                 </div>
 
             </form>
 
         </div>
 
-
         <div class="panel">
 
-            <div class="panel-header">
-                <h2>Histórico</h2>
-            </div>
+            <div class="history-title">
 
-            <div class="table-wrap">
+                <h3>Histórico de entradas</h3>
 
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Material</th>
-                            <th>Quantidade</th>
-                            <th>Documento</th>
-                            <th>Fornecedor</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${
-                            d.entradas.length
-                            ? d.entradas.map(e => `
-                                <tr>
-                                    <td>${e.data}</td>
-                                    <td>${escapar(e.material)}</td>
-                                    <td>${e.quantidade}</td>
-                                    <td>${escapar(e.documento)}</td>
-                                    <td>${escapar(e.fornecedor)}</td>
-                                </tr>
-                            `).join("")
-                            : `
-                                <tr>
-                                    <td colspan="5">
-                                        <div class="empty">
-                                            Nenhuma entrada registrada.
-                                        </div>
-                                    </td>
-                                </tr>
-                            `
-                        }
-
-                    </tbody>
-
-                </table>
+                <span class="history-badge">
+                    ${d.entradas.length}
+                </span>
 
             </div>
 
-        </div>
-    `;
-
-    $("entradaForm")
-        .addEventListener("submit", event => {
-
-            event.preventDefault();
-
-            const codigo =
-                $("entradaMaterial").value;
-
-            const quantidade =
-                numero(
-                    $("entradaQuantidade").value
-                );
-
-            const material =
-                d.materiais.find(
-                    m => m.codigo === codigo
-                );
-
-            if (!material || quantidade <= 0) {
-                return;
+            ${
+                table(
+                    [
+                        "Data",
+                        "Material",
+                        "Quantidade",
+                        "Documento",
+                        "Fornecedor",
+                        "Responsável"
+                    ],
+                    d.entradas.map(e => [
+                        esc(e.data),
+                        esc(e.material),
+                        num(e.quantidade),
+                        esc(e.documento || "-"),
+                        esc(e.fornecedor || "-"),
+                        esc(e.responsavel || "-")
+                    ])
+                )
             }
 
-            material.quantidade += quantidade;
+        </div>
+        `;
 
-            d.entradas.unshift({
-                data: hoje(),
-                material: material.descricao,
-                quantidade,
-                documento:
-                    $("entradaDocumento").value,
-                fornecedor:
-                    $("entradaFornecedor").value,
-                observacao:
-                    $("entradaObservacao").value
-            });
+    $("entradaForm").onsubmit = e => {
 
-            abrirTela("entradas");
+        e.preventDefault();
+
+        const f =
+            Object.fromEntries(
+                new FormData(e.target)
+            );
+
+        const mat =
+            d.materiais.find(
+                m => m.codigo === f.material
+            );
+
+        if (!mat) return;
+
+        mat.estoque =
+            (Number(mat.estoque) || 0) +
+            (Number(f.quantidade) || 0);
+
+        d.entradas.unshift({
+            ...f,
+            material: mat.descricao,
+            quantidade:
+                Number(f.quantidade) || 0
         });
+
+        save();
+        entradas();
+    };
 }
 
+function saidas() {
 
-/* =========================================================
-   SAÍDAS — ENGENHARIA
-========================================================= */
+    const d = state.data;
 
-function saidasEngenharia() {
+    $("main").innerHTML =
 
-    const d = DADOS.engenharia;
+        title(
+            "Saída do Almoxarifado",
+            "Envie materiais aos projetos e acompanhe o histórico das movimentações."
+        ) +
 
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Saída do Almoxarifado</h1>
-            <p>Registre materiais enviados para os projetos.</p>
-        </div>
-
+        `
         <div class="panel">
 
-            <form id="saidaForm">
+            <div class="section-title">
 
-                <div class="form-grid">
+                <h3>Nova saída</h3>
 
-                    <div class="field">
-                        <label>Material</label>
+                <span class="history-badge">
+                    ${d.saidas.length} saídas registradas
+                </span>
 
-                        <select id="saidaMaterial" required>
+            </div>
 
-                            <option value="">
-                                Selecione
-                            </option>
+            <form
+                id="saidaForm"
+                class="form-grid"
+            >
 
-                            ${d.materiais.map(m => `
-                                <option value="${escapar(m.codigo)}">
-                                    ${escapar(m.descricao)}
-                                    — estoque ${m.quantidade}
-                                </option>
-                            `).join("")}
+                <div class="form-group">
+                    <label>Data</label>
 
-                        </select>
-
-                    </div>
-
-                    <div class="field">
-                        <label>Quantidade</label>
-
-                        <input
-                            id="saidaQuantidade"
-                            type="number"
-                            min="1"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="field">
-                        <label>Projeto</label>
-
-                        <select id="saidaProjeto" required>
-
-                            <option value="">
-                                Selecione
-                            </option>
-
-                            ${d.projetos.map(p => `
-                                <option value="${escapar(p.id)}">
-                                    ${escapar(p.nome)}
-                                </option>
-                            `).join("")}
-
-                        </select>
-
-                    </div>
-
-                    <div class="field">
-                        <label>Responsável</label>
-
-                        <input
-                            id="saidaResponsavel"
-                            value="${escapar(APP.usuario?.nome || "")}"
-                        >
-
-                    </div>
-
+                    <input
+                        name="data"
+                        type="date"
+                        required
+                    >
                 </div>
 
-                <div class="actions">
+                <div class="form-group">
+                    <label>Material</label>
 
-                    <button
-                        class="btn btn-primary"
-                        type="submit"
+                    <select
+                        name="material"
+                        required
                     >
+                        ${
+                            d.materiais
+                                .map(m =>
+                                    `
+                                    <option value="${esc(m.codigo)}">
+                                        ${esc(m.descricao)}
+                                        — estoque ${num(m.estoque)}
+                                    </option>
+                                    `
+                                )
+                                .join("")
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Projeto</label>
+
+                    <select
+                        name="projeto"
+                        required
+                    >
+                        ${
+                            d.projetos
+                                .map(p =>
+                                    `
+                                    <option value="${esc(p.id)}">
+                                        ${esc(p.nome)}
+                                    </option>
+                                    `
+                                )
+                                .join("")
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantidade</label>
+
+                    <input
+                        name="quantidade"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Responsável</label>
+
+                    <input
+                        name="responsavel"
+                        value="${esc(state.user?.nome || "")}"
+                    >
+                </div>
+
+                <div class="form-group full">
+                    <label>Observação</label>
+
+                    <textarea
+                        name="observacao"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <button class="btn">
                         Registrar saída
                     </button>
-
                 </div>
 
             </form>
 
         </div>
-    `;
-
-    $("saidaForm")
-        .addEventListener("submit", event => {
-
-            event.preventDefault();
-
-            const codigo =
-                $("saidaMaterial").value;
-
-            const quantidade =
-                numero(
-                    $("saidaQuantidade").value
-                );
-
-            const material =
-                d.materiais.find(
-                    m => m.codigo === codigo
-                );
-
-            const projeto =
-                d.projetos.find(
-                    p => p.id ===
-                    $("saidaProjeto").value
-                );
-
-            if (
-                !material ||
-                !projeto ||
-                quantidade <= 0 ||
-                quantidade > material.quantidade
-            ) {
-
-                alert(
-                    "Quantidade inválida ou estoque insuficiente."
-                );
-
-                return;
-            }
-
-            material.quantidade -= quantidade;
-
-            let item =
-                projeto.materiais.find(
-                    m => m.material ===
-                    material.descricao
-                );
-
-            if (!item) {
-
-                item = {
-                    material: material.descricao,
-                    planejado: quantidade,
-                    recebido: 0,
-                    utilizado: 0
-                };
-
-                projeto.materiais.push(item);
-            }
-
-            item.recebido += quantidade;
-
-            d.saidas.unshift({
-                data: hoje(),
-                material: material.descricao,
-                quantidade,
-                projeto: projeto.nome,
-                responsavel:
-                    $("saidaResponsavel").value
-            });
-
-            abrirTela("saidas");
-        });
-}
-
-
-/* =========================================================
-   INVENTÁRIO
-========================================================= */
-
-function inventarioEngenharia() {
-
-    const d = DADOS.engenharia;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Inventário</h1>
-            <p>
-                Conferência entre estoque do sistema
-                e quantidade física.
-            </p>
-        </div>
 
         <div class="panel">
 
-            <div class="table-wrap">
+            <div class="history-title">
 
-                <table>
+                <h3>Histórico de saídas</h3>
 
-                    <thead>
-                        <tr>
-                            <th>Material</th>
-                            <th>Sistema</th>
-                            <th>Físico</th>
-                            <th>Divergência</th>
-                            <th>%</th>
-                            <th>Responsável</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${d.materiais.map((m, index) => `
-
-                            <tr>
-
-                                <td>
-                                    ${escapar(m.descricao)}
-                                </td>
-
-                                <td>
-                                    ${m.quantidade}
-                                </td>
-
-                                <td>
-
-                                    <input
-                                        id="fisico-${index}"
-                                        type="number"
-                                        min="0"
-                                        value="${m.quantidade}"
-                                        style="width:100px"
-                                    >
-
-                                </td>
-
-                                <td id="divergencia-${index}">
-                                    0
-                                </td>
-
-                                <td id="percentual-${index}">
-                                    0%
-                                </td>
-
-                                <td>
-                                    ${escapar(
-                                        APP.usuario?.nome || ""
-                                    )}
-                                </td>
-
-                            </tr>
-
-                        `).join("")}
-
-                    </tbody>
-
-                </table>
+                <span class="history-badge">
+                    ${d.saidas.length}
+                </span>
 
             </div>
 
-            <div class="actions" style="margin-top:18px">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="calcularInventario()"
-                >
-                    Calcular divergências
-                </button>
-
-                <button
-                    class="btn btn-secondary"
-                    onclick="salvarInventario()"
-                >
-                    Salvar inventário
-                </button>
-
-            </div>
+            ${
+                table(
+                    [
+                        "Data",
+                        "Material",
+                        "Quantidade",
+                        "Projeto",
+                        "Responsável",
+                        "Observação"
+                    ],
+                    d.saidas.map(e => [
+                        esc(e.data),
+                        esc(e.material),
+                        num(e.quantidade),
+                        esc(e.projetoNome || "-"),
+                        esc(e.responsavel || "-"),
+                        esc(e.observacao || "-")
+                    ])
+                )
+            }
 
         </div>
-    `;
-}
+        `;
 
-function calcularInventario() {
+    $("saidaForm").onsubmit = e => {
 
-    DADOS.engenharia.materiais
-        .forEach((m, index) => {
+        e.preventDefault();
 
-            const fisico =
-                numero(
-                    $("fisico-" + index).value
+        const f =
+            Object.fromEntries(
+                new FormData(e.target)
+            );
+
+        const mat =
+            d.materiais.find(
+                m => m.codigo === f.material
+            );
+
+        const proj =
+            d.projetos.find(
+                p => p.id === f.projeto
+            );
+
+        const qtd =
+            Number(f.quantidade) || 0;
+
+        if (
+            !mat ||
+            !proj ||
+            qtd <= 0 ||
+            qtd > (Number(mat.estoque) || 0)
+        ) {
+            alert(
+                "Quantidade inválida ou estoque insuficiente."
+            );
+
+            return;
+        }
+
+        mat.estoque =
+            (Number(mat.estoque) || 0) -
+            qtd;
+
+        let item =
+            (proj.materiais || [])
+                .find(
+                    m =>
+                        m.descricao ===
+                        mat.descricao
                 );
 
-            const divergencia =
-                fisico - numero(m.quantidade);
+        if (!item) {
 
-            const pct =
-                numero(m.quantidade) > 0
-                    ? Math.abs(divergencia) /
-                      numero(m.quantidade) *
-                      100
-                    : 0;
+            item = {
+                descricao: mat.descricao,
+                planejado: qtd,
+                recebido: 0,
+                utilizado: 0
+            };
 
-            $("divergencia-" + index)
-                .textContent = divergencia;
+            proj.materiais.push(item);
+        }
 
-            $("percentual-" + index)
-                .textContent =
-                    pct.toFixed(1) + "%";
+        item.recebido =
+            (Number(item.recebido) || 0) +
+            qtd;
+
+        recalcProject(proj);
+
+        d.saidas.unshift({
+            ...f,
+            material: mat.descricao,
+            projetoNome: proj.nome,
+            quantidade: qtd
         });
+
+        save();
+        saidas();
+    };
 }
 
-function salvarInventario() {
+function inventario() {
 
-    calcularInventario();
+    const m = state.data.materiais;
 
-    DADOS.engenharia.inventarios.unshift({
-        data: hoje(),
-        responsavel:
-            APP.usuario?.nome || "",
-        materiais:
-            DADOS.engenharia.materiais.map(
-                (m, index) => ({
-                    material: m.descricao,
-                    sistema: m.quantidade,
-                    fisico:
-                        numero(
-                            $("fisico-" + index).value
-                        )
-                })
-            )
-    });
+    $("main").innerHTML =
+        title(
+            "Inventário",
+            "Conferência física dos materiais do Almoxarifado."
+        ) +
 
-    alert("Inventário registrado.");
+        `
+        <div class="panel">
 
-    abrirTela("inventario");
-}
+            <div class="section-title">
+                <h3>Inventário</h3>
 
+                <span class="history-badge">
+                    ${m.length} materiais
+                </span>
+            </div>
 
-/* =========================================================
-   LOCALIZAÇÃO
-========================================================= */
+            ${
+                table(
+                    [
+                        "Código",
+                        "Material",
+                        "Sistema",
+                        "Físico",
+                        "Diferença"
+                    ],
+                    m.map(x => {
 
-function localizacaoEngenharia() {
+                        const fisico =
+                            x.fisico !== undefined
+                                ? x.fisico
+                                : x.estoque;
 
-    const d = DADOS.engenharia;
+                        const dif =
+                            Number(fisico || 0) -
+                            Number(x.estoque || 0);
 
-    $("content").innerHTML = `
+                        return [
+                            esc(x.codigo),
+                            esc(x.descricao),
+                            num(x.estoque),
+                            `
+                            <input
+                                type="number"
+                                step="0.01"
+                                value="${fisico}"
+                                onchange="updateFisico('${esc(x.codigo)}', this.value)"
+                            >
+                            `,
+                            num(dif)
+                        ];
+                    })
+                )
+            }
 
-        <div class="page-title">
-            <h1>Localização</h1>
-            <p>
-                10 prateleiras × 5 níveis × 2 posições.
-            </p>
         </div>
+        `;
+}
 
+function updateFisico(codigo, value) {
+
+    const mat =
+        state.data.materiais.find(
+            m => m.codigo === codigo
+        );
+
+    if (!mat) return;
+
+    mat.fisico =
+        Number(value) || 0;
+
+    save();
+}
+
+function localizacao() {
+
+    $("main").innerHTML =
+        title(
+            "Localização",
+            "Estrutura física do Almoxarifado da Engenharia."
+        ) +
+
+        `
         <div class="panel">
 
             <div class="location-grid">
 
-                ${Array.from(
-                    { length: 100 },
-                    (_, i) => {
-
-                        const codigo =
-                            "P" +
-                            String(
-                                Math.floor(i / 10) + 1
-                            ).padStart(2, "0") +
-                            "-" +
-                            String(
-                                (i % 5) + 1
-                            ) +
-                            "-" +
-                            ((i % 2) ? "B" : "A");
-
-                        const ocupado =
-                            d.materiais.some(
-                                m =>
-                                    m.localizacao ===
-                                    codigo
-                            );
-
-                        return `
-                            <div
-                                class="location-slot ${ocupado ? "occupied" : ""}"
-                            >
-                                <strong>
-                                    ${codigo}
-                                </strong>
+                ${
+                    Array
+                        .from(
+                            { length: 100 },
+                            (_, i) => `
+                            <div class="loc">
+                                A${String(
+                                    Math.floor(i / 10) + 1
+                                ).padStart(2, "0")}
+                                ·
+                                ${(i % 10) + 1}
 
                                 <br>
 
                                 <small>
-                                    ${ocupado ? "Ocupado" : "Livre"}
+                                    Posição
                                 </small>
                             </div>
-                        `;
-                    }
-                ).join("")}
+                            `
+                        )
+                        .join("")
+                }
 
             </div>
 
         </div>
-    `;
+        `;
 }
 
+function gestao() {
 
-/* =========================================================
-   GESTÃO
-========================================================= */
+    $("main").innerHTML =
+        title(
+            "Área da Gestão",
+            "Métodos para organização, priorização e acompanhamento."
+        ) +
 
-function gestaoEngenharia() {
+        `
+        <div class="grid">
 
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Área da Gestão</h1>
-            <p>
-                Métodos para organização e priorização.
-            </p>
-        </div>
-
-        <div class="panel">
-
-            <div class="panel-header">
-                <h2>Matriz de Eisenhower</h2>
+            <div class="panel">
+                <h3>Eisenhower</h3>
+                <p>
+                    Organize as atividades por urgência
+                    e importância.
+                </p>
             </div>
 
-            <div class="eisenhower-grid">
-
-                <div class="eisenhower-box">
-                    <h3>Importante e urgente</h3>
-                    <ul>
-                        <li>Resolver imediatamente</li>
-                        <li>Atender rupturas críticas</li>
-                        <li>Corrigir divergências graves</li>
-                    </ul>
-                </div>
-
-                <div class="eisenhower-box">
-                    <h3>Importante e não urgente</h3>
-                    <ul>
-                        <li>Planejamento</li>
-                        <li>Inventários</li>
-                        <li>Melhoria de processos</li>
-                    </ul>
-                </div>
-
-                <div class="eisenhower-box">
-                    <h3>Urgente e não importante</h3>
-                    <ul>
-                        <li>Demandas operacionais</li>
-                        <li>Solicitações pontuais</li>
-                    </ul>
-                </div>
-
-                <div class="eisenhower-box">
-                    <h3>Não urgente e não importante</h3>
-                    <ul>
-                        <li>Eliminar desperdícios</li>
-                        <li>Evitar tarefas sem valor</li>
-                    </ul>
-                </div>
-
+            <div class="panel">
+                <h3>Ivy Lee</h3>
+                <p>
+                    Defina as prioridades essenciais
+                    do dia.
+                </p>
             </div>
 
         </div>
-
-
-        <div class="panel">
-
-            <div class="panel-header">
-                <h2>Método Ivy Lee</h2>
-            </div>
-
-            <div class="ivy-list">
-
-                ${[
-                    "Priorizar as tarefas críticas do dia",
-                    "Executar uma tarefa por vez",
-                    "Concluir antes de passar à próxima",
-                    "Revisar o resultado no final do dia",
-                    "Transferir pendências para o próximo ciclo",
-                    "Eliminar atividades sem valor"
-                ].map((item, index) => `
-
-                    <div class="ivy-item">
-
-                        <div class="ivy-number">
-                            ${index + 1}
-                        </div>
-
-                        <div>
-                            ${item}
-                        </div>
-
-                    </div>
-
-                `).join("")}
-
-            </div>
-
-        </div>
-    `;
+        `;
 }
 
+function renderSecurity() {
 
-/* =========================================================
-   SEGURANÇA — DASHBOARD
-========================================================= */
+    document.body.innerHTML = `
+        <div class="app">
 
-function dashboardSeguranca() {
+            <aside class="sidebar">
 
-    const d = DADOS.seguranca;
-
-    const valor =
-        d.materiais.reduce(
-            (s, m) =>
-                s +
-                numero(m.quantidade) *
-                numero(m.valor),
-            0
-        );
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Dashboard</h1>
-            <p>
-                Visão geral do Almoxarifado da Segurança.
-            </p>
-        </div>
-
-        <div class="cards">
-
-            <div class="card">
-                <div class="card-label">
-                    Valor do estoque
+                <div class="brand">
+                    <strong>ALMOX CONTROL</strong>
+                    <small>Segurança</small>
                 </div>
 
-                <div class="card-value blue">
-                    ${dinheiro(valor)}
-                </div>
-            </div>
+                <div class="user-box">
+                    <strong>
+                        ${esc(state.user.usuario)}
+                    </strong>
 
-            <div class="card">
-                <div class="card-label">
-                    Materiais
-                </div>
-
-                <div class="card-value">
-                    ${d.materiais.length}
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-label">
-                    Colaboradores
+                    <small>
+                        ${esc(state.user.cargo)}
+                    </small>
                 </div>
 
-                <div class="card-value green">
-                    ${d.colaboradores.length}
-                </div>
-            </div>
+                <div class="nav">
 
-            <div class="card">
-                <div class="card-label">
-                    Agenda
-                </div>
-
-                <div class="card-value yellow">
-                    ${d.agenda.length}
-                </div>
-            </div>
-
-        </div>
-
-    `;
-}
-
-
-/* =========================================================
-   SEGURANÇA — ESTOQUE
-========================================================= */
-
-function estoqueSeguranca() {
-
-    const d = DADOS.seguranca;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Estoque</h1>
-            <p>
-                Materiais disponíveis e equipamentos.
-            </p>
-        </div>
-
-        <div class="panel">
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Material</th>
-                            <th>Unidade</th>
-                            <th>Disponível</th>
-                            <th>Mínimo</th>
-                            <th>Valor unitário</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${d.materiais.map(m => {
-
-                            const baixo =
-                                numero(m.quantidade) <=
-                                numero(m.minimo);
-
-                            return `
-                                <tr>
-
-                                    <td>${escapar(m.codigo)}</td>
-
-                                    <td>
-                                        <strong>
-                                            ${escapar(m.descricao)}
-                                        </strong>
-                                    </td>
-
-                                    <td>${escapar(m.unidade)}</td>
-
-                                    <td>${m.quantidade}</td>
-
-                                    <td>${m.minimo}</td>
-
-                                    <td>${dinheiro(m.valor)}</td>
-
-                                    <td>
-                                        <span class="status ${baixo ? "alerta" : "ativo"}">
-                                            ${baixo ? "Baixo" : "Normal"}
-                                        </span>
-                                    </td>
-
-                                </tr>
-                            `;
-
-                        }).join("")}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   SEGURANÇA — COLABORADORES
-========================================================= */
-
-function colaboradoresSeguranca() {
-
-    const d = DADOS.seguranca;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-
-            <div class="panel-header">
-
-                <div>
-                    <h1>Cadastro de colaboradores</h1>
-                    <p>
-                        Controle dos colaboradores vinculados ao estoque.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="panel">
-
-            <form id="colaboradorForm">
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Nome</label>
-                        <input id="colNome" required>
+                    <div class="nav-title">
+                        Operação
                     </div>
-
-                    <div class="field">
-                        <label>Matrícula</label>
-                        <input id="colMatricula" required>
-                    </div>
-
-                    <div class="field">
-                        <label>Cargo</label>
-                        <input id="colCargo">
-                    </div>
-
-                    <div class="field">
-                        <label>Setor</label>
-                        <input id="colSetor">
-                    </div>
-
-                </div>
-
-                <div class="actions">
 
                     <button
-                        class="btn btn-primary"
-                        type="submit"
+                        onclick="securityDashboard()"
                     >
-                        Cadastrar colaborador
+                        Dashboard
+                    </button>
+
+                    <button
+                        onclick="securityStock()"
+                    >
+                        Estoque
+                    </button>
+
+                    <button
+                        onclick="securityCollaborators()"
+                    >
+                        Cadastro de colaboradores
+                    </button>
+
+                    <button
+                        onclick="securityEmployeeStock()"
+                    >
+                        Estoque por colaborador
+                    </button>
+
+                    <button
+                        onclick="securityEntry()"
+                    >
+                        Entrada no almoxarifado
+                    </button>
+
+                    <button
+                        onclick="securityExit()"
+                    >
+                        Saída no almoxarifado
+                    </button>
+
+                    <button
+                        onclick="securityAgenda()"
+                    >
+                        Agenda
                     </button>
 
                 </div>
 
-            </form>
+                <button
+                    class="logout"
+                    onclick="environmentScreen()"
+                >
+                    Trocar ambiente
+                </button>
 
-        </div>
+            </aside>
 
-
-        <div class="panel">
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Matrícula</th>
-                            <th>Cargo</th>
-                            <th>Setor</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${d.colaboradores.map(c => `
-                            <tr>
-                                <td>
-                                    <strong>
-                                        ${escapar(c.nome)}
-                                    </strong>
-                                </td>
-                                <td>${escapar(c.matricula)}</td>
-                                <td>${escapar(c.cargo)}</td>
-                                <td>${escapar(c.setor)}</td>
-                                <td>
-                                    <span class="status ativo">
-                                        ${escapar(c.status)}
-                                    </span>
-                                </td>
-                            </tr>
-                        `).join("")}
-
-                    </tbody>
-
-                </table>
-
-            </div>
+            <main
+                class="content"
+                id="securityMain"
+            ></main>
 
         </div>
     `;
 
-    $("colaboradorForm")
-        .addEventListener("submit", event => {
-
-            event.preventDefault();
-
-            d.colaboradores.push({
-                id:
-                    "COL-" +
-                    String(
-                        d.colaboradores.length + 1
-                    ).padStart(3, "0"),
-
-                nome:
-                    $("colNome").value,
-
-                matricula:
-                    $("colMatricula").value,
-
-                cargo:
-                    $("colCargo").value,
-
-                setor:
-                    $("colSetor").value,
-
-                status: "Ativo"
-            });
-
-            abrirTela("colaboradores");
-        });
+    securityDashboard();
 }
 
+function securityDashboard() {
 
-/* =========================================================
-   SEGURANÇA — ESTOQUE POR COLABORADOR
-========================================================= */
+    $("securityMain").innerHTML =
+        title(
+            "Dashboard",
+            "Visão geral do Almoxarifado da Segurança"
+        ) +
 
-function estoqueColaboradorSeguranca() {
+        `
+        <div class="grid">
 
-    const d = DADOS.seguranca;
+            <div class="stat blue">
+                <small>
+                    Materiais cadastrados
+                </small>
+                <b>0</b>
+            </div>
 
-    $("content").innerHTML = `
+            <div class="stat green">
+                <small>
+                    Colaboradores
+                </small>
+                <b>0</b>
+            </div>
 
-        <div class="page-title">
-            <h1>Estoque por colaborador</h1>
+            <div class="stat orange">
+                <small>
+                    Materiais com colaboradores
+                </small>
+                <b>0</b>
+            </div>
+
+            <div class="stat red">
+                <small>
+                    Pendências
+                </small>
+                <b>0</b>
+            </div>
+
+        </div>
+
+        <div class="panel">
+            <h3>
+                Almoxarifado da Segurança
+            </h3>
+
             <p>
-                Consulte a ficha individual de cada colaborador.
+                Ambiente preparado para controle de
+                colaboradores, equipamentos, materiais,
+                entregas, devoluções e agenda.
             </p>
         </div>
-
-        <div class="project-grid">
-
-            ${d.colaboradores.map(c => `
-
-                <div
-                    class="project-card"
-                    onclick="abrirFichaColaborador('${c.id}')"
-                >
-
-                    <span class="status ativo">
-                        ${escapar(c.status)}
-                    </span>
-
-                    <h3 style="margin-top:14px">
-                        ${escapar(c.nome)}
-                    </h3>
-
-                    <p>
-                        Matrícula:
-                        ${escapar(c.matricula)}
-                    </p>
-
-                    <p>
-                        ${escapar(c.cargo)}
-                    </p>
-
-                </div>
-
-            `).join("")}
-
-        </div>
-    `;
+        `;
 }
 
-function abrirFichaColaborador(id) {
+function securityStock() {
 
-    const colaborador =
-        DADOS.seguranca.colaboradores.find(
-            c => c.id === id
-        );
+    $("securityMain").innerHTML =
+        title(
+            "Estoque",
+            "Materiais disponíveis no Almoxarifado da Segurança."
+        ) +
 
-    if (!colaborador) {
-        return;
-    }
-
-    const entregas =
-        DADOS.seguranca.entregas.filter(
-            e => e.colaboradorId === id
-        );
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-
-            <div class="panel-header">
-
-                <div>
-                    <h1>
-                        ${escapar(colaborador.nome)}
-                    </h1>
-
-                    <p>
-                        ${escapar(colaborador.cargo)}
-                        •
-                        ${escapar(colaborador.setor)}
-                    </p>
-                </div>
-
-                <button
-                    class="btn btn-secondary"
-                    onclick="abrirTela('estoque-colaborador')"
-                >
-                    Voltar
-                </button>
-
-            </div>
-
-        </div>
-
-
+        `
         <div class="panel">
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Material</th>
-                            <th>Quantidade</th>
-                            <th>Data</th>
-                            <th>Situação</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${
-                            entregas.length
-                            ? entregas.map(e => `
-                                <tr>
-                                    <td>${escapar(e.material)}</td>
-                                    <td>${e.quantidade}</td>
-                                    <td>${e.data}</td>
-                                    <td>
-                                        <span class="status ativo">
-                                            ${escapar(e.situacao)}
-                                        </span>
-                                    </td>
-                                </tr>
-                            `).join("")
-                            : `
-                                <tr>
-                                    <td colspan="4">
-                                        <div class="empty">
-                                            Nenhum material entregue.
-                                        </div>
-                                    </td>
-                                </tr>
-                            `
-                        }
-
-                    </tbody>
-
-                </table>
-
+            <div class="empty">
+                Nenhum material cadastrado ainda.
             </div>
-
         </div>
-    `;
+        `;
 }
 
+function securityCollaborators() {
 
-/* =========================================================
-   SEGURANÇA — ENTRADAS
-========================================================= */
+    $("securityMain").innerHTML =
+        title(
+            "Cadastro de colaboradores",
+            "Cadastro dos colaboradores vinculados ao controle de materiais."
+        ) +
 
-function entradasSeguranca() {
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Entrada no Almoxarifado</h1>
-            <p>
-                Registro de entrada de equipamentos e materiais.
-            </p>
-        </div>
-
+        `
         <div class="panel">
 
-            <form id="segEntradaForm">
+            <form class="form-grid">
 
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Material</label>
-
-                        <select id="segEntradaMaterial">
-
-                            ${DADOS.seguranca.materiais.map(m => `
-                                <option value="${escapar(m.codigo)}">
-                                    ${escapar(m.descricao)}
-                                </option>
-                            `).join("")}
-
-                        </select>
-
-                    </div>
-
-                    <div class="field">
-                        <label>Quantidade</label>
-
-                        <input
-                            id="segEntradaQuantidade"
-                            type="number"
-                            min="1"
-                            required
-                        >
-
-                    </div>
-
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input>
                 </div>
 
-                <button
-                    class="btn btn-primary"
-                    type="submit"
-                >
-                    Registrar entrada
-                </button>
+                <div class="form-group">
+                    <label>Matrícula</label>
+                    <input>
+                </div>
+
+                <div class="form-group">
+                    <label>Cargo</label>
+                    <input>
+                </div>
+
+                <div class="form-group">
+                    <label>Setor</label>
+                    <input>
+                </div>
+
+                <div class="form-group">
+                    <label>CPF</label>
+                    <input>
+                </div>
+
+                <div class="form-group">
+                    <label>Data de admissão</label>
+                    <input type="date">
+                </div>
+
+                <div class="form-group full">
+                    <button
+                        type="button"
+                        class="btn"
+                    >
+                        Cadastrar colaborador
+                    </button>
+                </div>
 
             </form>
 
         </div>
-    `;
-
-    $("segEntradaForm")
-        .addEventListener("submit", event => {
-
-            event.preventDefault();
-
-            const codigo =
-                $("segEntradaMaterial").value;
-
-            const quantidade =
-                numero(
-                    $("segEntradaQuantidade").value
-                );
-
-            const material =
-                DADOS.seguranca.materiais.find(
-                    m => m.codigo === codigo
-                );
-
-            if (!material || quantidade <= 0) {
-                return;
-            }
-
-            material.quantidade += quantidade;
-
-            DADOS.seguranca.entradas.unshift({
-                data: hoje(),
-                material: material.descricao,
-                quantidade
-            });
-
-            abrirTela("entradas");
-        });
+        `;
 }
 
+function securityEmployeeStock() {
 
-/* =========================================================
-   SEGURANÇA — SAÍDAS
-========================================================= */
+    $("securityMain").innerHTML =
+        title(
+            "Estoque por colaborador",
+            "Materiais atualmente sob responsabilidade de cada colaborador."
+        ) +
 
-function saidasSeguranca() {
-
-    const d = DADOS.seguranca;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Saída no Almoxarifado</h1>
-            <p>
-                Entrega de materiais aos colaboradores.
-            </p>
+        `
+        <div class="panel">
+            <div class="empty">
+                Nenhum colaborador possui materiais registrados.
+            </div>
         </div>
+        `;
+}
 
+function securityEntry() {
+
+    $("securityMain").innerHTML =
+        title(
+            "Entrada no almoxarifado",
+            "Registo de materiais recebidos pela Segurança."
+        ) +
+
+        `
         <div class="panel">
 
-            <form id="segSaidaForm">
+            <form class="form-grid">
 
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Colaborador</label>
-
-                        <select id="segColaborador" required>
-
-                            <option value="">
-                                Selecione
-                            </option>
-
-                            ${d.colaboradores.map(c => `
-                                <option value="${escapar(c.id)}">
-                                    ${escapar(c.nome)}
-                                </option>
-                            `).join("")}
-
-                        </select>
-
-                    </div>
-
-                    <div class="field">
-                        <label>Material</label>
-
-                        <select id="segMaterial" required>
-
-                            ${d.materiais.map(m => `
-                                <option value="${escapar(m.codigo)}">
-                                    ${escapar(m.descricao)}
-                                </option>
-                            `).join("")}
-
-                        </select>
-
-                    </div>
-
-                    <div class="field">
-                        <label>Quantidade</label>
-
-                        <input
-                            id="segQuantidade"
-                            type="number"
-                            min="1"
-                            required
-                        >
-
-                    </div>
-
+                <div class="form-group">
+                    <label>Data</label>
+                    <input type="date">
                 </div>
 
-                <button
-                    class="btn btn-primary"
-                    type="submit"
-                >
-                    Registrar entrega
-                </button>
+                <div class="form-group">
+                    <label>Material</label>
+                    <input>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantidade</label>
+                    <input type="number">
+                </div>
+
+                <div class="form-group">
+                    <label>Documento</label>
+                    <input>
+                </div>
+
+                <div class="form-group full">
+                    <button
+                        type="button"
+                        class="btn"
+                    >
+                        Registrar entrada
+                    </button>
+                </div>
 
             </form>
 
         </div>
-    `;
-
-    $("segSaidaForm")
-        .addEventListener("submit", event => {
-
-            event.preventDefault();
-
-            const colaboradorId =
-                $("segColaborador").value;
-
-            const codigo =
-                $("segMaterial").value;
-
-            const quantidade =
-                numero(
-                    $("segQuantidade").value
-                );
-
-            const colaborador =
-                d.colaboradores.find(
-                    c => c.id === colaboradorId
-                );
-
-            const material =
-                d.materiais.find(
-                    m => m.codigo === codigo
-                );
-
-            if (
-                !colaborador ||
-                !material ||
-                quantidade <= 0 ||
-                quantidade > material.quantidade
-            ) {
-
-                alert(
-                    "Quantidade inválida ou estoque insuficiente."
-                );
-
-                return;
-            }
-
-            material.quantidade -= quantidade;
-
-            d.entregas.unshift({
-                data: hoje(),
-                colaboradorId,
-                colaborador:
-                    colaborador.nome,
-                material:
-                    material.descricao,
-                quantidade,
-                situacao: "Com o colaborador"
-            });
-
-            d.saidas.unshift({
-                data: hoje(),
-                colaborador:
-                    colaborador.nome,
-                material:
-                    material.descricao,
-                quantidade
-            });
-
-            abrirTela("saidas");
-        });
+        `;
 }
 
+function securityExit() {
 
-/* =========================================================
-   SEGURANÇA — AGENDA
-========================================================= */
+    $("securityMain").innerHTML =
+        title(
+            "Saída no almoxarifado",
+            "Entrega de materiais aos colaboradores."
+        ) +
 
-function agendaSeguranca() {
-
-    const d = DADOS.seguranca;
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-
-            <div class="panel-header">
-
-                <div>
-                    <h1>Agenda</h1>
-                    <p>
-                        Entregas, trocas, devoluções,
-                        inspeções e vencimentos.
-                    </p>
-                </div>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="novaAgenda()"
-                >
-                    Novo compromisso
-                </button>
-
-            </div>
-
-        </div>
-
-
+        `
         <div class="panel">
 
-            <div class="table-wrap">
+            <form class="form-grid">
 
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Tipo</th>
-                            <th>Descrição</th>
-                            <th>Responsável</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        ${
-                            d.agenda.length
-                            ? d.agenda.map(a => `
-                                <tr>
-                                    <td>${a.data}</td>
-                                    <td>${escapar(a.tipo)}</td>
-                                    <td>${escapar(a.descricao)}</td>
-                                    <td>${escapar(a.responsavel)}</td>
-                                    <td>
-                                        <span class="status ativo">
-                                            ${escapar(a.status)}
-                                        </span>
-                                    </td>
-                                </tr>
-                            `).join("")
-                            : `
-                                <tr>
-                                    <td colspan="5">
-                                        <div class="empty">
-                                            Nenhum compromisso cadastrado.
-                                        </div>
-                                    </td>
-                                </tr>
-                            `
-                        }
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-    `;
-}
-
-function novaAgenda() {
-
-    $("content").innerHTML = `
-
-        <div class="page-title">
-            <h1>Novo compromisso</h1>
-            <p>Cadastre uma atividade na agenda.</p>
-        </div>
-
-        <div class="panel">
-
-            <form id="agendaForm">
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Data</label>
-
-                        <input
-                            id="agendaData"
-                            type="date"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="field">
-                        <label>Tipo</label>
-
-                        <select id="agendaTipo">
-
-                            <option>
-                                Entrega
-                            </option>
-
-                            <option>
-                                Troca
-                            </option>
-
-                            <option>
-                                Devolução
-                            </option>
-
-                            <option>
-                                Inspeção
-                            </option>
-
-                            <option>
-                                Vencimento
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="field form-full">
-
-                        <label>
-                            Descrição
-                        </label>
-
-                        <textarea
-                            id="agendaDescricao"
-                            rows="3"
-                            required
-                        ></textarea>
-
-                    </div>
-
+                <div class="form-group">
+                    <label>Data</label>
+                    <input type="date">
                 </div>
 
-                <button
-                    class="btn btn-primary"
-                    type="submit"
-                >
-                    Salvar
-                </button>
+                <div class="form-group">
+                    <label>Colaborador</label>
+                    <select>
+                        <option>
+                            Selecione
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Material</label>
+                    <select>
+                        <option>
+                            Selecione
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantidade</label>
+                    <input type="number">
+                </div>
+
+                <div class="form-group full">
+                    <button
+                        type="button"
+                        class="btn"
+                    >
+                        Registrar saída
+                    </button>
+                </div>
 
             </form>
 
         </div>
-    `;
-
-    $("agendaForm")
-        .addEventListener("submit", event => {
-
-            event.preventDefault();
-
-            DADOS.seguranca.agenda.push({
-                data:
-                    $("agendaData").value,
-
-                tipo:
-                    $("agendaTipo").value,
-
-                descricao:
-                    $("agendaDescricao").value,
-
-                responsavel:
-                    APP.usuario?.nome || "",
-
-                status:
-                    "Agendado"
-            });
-
-            abrirTela("agenda");
-        });
+        `;
 }
 
+function securityAgenda() {
 
-/* =========================================================
-   LOGIN
-========================================================= */
+    $("securityMain").innerHTML =
+        title(
+            "Agenda",
+            "Entregas, devoluções, trocas, inspeções e vencimentos."
+        ) +
 
-async function fazerLogin(event) {
-
-    event.preventDefault();
-
-    const usuario =
-        $("loginUsuario")
-            .value
-            .trim();
-
-    const senha =
-        $("loginSenha")
-            .value;
-
-    const erro =
-        $("loginError");
-
-    const botao =
-        $("loginButton");
-
-    erro.style.display = "none";
-    erro.textContent = "";
-
-    if (!usuario || !senha) {
-
-        erro.textContent =
-            "Informe usuário e senha.";
-
-        erro.style.display = "block";
-
-        return;
-    }
-
-    botao.disabled = true;
-    botao.textContent = "Entrando...";
-
-    try {
-
-        const resposta =
-            await fetch(
-                "/api/auth/login",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    credentials: "include",
-
-                    body: JSON.stringify({
-                        usuario,
-                        senha
-                    })
-                }
-            );
-
-        let dados = null;
-
-        try {
-            dados = await resposta.json();
-        } catch {
-            dados = null;
-        }
-
-        if (
-            !resposta.ok ||
-            !dados ||
-            !dados.ok ||
-            !dados.user
-        ) {
-
-            throw new Error(
-                dados?.error ||
-                "Usuário ou senha inválidos."
-            );
-        }
-
-        APP.usuario = dados.user;
-
-        /*
-         * Mantém o usuário no navegador para que
-         * o acesso não dependa exclusivamente
-         * da sessão HTTP durante o desenvolvimento.
-         */
-        sessionStorage.setItem(
-            "almox_user",
-            JSON.stringify(APP.usuario)
-        );
-
-        $("loginSenha").value = "";
-
-        configurarAmbientes();
-
-    } catch (error) {
-
-        console.error(
-            "LOGIN:",
-            error
-        );
-
-        erro.textContent =
-            error.message ||
-            "Não foi possível autenticar.";
-
-        erro.style.display = "block";
-
-    } finally {
-
-        botao.disabled = false;
-        botao.textContent = "Entrar";
-    }
+        `
+        <div class="panel">
+            <div class="empty">
+                Nenhum compromisso registrado.
+            </div>
+        </div>
+        `;
 }
 
+load();
 
-/* =========================================================
-   AMBIENTES
-========================================================= */
+try {
 
-function configurarAmbientes() {
-
-    const permitidos =
-        APP.usuario?.almoxarifados || [];
-
-    $("engineeringEnvironment")
-        .style.display =
-            permitidos.includes("engenharia")
-                ? "block"
-                : "none";
-
-    $("securityEnvironment")
-        .style.display =
-            permitidos.includes("seguranca")
-                ? "block"
-                : "none";
-
-    mostrarAmbientes();
-}
-
-
-/* =========================================================
-   EVENTOS
-========================================================= */
-
-$("loginForm")
-    .addEventListener(
-        "submit",
-        fazerLogin
-    );
-
-
-$("passwordToggle")
-    .addEventListener(
-        "click",
-        () => {
-
-            const campo =
-                $("loginSenha");
-
-            if (
-                campo.type === "password"
-            ) {
-
-                campo.type = "text";
-
-                $("passwordToggle")
-                    .textContent = "Ocultar";
-
-            } else {
-
-                campo.type = "password";
-
-                $("passwordToggle")
-                    .textContent = "Mostrar";
-            }
-        }
-    );
-
-
-$("engineeringEnvironment")
-    .addEventListener(
-        "click",
-        () =>
-            abrirAlmoxarifado(
-                "engenharia"
-            )
-    );
-
-
-$("securityEnvironment")
-    .addEventListener(
-        "click",
-        () =>
-            abrirAlmoxarifado(
-                "seguranca"
-            )
-    );
-
-
-$("logoutButton")
-    .addEventListener(
-        "click",
-        async () => {
-
-            try {
-
-                await fetch(
-                    "/api/auth/logout",
-                    {
-                        method: "POST",
-                        credentials: "include"
-                    }
-                );
-
-            } catch {}
-
-            sairDoSistema();
-        }
-    );
-
-
-$("environmentLogout")
-    .addEventListener(
-        "click",
-        async () => {
-
-            try {
-
-                await fetch(
-                    "/api/auth/logout",
-                    {
-                        method: "POST",
-                        credentials: "include"
-                    }
-                );
-
-            } catch {}
-
-            sairDoSistema();
-        }
-    );
-
-
-$("environmentBack")
-    .addEventListener(
-        "click",
-        configurarAmbientes
-    );
-
-
-/* =========================================================
-   RESTAURAR USUÁRIO LOCAL
-========================================================= */
-
-(function iniciar() {
-
-    try {
-
-        const salvo =
-            sessionStorage.getItem(
-                "almox_user"
-            );
-
-        if (salvo) {
-
-            const usuario =
-                JSON.parse(salvo);
-
-            if (
-                usuario &&
-                usuario.usuario &&
-                Array.isArray(
-                    usuario.almoxarifados
-                )
-            ) {
-
-                APP.usuario = usuario;
-
-                configurarAmbientes();
-
-                return;
-            }
-        }
-
-    } catch (error) {
-
-        console.error(
-            "RESTORE:",
-            error
+    const savedUser =
+        localStorage.getItem(
+            "almox_control_user"
         );
 
-        sessionStorage.removeItem(
-            "almox_user"
-        );
+    if (savedUser) {
+        state.user =
+            JSON.parse(savedUser);
+
+        environmentScreen();
+    } else {
+        loginScreen();
     }
 
-    mostrarLogin();
+} catch {
 
-})();
+    loginScreen();
+}
 </script>
 
 </body>
