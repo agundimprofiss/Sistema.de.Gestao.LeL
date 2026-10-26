@@ -81,8 +81,7 @@ export default async function handler(req, res) {
             id: usuario.id,
             usuario: usuario.usuario,
             cargo: usuario.cargo,
-            almoxarifados:
-                usuario.almoxarifados
+            almoxarifados: usuario.almoxarifados
         });
 
         setSessionCookie(res, token);
@@ -94,8 +93,8 @@ export default async function handler(req, res) {
                 nome: usuario.nome,
                 usuario: usuario.usuario,
                 cargo: usuario.cargo,
-                almoxarifados:
-                    usuario.almoxarifados
+                almoxarifados: usuario.almoxarifados,
+                telas: usuario.telas
             }
         });
 
