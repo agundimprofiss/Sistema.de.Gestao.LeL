@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ALMOX CONTROL</title>
+
+    <style>
+        :root {
+            --navy: #071426;
+            --navy-2: #0c1d34;
+            --blue: #1976d2;
+            --blue-light: #42a5f5;
+            --white: #ffffff;
+            --text: #e8eef7;
+            --muted: #9eafc5;
+            --border: rgba(255,255,255,.10);
+            --danger: #ef5350;
+            --success: #42d392;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family:
+                Inter,
+                Arial,
+                Helvetica,
+                sans-serif;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #12335a 0%,
+                    var(--navy) 42%,
+                    #040b15 100%
+                );
+            color: var(--text);
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            background: rgba(7, 20, 38, .92);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 38px;
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.38);
+            backdrop-filter: blur(14px);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+
+        .brand-mark {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 18px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--blue-light),
+                    var(--blue)
+                );
+            color: white;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            box-shadow:
+                0 12px 35px rgba(25,118,210,.35);
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 27px;
+            letter-spacing: .8px;
+        }
+
+        .brand p {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd7e7;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .field input {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            outline: none;
+            background: rgba(255,255,255,.045);
+            color: white;
+            transition: .2s;
+        }
+
+        .field input:focus {
+            border-color: var(--blue-light);
+            box-shadow:
+                0 0 0 3px rgba(66,165,245,.12);
+        }
+
+        .login-button {
+            width: 100%;
+            height: 52px;
+            border: 0;
+            border-radius: 12px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue-light),
+                    var(--blue)
+                );
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s;
+            margin-top: 4px;
+        }
+
+        .login-button:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.08);
+        }
+
+        .login-button:disabled {
+            opacity: .6;
+            cursor: wait;
+            transform: none;
+        }
+
+        .message {
+            min-height: 20px;
+            margin-top: 16px;
+            text-align: center;
+            color: var(--danger);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* AMBIENTE */
+
+        .environment-page {
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .environment-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .mini-mark {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--blue);
+            font-weight: 900;
+        }
+
+        .topbar-brand strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .topbar-brand span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .logout-button {
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.04);
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .environment-title {
+            margin-bottom: 26px;
+        }
+
+        .environment-title h2 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .environment-title p {
+            color: var(--muted);
+            margin: 8px 0 0;
+        }
+
+        .environment-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .environment-card {
+            min-height: 240px;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(18,51,90,.70),
+                    rgba(7,20,38,.92)
+                );
+            cursor: pointer;
+            transition: .22s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .environment-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(66,165,245,.45);
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.25);
+        }
+
+        .environment-card.disabled {
+            display: none;
+        }
+
+        .environment-icon {
+            font-size: 42px;
+            margin-bottom: 25px;
+        }
+
+        .environment-card h3 {
+            margin: 0 0 10px;
+            font-size: 22px;
+        }
+
+        .environment-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .environment-arrow {
+            position: absolute;
+            right: 25px;
+            bottom: 23px;
+            color: var(--blue-light);
+            font-size: 22px;
+        }
+
+        /* SISTEMA */
+
+        .system-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .system-header {
+            height: 72px;
+            padding: 0 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            background: rgba(4,11,21,.82);
+        }
+
+        .system-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .system-brand .mini-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .system-brand strong {
+            font-size: 16px;
+        }
+
+        .environment-badge {
+            color: var(--blue-light);
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .system-body {
+            display: flex;
+            flex: 1;
+            min-height: calc(100vh - 72px);
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            padding: 22px 14px;
+            border-right: 1px solid var(--border);
+            background: rgba(5,14,26,.85);
+        }
+
+        .sidebar-section {
+            margin-bottom: 22px;
+        }
+
+        .sidebar-label {
+            padding: 0 12px;
+            margin-bottom: 7px;
+            color: #667991;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .nav-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 11px 12px;
+            margin-bottom: 4px;
+            border: 0;
+            border-radius: 9px;
+            background: transparent;
+            color: #aebed2;
+            text-align: left;
+            cursor: pointer;
+            transition: .15s;
+            font-size: 13px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255,255,255,.05);
+            color: white;
+        }
+
+        .nav-button.active {
+            background: rgba(25,118,210,.18);
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            padding: 30px;
+            overflow: auto;
+        }
+
+        .content-title {
+            margin-bottom: 25px;
+        }
+
+        .content-title h2 {
+            margin: 0;
+            font-size: 27px;
+        }
+
+        .content-title p {
+            margin: 7px 0 0;
+            color: var(--muted);
+        }
+
+        .empty-panel {
+            padding: 40px;
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
+            .login-card {
+                padding: 28px 22px;
+            }
+
+            .environment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .environment-page {
+                padding: 20px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .user-area {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .system-body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: 0;
+                border-bottom: 1px solid var(--border);
+                overflow-x: auto;
+            }
+
+            .sidebar-section {
+                display: flex;
+                gap: 4px;
+                margin-bottom: 0;
+            }
+
+            .sidebar-label {
+                display: none;
+            }
+
+            .nav-button {
+                white-space: nowrap;
+                width: auto;
+            }
+
+            .content {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+
+    <main
+        id="loginPage"
+        class="page"
+    >
+        <section class="login-card">
+
+            <div class="brand">
+                <div class="brand-mark">
+                    AC
+                </div>
+
+                <h1>ALMOX CONTROL</h1>
+
+                <p>
+                    Gestão inteligente de almoxarifados
+                </p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="field">
+                    <label for="usuario">
+                        Usuário
+                    </label>
+
+                    <input
+                        id="usuario"
+                        name="usuario"
+                        type="text"
+                        autocomplete="username"
+                        placeholder="Digite seu usuário"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        id="senha"
+                        name="senha"
+                        type="password"
+                        autocomplete="current-password"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+                </div>
+
+                <button
+                    id="loginButton"
+                    class="login-button"
+                    type="submit"
+                >
+                    Entrar
+                </button>
+
+                <div
+                    id="loginMessage"
+                    class="message"
+                    aria-live="polite"
+                ></div>
+
+            </form>
+
+        </section>
+    </main>
+
+
+    <!-- SELEÇÃO DO ALMOXARIFADO -->
+
+    <main
+        id="environmentPage"
+        class="environment-page hidden"
+    >
+        <div class="environment-container">
+
+            <header class="topbar">
+
+                <div class="topbar-brand">
+                    <div class="mini-mark">
+                        AC
+                    </div>
+
+                    <div>
+                        <strong>ALMOX CONTROL</strong>
+
+                        <span>
+                            Seleção de ambiente
+                        </span>
+                    </div>
+                </div>
+
+                <div class="user-area">
+
+                    <span id="environmentUser">
+                        Usuário
+                    </span>
+
+                    <button
+                        id="environmentLogout"
+                        class="logout-button"
+                        type="button"
+                    >
+                        Sair
+                    </button>
+
+                </div>
+
+            </header>
+
+            <section class="environment-title">
+
+                <h2>
+                    Escolha o almoxarifado
+                </h2>
+
+                <p>
+                    Selecione o ambiente que deseja acessar.
+                </p>
+
+            </section>
+
+            <section class="environment-grid">
+
+                <article
+                    id="engineeringCard"
+                    class="environment-card"
+                    data-environment="engenharia"
+                >
+                    <div class="environment-icon">
+                        🏗️
+                    </div>
+
+                    <h3>
+                        Almoxarifado da Engenharia
+                    </h3>
+
+                    <p>
+                        Gestão de materiais, projetos,
+                        estoque, movimentações,
+                        inventário e localização.
+                    </p>
+
+                    <div class="environment-arrow">
+                        →
+                    </div>
+                </article>
+
+
+                <article
+                    id="securityCard"
+                    class="environment-card"
+                    data-environment="seguranca"
+                >
+                    <div class="environment-icon">
+                        🛡️
+                    </div>
+
+                    <h3>
+                        Almoxarifado da Segurança
+                    </h3>
+
+                    <p>
+                        Gestão de colaboradores,
+                        materiais entregues,
+                        estoque e agenda operacional.
+                    </p>
+
+                    <div class="environment-arrow">
+                        →
+                    </div>
+                </article>
+
+            </section>
+
+        </div>
+    </main>
+
+
+    <!-- SISTEMA -->
+
+    <main
+        id="systemPage"
+        class="system-page hidden"
+    >
+
+        <header class="system-header">
+
+            <div class="system-brand">
+
+                <div class="mini-mark">
+                    AC
+                </div>
+
+                <strong>
+                    ALMOX CONTROL
+                </strong>
+
+                <span
+                    id="systemEnvironment"
+                    class="environment-badge"
+                ></span>
+
+            </div>
+
+            <div class="user-area">
+
+                <span id="systemUser">
+                    Usuário
+                </span>
+
+                <button
+                    id="systemLogout"
+                    class="logout-button"
+                    type="button"
+                >
+                    Sair
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <div class="system-body">
+
+            <aside
+                id="sidebar"
+                class="sidebar"
+            ></aside>
+
+
+            <section
+                id="content"
+                class="content"
+            >
+
+                <div class="content-title">
+
+                    <h2 id="contentTitle">
+                        Dashboard
+                    </h2>
+
+                    <p id="contentDescription">
+                        Visão geral do almoxarifado.
+                    </p>
+
+                </div>
+
+                <div
+                    id="contentPanel"
+                    class="empty-panel"
+                >
+                    Selecione uma tela no menu.
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script>
+        const state = {
+            user: null,
+            environment: null,
+            currentScreen: null
+        };
+
+        const screenNames = {
+            engenharia: {
+                dashboard: {
+                    label: "Dashboard",
+                    icon: "▦",
+                    description:
+                        "Visão geral do Almoxarifado da Engenharia."
+                },
+
+                estoque: {
+                    label: "Estoque",
+                    icon: "▤",
+                    description:
+                        "Controle dos materiais disponíveis."
+                },
+
+                projetos: {
+                    label: "Projetos",
+                    icon: "⌂",
+                    description:
+                        "Gestão de materiais por projeto."
+                },
+
+                entradas: {
+                    label: "Entrada no Almoxarifado",
+                    icon: "↓",
+                    description:
+                        "Registro de entradas de materiais."
+                },
+
+                saidas: {
+                    label: "Saída do Almoxarifado",
+                    icon: "↑",
+                    description:
+                        "Registro de saídas de materiais."
+                },
+
+                inventario: {
+                    label: "Inventário",
+                    icon: "✓",
+                    description:
+                        "Conferência física e divergências."
+                },
+
+                localizacao: {
+                    label: "Localização",
+                    icon: "⌖",
+                    description:
+                        "Mapa físico das posições do almoxarifado."
+                },
+
+                gestao: {
+                    label: "Área da Gestão",
+                    icon: "◆",
+                    description:
+                        "Ferramentas de gestão e organização."
+                }
+            },
+
+            seguranca: {
+                dashboard: {
+                    label: "Dashboard",
+                    icon: "▦",
+                    description:
+                        "Visão geral do Almoxarifado da Segurança."
+                },
+
+                estoque: {
+                    label: "Estoque",
+                    icon: "▤",
+                    description:
+                        "Controle de materiais disponíveis e entregues."
+                },
+
+                colaboradores: {
+                    label: "Cadastro de Colaboradores",
+                    icon: "♙",
+                    description:
+                        "Cadastro e gestão dos colaboradores."
+                },
+
+                "estoque-colaborador": {
+                    label: "Estoque por Colaborador",
+                    icon: "♙",
+                    description:
+                        "Materiais atualmente sob responsabilidade de cada colaborador."
+                },
+
+                entradas: {
+                    label: "Entrada no Almoxarifado",
+                    icon: "↓",
+                    description:
+                        "Registro de entradas de materiais."
+                },
+
+                saidas: {
+                    label: "Saída no Almoxarifado",
+                    icon: "↑",
+                    description:
+                        "Entrega de materiais aos colaboradores."
+                },
+
+                agenda: {
+                    label: "Agenda",
+                    icon: "□",
+                    description:
+                        "Agenda operacional do almoxarifado."
+                }
+            }
+        };
+
+
+        const loginPage =
+            document.getElementById("loginPage");
+
+        const environmentPage =
+            document.getElementById("environmentPage");
+
+        const systemPage =
+            document.getElementById("systemPage");
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const loginMessage =
+            document.getElementById("loginMessage");
+
+        const environmentUser =
+            document.getElementById("environmentUser");
+
+        const systemUser =
+            document.getElementById("systemUser");
+
+        const systemEnvironment =
+            document.getElementById("systemEnvironment");
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const contentTitle =
+            document.getElementById("contentTitle");
+
+        const contentDescription =
+            document.getElementById("contentDescription");
+
+        const contentPanel =
+            document.getElementById("contentPanel");
+
+
+        function mostrarPagina(pagina) {
+            loginPage.classList.add("hidden");
+            environmentPage.classList.add("hidden");
+            systemPage.classList.add("hidden");
+
+            pagina.classList.remove("hidden");
+        }
+
+
+        function limparLoginMensagem() {
+            loginMessage.textContent = "";
+        }
+
+
+        function mostrarSelecaoAmbiente(user) {
+            state.user = user;
+            state.environment = null;
+            state.currentScreen = null;
+
+            environmentUser.textContent =
+                `${user.nome} · ${user.cargo}`;
+
+            const podeEngenharia =
+                user.almoxarifados.includes(
+                    "engenharia"
+                );
+
+            const podeSeguranca =
+                user.almoxarifados.includes(
+                    "seguranca"
+                );
+
+            document
+                .getElementById("engineeringCard")
+                .classList.toggle(
+                    "disabled",
+                    !podeEngenharia
+                );
+
+            document
+                .getElementById("securityCard")
+                .classList.toggle(
+                    "disabled",
+                    !podeSeguranca
+                );
+
+            mostrarPagina(environmentPage);
+        }
+
+
+        function abrirAmbiente(environment) {
+            if (!state.user) {
+                return;
+            }
+
+            if (
+                !state.user.almoxarifados.includes(
+                    environment
+                )
+            ) {
+                return;
+            }
+
+            state.environment = environment;
+
+            const telas =
+                state.user.telas?.[environment] || [];
+
+            if (!telas.length) {
+                return;
+            }
+
+            systemEnvironment.textContent =
+                environment === "engenharia"
+                    ? "· Engenharia"
+                    : "· Segurança";
+
+            systemUser.textContent =
+                `${state.user.nome} · ${state.user.cargo}`;
+
+            montarMenu(telas);
+
+            mostrarPagina(systemPage);
+
+            abrirTela(telas[0]);
+        }
+
+
+        function montarMenu(telas) {
+            sidebar.innerHTML = "";
+
+            const section =
+                document.createElement("div");
+
+            section.className =
+                "sidebar-section";
+
+            const label =
+                document.createElement("div");
+
+            label.className =
+                "sidebar-label";
+
+            label.textContent =
+                state.environment === "engenharia"
+                    ? "Engenharia"
+                    : "Segurança";
+
+            section.appendChild(label);
+
+            telas.forEach(tela => {
+                const config =
+                    screenNames[
+                        state.environment
+                    ]?.[tela];
+
+                if (!config) {
+                    return;
+                }
+
+                const button =
+                    document.createElement("button");
+
+                button.type = "button";
+                button.className = "nav-button";
+
+                button.dataset.screen = tela;
+
+                button.innerHTML = `
+                    <span>${config.icon}</span>
+                    <span>${config.label}</span>
+                `;
+
+                button.addEventListener(
+                    "click",
+                    () => abrirTela(tela)
+                );
+
+                section.appendChild(button);
+            });
+
+            sidebar.appendChild(section);
+        }
+
+
+        function abrirTela(tela) {
+            state.currentScreen = tela;
+
+            const config =
+                screenNames[
+                    state.environment
+                ]?.[tela];
+
+            if (!config) {
+                return;
+            }
+
+            document
+                .querySelectorAll(".nav-button")
+                .forEach(button => {
+                    button.classList.toggle(
+                        "active",
+                        button.dataset.screen === tela
+                    );
+                });
+
+            contentTitle.textContent =
+                config.label;
+
+            contentDescription.textContent =
+                config.description;
+
+            contentPanel.innerHTML = `
+                <strong>${config.label}</strong>
+                <br><br>
+                Esta tela está preparada para
+                receber o módulo operacional.
+            `;
+        }
+
+
+        async function fazerLogout() {
+            try {
+                await fetch(
+                    "/api/auth/logout",
+                    {
+                        method: "POST"
+                    }
+                );
+            } catch {
+                // Mesmo se houver falha na requisição,
+                // limpamos a interface local.
+            }
+
+            state.user = null;
+            state.environment = null;
+            state.currentScreen = null;
+
+            loginForm.reset();
+            limparLoginMensagem();
+
+            mostrarPagina(loginPage);
+        }
+
+
+        loginForm.addEventListener(
+            "submit",
+            async event => {
+                event.preventDefault();
+
+                limparLoginMensagem();
+
+                const usuario =
+                    document
+                        .getElementById("usuario")
+                        .value
+                        .trim();
+
+                const senha =
+                    document
+                        .getElementById("senha")
+                        .value;
+
+                if (!usuario || !senha) {
+                    loginMessage.textContent =
+                        "Informe usuário e senha.";
+
+                    return;
+                }
+
+                loginButton.disabled = true;
+                loginButton.textContent =
+                    "Entrando...";
+
+                try {
+                    const response =
+                        await fetch(
+                            "/api/auth/login",
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+                                credentials: "include",
+                                body: JSON.stringify({
+                                    usuario,
+                                    senha
+                                })
+                            }
+                        );
+
+                    const data =
+                        await response.json();
+
+                    if (!response.ok || !data.ok) {
+                        throw new Error(
+                            data.error ||
+                            "Usuário ou senha inválidos."
+                        );
+                    }
+
+                    mostrarSelecaoAmbiente(
+                        data.user
+                    );
+
+                } catch (error) {
+                    loginMessage.textContent =
+                        error.message ||
+                        "Não foi possível realizar o login.";
+
+                } finally {
+                    loginButton.disabled = false;
+                    loginButton.textContent =
+                        "Entrar";
+                }
+            }
+        );
+
+
+        document
+            .getElementById("engineeringCard")
+            .addEventListener(
+                "click",
+                () => abrirAmbiente("engenharia")
+            );
+
+
+        document
+            .getElementById("securityCard")
+            .addEventListener(
+                "click",
+                () => abrirAmbiente("seguranca")
+            );
+
+
+        document
+            .getElementById("environmentLogout")
+            .addEventListener(
+                "click",
+                fazerLogout
+            );
+
+
+        document
+            .getElementById("systemLogout")
+            .addEventListener(
+                "click",
+                fazerLogout
+            );
+
+
+        async function verificarSessao() {
+            try {
+                const response =
+                    await fetch(
+                        "/api/auth/session",
+                        {
+                            method: "GET",
+                            credentials: "include"
+                        }
+                    );
+
+                if (!response.ok) {
+                    mostrarPagina(loginPage);
+                    return;
+                }
+
+                const data =
+                    await response.json();
+
+                if (
+                    data.ok &&
+                    data.authenticated &&
+                    data.user
+                ) {
+                    mostrarSelecaoAmbiente(
+                        data.user
+                    );
+                } else {
+                    mostrarPagina(loginPage);
+                }
+
+            } catch {
+                mostrarPagina(loginPage);
+            }
+        }
+
+
+        verificarSessao();
+    </script>
+
+</body>
+</html>
